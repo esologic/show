@@ -5,9 +5,11 @@ Describes the data that make up the portfolio.
 from datetime import date
 from enum import Enum, IntEnum
 from pathlib import Path
-from typing import List, NamedTuple
+from typing import List, NamedTuple, Optional, Union
 
+from pyaml import yaml
 from pydantic import BaseModel, HttpUrl
+from typing_extensions import TypedDict
 
 
 class VersionNumber(IntEnum):
@@ -46,6 +48,20 @@ class Domain(str, Enum):
     mixed_hardware_software = "mixed (hardware, software)"
 
 
+class Medium(str, Enum):
+    """
+    The types of materials and technologies that make up the project.
+    This enum is intentionally going to get large, but gives us a good way to have a consistent
+    set of keywords across projects.
+    """
+
+    laser_cutter = "laser cutter"
+    printer_3d = "3d printer"
+    arduino = "arduino"
+    fritzing = "fritzing"
+    breadboard_electronics = "breadboard electronics"
+
+
 class TeamSize(str, Enum):
     """
     Describes how big the team working on the portfolio item was.
@@ -55,26 +71,26 @@ class TeamSize(str, Enum):
     group = "group"
 
 
-class MediaItem(BaseModel):
+class LabeledMedia(TypedDict):
     """
     Describes a piece of media.
     """
 
     # Should be short, a description of what is in the piece of media.
-    caption: str
+    label: str
 
     # Path to the piece of media within the repo.
     path: Path
 
 
-class LabeledLink(BaseModel):
+class LabeledLink(TypedDict):
     """
     Add context to a link on the web.
     These two are merged together in the portfolio to give the reader some context.
     """
 
     # A sentence saying where the link is going. Ex: "This project was featured on RaspberryPi.org"
-    description: str
+    label: str
 
     # The actual link.
     link: HttpUrl
@@ -96,12 +112,12 @@ class PortfolioEntry(BaseModel):
     # A short description of the project, should be one or two sentences at the most.
     description: str
 
-    # Between 3 and 5 sentences, combined with the `description`, should give reader a very
+    # Between three and five sentences, combined with the `description`, should give reader a very
     # complete idea as to what the project was about.
     explanation: str
 
     # Key pieces of media (images or videos) to describe the project. Shouldn't be too many.
-    gallery: List[MediaItem]
+    gallery: List[Union[LabeledLink, LabeledMedia]]
 
     # See type docs.
     size: EntrySize
@@ -115,10 +131,10 @@ class PortfolioEntry(BaseModel):
     # URLs that are associated with the entry, but not as "important" as the primary. Ex:
     # In the Tesla Cooler entry, the blog post on esologic.com is the primary url, but links to the
     # project's github ETC are secondary links
-    secondary_urls: List[LabeledLink]
+    secondary_urls: Optional[List[LabeledLink]]
 
     # If the project was written about on Hackaday for example, those links should go here.
-    press_urls: List[LabeledLink]
+    press_urls: Optional[List[LabeledLink]]
 
     # Format `YYYY-MM-DD`
     completion_date: date
@@ -128,7 +144,11 @@ class PortfolioEntry(BaseModel):
 
     # Explanation as to my level of involvement on the project.
     # Team lead, solo developer, group of people etc.
+    # One or two sentences at most.
     involvement: str
+
+    # See type docs.
+    mediums: List[Medium]
 
 
 class PortfolioSection(NamedTuple):
@@ -149,10 +169,10 @@ class PortfolioSection(NamedTuple):
 
     # A single piece of media associated with the section. Should be very visually interesting
     # and pleasing to look at.
-    key_media: MediaItem
+    key_media: LabeledMedia
 
 
-class Portfolio(NamedTuple):
+class PortfolioContent(NamedTuple):
     """
     Contains the `PortfolioSections` that make up the portfolio. Top-level container for all the
     data needed to render the portfolio.
@@ -162,3 +182,16 @@ class Portfolio(NamedTuple):
 
     # The sections in the order they're to be presented to reader.
     sections: List[PortfolioSection]
+
+
+if __name__ == "__main__":
+
+    with open(
+        "/home/devon/Documents/projects/devon_bray_portfolio/"
+        "devon_bray_portfolio/content/esologic/curecab/curecab.yaml"
+    ) as f:
+        data = yaml.load(f, Loader=yaml.FullLoader)
+
+    k = PortfolioEntry(**data)
+
+    print("stop")

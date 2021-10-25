@@ -1,2 +1,4 @@
 mypy==0.812
+pyaml==21.10.1
 pydantic==1.8.2
+pypandoc==1.6.4
