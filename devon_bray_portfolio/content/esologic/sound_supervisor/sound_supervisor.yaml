@@ -1,0 +1,22 @@
+completion_date: '2013-06-03'
+description: Adds physical controls to the Windows volume mixer.
+domain: mixed (hardware, software)
+explanation: Completed as a hackathon (hackMIT) project, this device maps the indvidual application volumes for programs running on Windows to potentiometer knobs, so user can quickly adjust these volumes without having to open the window.
+gallery:
+- label: Demo video.
+  link: https://youtu.be/2z9O2YgUMyc
+- label: Photo of finished product.
+  path: devon_bray_portfolio/content/esologic/sound_supervisor/sound_supervisor_images/frequency_counter_1.jpg
+involvement: Designed and manufactured this project.
+mediums:
+- arduino
+- 3d printer
+- mechanical cad
+- c_sharp
+primary_url:
+  label: Blog post (contains links to schematics, code, models, BOM etc)
+  link: https://www.esologic.com/sound-supervisor/
+size: small
+team_size: solo
+title: Sound Supervisor
+version_number: 0

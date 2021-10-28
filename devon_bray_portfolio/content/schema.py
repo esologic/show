@@ -61,6 +61,7 @@ class Medium(str, Enum):
     fritzing = "fritzing"
     breadboard_electronics = "breadboard electronics"
     mechanical_cad = "mechanical cad"
+    c_sharp = "c#"
 
 
 class TeamSize(str, Enum):
