@@ -60,6 +60,7 @@ class Medium(str, Enum):
     arduino = "arduino"
     fritzing = "fritzing"
     breadboard_electronics = "breadboard electronics"
+    mechanical_cad = "mechanical cad"
 
 
 class TeamSize(str, Enum):

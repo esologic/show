@@ -20,8 +20,9 @@ mediums:
 - arduino
 - fritzing
 - breadboard electronics
+- mechanical cad
 primary_url:
-  label: Blog post (Contains links to schematics, code models, BOM etc)
+  label: Blog post (Contains links to schematics, code, models, BOM etc)
   link: https://www.esologic.com/uv-resin-curing-cabinet/
 size: small
 team_size: solo
