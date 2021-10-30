@@ -88,16 +88,14 @@ def read_section(section_directory: Path) -> PortfolioSection:
     section_description_path = find_yaml(section_directory)
     section_description = read_portfolio_element(section_description_path, SectionDescription)
 
-    entries: t.List[PortfolioEntry] = [
-        read_portfolio_element(find_yaml(path), PortfolioEntry)
-        for path in directories_in_directory(section_directory)
-    ]
-
     return PortfolioSection(
         description=section_description.description,
         title=section_description.title,
         primary_url=section_description.primary_url,
-        entries=entries,
+        entries=[
+            read_portfolio_element(find_yaml(path), PortfolioEntry)
+            for path in directories_in_directory(section_directory)
+        ],
     )
 
 
