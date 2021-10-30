@@ -4,7 +4,7 @@ domain: mixed (hardware, software)
 explanation: This simple project was completed very quickly and has served me well over the years. It is a simple Arduino sketch that uses interrupts to measure the frequencies of singals coming in on digital pins. I've recylced this code many times over the years to great effect.
 gallery:
 - label: Breadboard implementation of circuit.
-  path: devon_bray_portfolio/content/esologic/frequency_counter/frequency_counter_images/frequency_counter_1.jpg
+  path: ./frequency_counter_images/frequency_counter_1.jpg
 involvement: Wrote/used this software.
 mediums:
 - arduino

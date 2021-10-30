@@ -6,28 +6,39 @@ from pathlib import Path
 
 from flask import Flask, render_template
 
-from devon_bray_portfolio.content.api import discover_sections
-
-app = Flask(__name__)
+from devon_bray_portfolio.content.api import discover_portfolio
 
 
-@app.route("/")
-def portfolio() -> str:
+def create_app() -> Flask:
     """
 
     :return:
     """
-    return render_template(
-        "entries.html",
-        sections=discover_sections(
-            Path(
-                "/home/devon/Documents/projects/devon_bray_portfolio"
-                "/devon_bray_portfolio/content/sections"
-            )
+
+    app = Flask(__name__)
+
+    sections = discover_portfolio(
+        sections_directory=Path(
+            "/home/devon/Documents/projects/devon_bray_portfolio"
+            "/devon_bray_portfolio/content/sections"
         ),
+        static_content_directory=Path("./static"),
     )
+
+    @app.route("/")
+    def portfolio() -> str:  # pylint: disable=unused-variable
+        """
+
+        :return:
+        """
+        return render_template(
+            "entries.html",
+            sections=sections,
+        )
+
+    return app
 
 
 if __name__ == "__main__":
 
-    app.run()
+    create_app().run()

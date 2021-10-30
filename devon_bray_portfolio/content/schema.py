@@ -1,13 +1,14 @@
 """
 Describes the data that make up the portfolio.
 """
-
+import typing as t
 from datetime import date
 from enum import Enum, IntEnum
 from pathlib import Path
-from typing import List, NamedTuple, Optional, Union
+from typing import List, Optional, Union
 
-from pydantic import BaseModel, HttpUrl
+from pyaml import yaml
+from pydantic import BaseModel, HttpUrl, ValidationError
 from typing_extensions import TypedDict
 
 
@@ -99,11 +100,12 @@ class LabeledLink(TypedDict):
     link: HttpUrl
 
 
-class PortfolioEntry(BaseModel):
+class SerializedEntry(BaseModel):
     """
     All of the raw data that makes up an entry in the portfolio.
     Note: The idea with this structure is that it can easily be written by hand using a markdown
     file that contains metadata yaml. The expectation is that these entries are written by hand.
+    TODO: We need a pretty version of this. Fix capitalization, format dates etc.
     """
 
     # See type docs.
@@ -154,7 +156,7 @@ class PortfolioEntry(BaseModel):
     mediums: List[Medium]
 
 
-class SectionDescription(BaseModel):
+class SerializedSectionDescription(BaseModel):
     """
     Composed by hand
     # TODO, may want a logo here
@@ -173,22 +175,44 @@ class SectionDescription(BaseModel):
     primary_url: LabeledLink
 
 
-class PortfolioSection(NamedTuple):
+def read_yaml(path: Path) -> t.Dict[str, t.Any]:  # type: ignore[misc]
     """
-    Read from disk into memory
-    Contains the entries that make up a whole section of the portfolio. Ex: Telapush, esologic
-    Note: These could be written by hand but that would kind of complicate things.
-    TODO - think more about this
+    Read a yaml to a dict. Schema is going to get verified later don't worry.
+    :param path: Path to the yaml on disk.
+    :return: Dict representation of yaml
     """
 
-    # Name of the portfolio section, should be as short as possible to describe the section.
-    title: str
+    with open(path) as f:
+        return dict(yaml.load(f, Loader=yaml.FullLoader))
 
-    # A short description of the section, should be one or two sentences at the most.
-    description: str
 
-    # Instead of a description here, this should be a call to action. Ex: "Check out the blog post"
-    primary_url: LabeledLink
+@t.overload
+def read_portfolio_element(
+    yaml_path: Path, element_type: t.Type[SerializedEntry]
+) -> SerializedEntry:
+    ...
 
-    # The entries that make up the individual portfolio section
-    entries: List[PortfolioEntry]
+
+@t.overload
+def read_portfolio_element(
+    yaml_path: Path, element_type: t.Type[SerializedSectionDescription]
+) -> SerializedSectionDescription:
+    ...
+
+
+def read_portfolio_element(
+    yaml_path: Path,
+    element_type: t.Union[t.Type[SerializedEntry], t.Type[SerializedSectionDescription]],
+) -> t.Union[SerializedEntry, SerializedSectionDescription]:
+    """
+
+    :param yaml_path:
+    :param element_type:
+    :return:
+    """
+    try:
+        return element_type(**read_yaml(yaml_path))
+    except ValidationError as e:
+        raise ValueError(
+            f"Couldn't validate to schema: {element_type.__name__} file: {str(yaml_path)}"
+        ) from e

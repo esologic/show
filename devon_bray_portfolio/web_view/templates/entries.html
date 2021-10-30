@@ -4,7 +4,7 @@
     <title>Portfolio</title>
 </head>
 <body>
-
+   <!--- TODO: I think we can move the whole section thing into it's own template. --->
     {% for section in sections %}
 
     <div>
@@ -37,15 +37,15 @@
                 <p>Meta: </p>
                 <ul>
                     <li><p>Size: {{ entry.size.value }}</p></li>
-                    <li><p>Domain: {{ entry.domain.value }}</p></li>
+                    <li><p>Domain: {{ entry.domain }}</p></li>
                     <li><p>Involvement: {{ entry.involvement }}</p></li>
-                    <li><p>Team Size: {{ entry.team_size.value }}</p></li>
+                    <li><p>Team Size: {{ entry.team_size }}</p></li>
                     <li><p>Completion Date: {{ entry.completion_date }}</p></li>
                     <li>
                         <p>Mediums: </p>
                         <ul>
                         {% for medium in entry.mediums %}
-                            <li>{{medium.value}}</li>
+                            <li>{{medium}}</li>
                         {% endfor %}
                         </ul>
                     </li>

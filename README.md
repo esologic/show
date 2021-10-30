@@ -2,6 +2,14 @@
 
 Contains the content and server code that makes up my portfolio.
 
+The goal of the repo is to decouple portfolio content and portfolio representation.
+
+It should be very low overhead to add a new piece of work to the portfolio, or remove an old piece.
+
+I should be able to update the style and presentation of the portfolio without having to rethink entering the content 
+
+
+
 ## Usage
 
 ####  Environment variables

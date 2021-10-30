@@ -6,13 +6,13 @@ gallery:
 - label: Project overview video, contains a walkthrough and short demonstration.
   link: https://youtu.be/bDANxamg2Xs
 - label: Cabinet opened with the lights turned on. Note the part platform and hardware UI.
-  path: devon_bray_portfolio/content/esologic/curecab/curecab_images/curecab_1.JPG
+  path: ./curecab_images/curecab_1.JPG
 - label: Detail view of the electronics housing. Wanted visitors to see "how it worked" so lid was transparent.
-  path: devon_bray_portfolio/content/esologic/curecab/curecab_images/curecab_2.JPG
+  path: ./curecab_images/curecab_2.JPG
 - label: Electronics box in closed position.
-  path: devon_bray_portfolio/content/esologic/curecab/curecab_images/curecab_3.JPG
+  path: ./curecab_images/curecab_3.JPG
 - label: Roadkill electronics.
-  path: devon_bray_portfolio/content/esologic/curecab/curecab_images/curecab_4.JPG
+  path: ./curecab_images/curecab_4.JPG
 involvement: I designed and fabricated the cabinet and electronics as well as wrote the software driving it.
 mediums:
 - laser cutter
