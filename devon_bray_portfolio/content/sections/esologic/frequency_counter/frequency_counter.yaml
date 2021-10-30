@@ -7,7 +7,7 @@ gallery:
   path: devon_bray_portfolio/content/esologic/frequency_counter/frequency_counter_images/frequency_counter_1.jpg
 involvement: Wrote/used this software.
 mediums:
-- Arduino
+- arduino
 primary_url:
   label: Blog post (contains code, test results etc.)
   link: https://www.esologic.com/multiple-frequency-counter-arduino/

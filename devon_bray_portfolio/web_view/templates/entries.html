@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Portfolio</title>
+</head>
+<body>
+
+    {% for section in sections %}
+
+    <div>
+        <h1>{{ section.title }}</h1>
+        <p>{{ section.description }}</p>
+        <ul>
+        {% for entry in section.entries %}
+        <li>
+            <div>
+                <h2>{{ entry.title }}</h2>
+                <h3>{{ entry.description }}</h3>
+                <p>{{ entry.explanation }}</p>
+                <a href="{{ entry.primary_url.link }}">{{ entry.primary_url.label }}</a>
+                {% if entry.secondary_urls %}
+                <p>Further Reading</p>
+                <ul>
+                {% for secondary_url in entry.secondary_urls  %}
+                    <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
+                {% endfor %}
+                </ul>
+                {%endif %}
+                {% if entry.press_urls %}
+                <p>As seen in</p>
+                <ul>
+                {% for press_url in entry.press_urls  %}
+                    <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
+                {% endfor %}
+                </ul>
+                {%endif %}
+                <p>Meta: </p>
+                <ul>
+                    <li><p>Size: {{ entry.size.value }}</p></li>
+                    <li><p>Domain: {{ entry.domain.value }}</p></li>
+                    <li><p>Involvement: {{ entry.involvement }}</p></li>
+                    <li><p>Team Size: {{ entry.team_size.value }}</p></li>
+                    <li><p>Completion Date: {{ entry.completion_date }}</p></li>
+                    <li>
+                        <p>Mediums: </p>
+                        <ul>
+                        {% for medium in entry.mediums %}
+                            <li>{{medium.value}}</li>
+                        {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    {% endfor %}
+
+</body>
+</html>

@@ -7,7 +7,6 @@ from enum import Enum, IntEnum
 from pathlib import Path
 from typing import List, NamedTuple, Optional, Union
 
-from pyaml import yaml
 from pydantic import BaseModel, HttpUrl
 from typing_extensions import TypedDict
 
@@ -155,8 +154,28 @@ class PortfolioEntry(BaseModel):
     mediums: List[Medium]
 
 
+class SectionDescription(BaseModel):
+    """
+    Composed by hand
+    # TODO, may want a logo here
+    """
+
+    # Name of the portfolio section, should be as short as possible to describe the section.
+    title: str
+
+    # A short description of the section, should be one or two sentences at the most.
+    description: str
+
+    # See type docs.
+    version_number: VersionNumber
+
+    # Instead of a description here, this should be a call to action. Ex: "Check out the blog post"
+    primary_url: LabeledLink
+
+
 class PortfolioSection(NamedTuple):
     """
+    Read from disk into memory
     Contains the entries that make up a whole section of the portfolio. Ex: Telapush, esologic
     Note: These could be written by hand but that would kind of complicate things.
     TODO - think more about this
@@ -168,34 +187,8 @@ class PortfolioSection(NamedTuple):
     # A short description of the section, should be one or two sentences at the most.
     description: str
 
+    # Instead of a description here, this should be a call to action. Ex: "Check out the blog post"
+    primary_url: LabeledLink
+
     # The entries that make up the individual portfolio section
     entries: List[PortfolioEntry]
-
-    # A single piece of media associated with the section. Should be very visually interesting
-    # and pleasing to look at.
-    key_media: LabeledMedia
-
-
-class PortfolioContent(NamedTuple):
-    """
-    Contains the `PortfolioSections` that make up the portfolio. Top-level container for all the
-    data needed to render the portfolio.
-    Note: These could be written by hand but that would kind of complicate things.
-    TODO - think more about this
-    """
-
-    # The sections in the order they're to be presented to reader.
-    sections: List[PortfolioSection]
-
-
-if __name__ == "__main__":
-
-    with open(
-        "/home/devon/Documents/projects/devon_bray_portfolio/"
-        "devon_bray_portfolio/content/esologic/curecab/curecab.yaml"
-    ) as f:
-        data = yaml.load(f, Loader=yaml.FullLoader)
-
-    k = PortfolioEntry(**data)
-
-    print("stop")

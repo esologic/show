@@ -12,7 +12,7 @@ mediums:
 - arduino
 - 3d printer
 - mechanical cad
-- c_sharp
+- c#
 primary_url:
   label: Blog post (contains links to schematics, code, models, BOM etc)
   link: https://www.esologic.com/sound-supervisor/
