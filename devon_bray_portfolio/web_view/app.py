@@ -1,12 +1,14 @@
 """
 Flask entry point
 """
-
+import os
 from pathlib import Path
 
 from flask import Flask, render_template
 
 from devon_bray_portfolio.content.api import discover_portfolio
+
+_CURRENT_DIRECTORY = Path(os.path.dirname(os.path.abspath(__file__)))
 
 
 def create_app() -> Flask:
@@ -17,12 +19,12 @@ def create_app() -> Flask:
 
     app = Flask(__name__)
 
-    sections = discover_portfolio(
+    current_portfolio = discover_portfolio(
         sections_directory=Path(
             "/home/devon/Documents/projects/devon_bray_portfolio"
-            "/devon_bray_portfolio/content/sections"
+            "/devon_bray_portfolio/content/portfolio"
         ),
-        static_content_directory=Path("./static"),
+        static_content_directory=_CURRENT_DIRECTORY.joinpath("static"),
     )
 
     @app.route("/")
@@ -33,7 +35,7 @@ def create_app() -> Flask:
         """
         return render_template(
             "entries.html",
-            sections=sections,
+            portfolio=current_portfolio,
         )
 
     return app

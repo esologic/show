@@ -2,9 +2,7 @@ completion_date: '2015-08-12'
 description: Cabinet full of UV LEDs to accelerate curing of 3D prints from SLA resin printers.
 domain: mixed (hardware, software)
 explanation: This project was a task of mine during my internship at MADE@MassChallenge. The goal was to speed up the turnaround time for prints coming through the Formlabs Form1+ SLA 3D Printer. There are 72 high power UV LEDs to speed up the curing process by blasting prints with UV light driven by an Arduino running code that keeps track of and displays the cure time. An interesting challenge with this project was making something that looked good, was easy to use and simple to the point where it wouldn’t need any maintenance. I didn't know it at the time but this project would end up living in this shop until it's closure years later and be upgraded several times by several different engineers.
-gallery:
-- label: Project overview video, contains a walkthrough and short demonstration.
-  link: https://youtu.be/bDANxamg2Xs
+local_media:
 - label: Cabinet opened with the lights turned on. Note the part platform and hardware UI.
   path: ./curecab_images/curecab_1.JPG
 - label: Detail view of the electronics housing. Wanted visitors to see "how it worked" so lid was transparent.
@@ -13,6 +11,9 @@ gallery:
   path: ./curecab_images/curecab_3.JPG
 - label: Roadkill electronics.
   path: ./curecab_images/curecab_4.JPG
+youtube_videos:
+- label: Project overview video, contains a walkthrough and short demonstration.
+  video_id: bDANxamg2Xs
 involvement: I designed and fabricated the cabinet and electronics as well as wrote the software driving it.
 mediums:
 - laser cutter

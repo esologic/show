@@ -1,57 +1,74 @@
 """
 Interface through which other components of this application access the content of the portfolio.
+TODO: There's a bit of redundancy, and a little more inheritance could be helpful.
 """
 
+import shutil
 import string
 import typing as t
 from datetime import date
 from pathlib import Path
 from typing import NamedTuple
 
-from devon_bray_portfolio.content.schema import (
-    LabeledLink,
-    Medium,
-    SerializedEntry,
-    SerializedSectionDescription,
-    read_portfolio_element,
-)
+from devon_bray_portfolio.content import schema
 
 YAML_EXTENSION = "yaml"
 
 
-class LinkParts(NamedTuple):
+class RenderedLocalMedia(NamedTuple):
     """
-    Easy to render TODO: fill this out more
-    """
-
-    label: str
-    link: str
-
-
-class MediaParts(NamedTuple):
-    """
-    Easy to render TODO: fill this out more
+    Derived from the `LocalMedia` TD in `schema.py`.
+    All string fields, this structure will be directly input into the jinja html template
+    by flask.
     """
 
     label: str
     path: str
 
 
-class Entry(NamedTuple):
+class RenderedLink(NamedTuple):
     """
-    Easy to render TODO: fill this out more
+    Derived from the `Link` TD in `schema.py`.
+    All string fields, this structure will be directly input into the jinja html template
+    by flask.
     """
 
-    slug: str
+    label: str
+    link: str
+
+
+class RenderedYouTubeVideo(NamedTuple):
+    """
+    Derived from the `YouTubeVideo` TD in `schema.py`.
+    All string fields, this structure will be directly input into the jinja html template
+    by flask.
+    """
+
+    label: str
+    video_id: str
+
+
+class RenderedEntry(NamedTuple):
+    """
+    Derived from the `SerializedEntry` TD in `schema.py`.
+    All string fields, this structure will be directly input into the jinja html template
+    by flask.
+    By the time this is passed to flask, it assumes proper conditioning has been done on the
+    text. Things like capitalization, standardization of cad vs. CAD etc should be completed by
+    functions producing these objects. This is the "pretty" version of this information.
+    """
+
+    slug: str  # not present in `SerializedEntry`. This is set to the name of the source yaml file.
     title: str
     description: str
     explanation: str
-    gallery: t.List[t.Union[LinkParts, MediaParts]]
+    local_media: t.List[RenderedLocalMedia]
+    youtube_videos: t.Optional[t.List[RenderedYouTubeVideo]]
     size: str
     domain: str
-    primary_url: LinkParts
-    secondary_urls: t.Optional[t.List[LinkParts]]
-    press_urls: t.Optional[t.List[LinkParts]]
+    primary_url: RenderedLink
+    secondary_urls: t.Optional[t.List[RenderedLink]]
+    press_urls: t.Optional[t.List[RenderedLink]]
     completion_date: str
     team_size: str
     involvement: str
@@ -60,88 +77,142 @@ class Entry(NamedTuple):
 
 class Section(NamedTuple):
     """
-    Read from disk into memory
+    Composed of a `SerializedSectionDescription` and then a list of `SerializedEntry` TDs from
+    `schema.py`.
+    All string fields, this structure will be directly input into the jinja html template
+    by flask.
     Contains the entries that make up a whole section of the portfolio. Ex: Telapush, esologic
     Note: These could be written by hand but that would kind of complicate things.
-    TODO - think more about this
     """
 
     title: str
     description: str
-    primary_url: LinkParts
-    entries: t.List[Entry]
+    primary_url: RenderedLink
+    entries: t.List[RenderedEntry]
 
 
-def convert_url(url: LabeledLink) -> LinkParts:
+class Portfolio(NamedTuple):
     """
-    TODO
-    :param url:
-    :return:
-    """
-    return LinkParts(label=url["label"], link=str(url["link"]))  # just a plain string now
-
-
-def read_entry(yaml_path: Path, media_directory: Path) -> Entry:  # pylint: disable=unused-argument
+    Composed of `SerializedPortfolioDescription` and sub-sections as discovered on disk.
     """
 
-    :param yaml_path:
-    :param media_directory:
-    :return:
+    title: str
+    description: str
+    sections: t.List[Section]
+
+
+def _render_link(url: schema.Link) -> RenderedLink:
+    """
+    Go from the serialized form to the rendered form.
+    :param url: URL to convert.
+    :return: Converted URL.
+    """
+    return RenderedLink(label=url["label"], link=str(url["link"]))  # just a plain string now
+
+
+def _render_date(d: date) -> str:
+    """
+    Canonical method to go from an entry's completion date to the way that's displayed in the
+    portfolio.
+    :param d: Date to convert.
+    :return: String representation of the date.
+    """
+    return d.strftime("%B of %Y")
+
+
+def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
+    """
+    Makes sure capitalization, and format etc are uniform.
+    Implementation is a bit ugly, this could probably be done with a single regex if needed.
+    :param mediums: To render.
+    :return: Rendered strings for display.
     """
 
-    serialized_entry = read_portfolio_element(yaml_path, SerializedEntry)
+    def convert(medium: str) -> str:
+        for bad, good in [("3d", "3D"), ("Cad", "CAD")]:
+            if bad in medium:
+                return medium.replace(bad, good)
 
-    def render_date(d: date) -> str:
-        return d.strftime("%B of %Y")
+        return medium
 
-    def render_mediums(mediums: t.List[Medium]) -> t.List[str]:
+    return [convert(medium) for medium in [string.capwords(medium) for medium in mediums]]
+
+
+def _render_link_list(
+    link_list: t.Optional[t.List[schema.Link]],
+) -> t.Optional[t.List[RenderedLink]]:
+    """
+    Helper function, renders a list of links.
+    :param link_list: Links to render.
+    :return: Rendered links.
+    """
+    return [_render_link(url) for url in link_list] if link_list else None
+
+
+def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
+    """
+    Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
+    different fields then return the resulting NT.
+    :param yaml_path: Path to the entry's yaml file.
+    :param media_directory: Flask's `static` directory (or a subdir of the static dir).
+    Images are copied from their original location in the entry directories to this folder.
+    Some processing is done on these images to assure that they're not massive.
+    :return: The `RenderedEntry`, ready for consumption by jinja via flask.
+    All fields (members?) in this output should be strings.
+    """
+
+    serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
+
+    def render_local_media(local_media: schema.LocalMedia) -> RenderedLocalMedia:
         """
-        TODO: this can assuredly be implemented more pythonically.
-        :param mediums:
-        :return:
+        Copies, processes images from their origins in the entry folders to their destinations
+        in the `media_directory` folder. Returns a new NT, with a reference to their path
+        relative to `media_directory`.
+        :param local_media: Reference to the file in the entry directory.
+        :return: Fields converted to strings, paths relative to `media_directory`.
         """
 
-        def convert(medium: str) -> str:
-            for bad, good in [("3d", "3D"), ("Cad", "CAD")]:
-                if bad in medium:
-                    return medium.replace(bad, good)
+        name = local_media["path"].name
 
-            return medium
+        # TODO: Compress this image.
+        shutil.copy(
+            src=yaml_path.parent.joinpath(local_media["path"]), dst=media_directory.joinpath(name)
+        )
 
-        return [convert(medium) for medium in [string.capwords(medium) for medium in mediums]]
+        return RenderedLocalMedia(label=local_media["label"], path=str(name))
 
-    def render_url_list(url_list: t.Optional[t.List[LabeledLink]]) -> t.Optional[t.List[LinkParts]]:
-        """
-
-        :param url_list:
-        :return:
-        """
-
-        return [convert_url(url) for url in url_list] if url_list else None
-
-    return Entry(
+    return RenderedEntry(
         slug=yaml_path.with_suffix("").name,
         title=serialized_entry.title,
         description=serialized_entry.description,
         explanation=serialized_entry.explanation,
-        gallery=None,
-        size=serialized_entry.size.value,
+        local_media=[render_local_media(loc) for loc in serialized_entry.local_media],
+        youtube_videos=[
+            t.cast(RenderedYouTubeVideo, video) for video in serialized_entry.youtube_videos
+        ]
+        if serialized_entry.youtube_videos
+        else None,
+        size=string.capwords(serialized_entry.size.value),
         domain=string.capwords(serialized_entry.domain.value),
-        primary_url=convert_url(serialized_entry.primary_url),
-        secondary_urls=render_url_list(serialized_entry.secondary_urls),
-        press_urls=render_url_list(serialized_entry.press_urls),
-        completion_date=render_date(serialized_entry.completion_date),
+        primary_url=_render_link(serialized_entry.primary_url),
+        secondary_urls=_render_link_list(serialized_entry.secondary_urls),
+        press_urls=_render_link_list(serialized_entry.press_urls),
+        completion_date=_render_date(serialized_entry.completion_date),
         team_size=string.capwords(serialized_entry.team_size.value),
         involvement=serialized_entry.involvement,
-        mediums=render_mediums(serialized_entry.mediums),
+        mediums=_render_mediums(serialized_entry.mediums),
     )
 
 
-def find_yaml(directory: Path) -> Path:
+def _find_yaml(directory: Path) -> Path:
     """
-
-    :param directory:
-    :return:
+    Search a given directory for a yaml file.
+    Note: all callers only want to find a single yaml file in the given directory, so if more
+    than one yaml file is found, an error is raised.
+    :param directory: Directory to search.
+    :return: Path to the yaml file.
+    :raises ValueError: If more than one yaml is found in the given directory, or if no yaml is
+    found
     """
 
     yaml_paths = list(directory.glob(f"*.{YAML_EXTENSION}"))
@@ -149,10 +220,15 @@ def find_yaml(directory: Path) -> Path:
     if len(yaml_paths) > 1:
         raise ValueError(f"Found too many yaml files in dir: {directory}")
 
-    return next(iter(yaml_paths))
+    try:
+        output = next(iter(yaml_paths))
+    except StopIteration as e:
+        raise ValueError(f"Couldn't find a yaml in directory: {directory}") from e
+
+    return output
 
 
-def directories_in_directory(directory: Path) -> t.Iterator[Path]:
+def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
     """
     For the given directory, yield paths to directories within that directory.
     :param directory: Path to search
@@ -162,37 +238,54 @@ def directories_in_directory(directory: Path) -> t.Iterator[Path]:
     yield from [path for path in directory.iterdir() if path.is_dir()]
 
 
-def read_section(section_directory: Path, static_content_directory: Path) -> Section:
+def _read_section(section_directory: Path, static_content_directory: Path) -> Section:
+    """
+    Given a `section_directory` (so a directory with a top-level yaml, and a bunch of directories
+    that each describe a portfolio entry), load the contents as a Section, modifying the contents
+    such that it'll be fit for rendering.
+    :param section_directory: Directory that corresponds with the section.
+    :param static_content_directory: Images from entries are copied/compressed to this directory.
+    :return: In-memory version of Section.
     """
 
-    :param section_directory:
-    :return:
-    """
-
-    section_description_path = find_yaml(section_directory)
-    section_description = read_portfolio_element(
-        section_description_path, SerializedSectionDescription
+    section_description_path = _find_yaml(section_directory)
+    section_description = schema.read_portfolio_element(
+        section_description_path, schema.SerializedSectionDescription
     )
 
     return Section(
         description=section_description.description,
         title=section_description.title,
-        primary_url=convert_url(section_description.primary_url),
+        primary_url=_render_link(section_description.primary_url),
         entries=[
-            read_entry(find_yaml(path), static_content_directory)
-            for path in directories_in_directory(section_directory)
+            _read_entry(_find_yaml(path), static_content_directory)
+            for path in _directories_in_directory(section_directory)
         ],
     )
 
 
-def discover_portfolio(sections_directory: Path, static_content_directory: Path) -> t.List[Section]:
+def discover_portfolio(sections_directory: Path, static_content_directory: Path) -> Portfolio:
     """
-    Reads all of the available entries from the content folder into their in-memory forms and
-    returns them.
-    :return: The list of entries.
+    Loads the portfolio as it's represented on disk (as a collection of directories and images and
+    yaml files) into memory so it can be displayed by other components of this application (flask)
+    :param sections_directory: Contains section directories, and a top level yaml describing the
+    portfolio.
+    :param static_content_directory: Media discovered is copied to this directory so it can
+    be served by flask.
+    :return: In-memory version of the portfolio.
     """
 
-    return [
-        read_section(section_directory, static_content_directory)
-        for section_directory in directories_in_directory(sections_directory)
-    ]
+    portfolio_description_path = _find_yaml(sections_directory)
+    portfolio_description = schema.read_portfolio_element(
+        portfolio_description_path, schema.SerializedPortfolioDescription
+    )
+
+    output = Portfolio(
+        title=portfolio_description.title,
+        description=portfolio_description.description,
+        sections=[
+            _read_section(section_directory, static_content_directory)
+            for section_directory in _directories_in_directory(sections_directory)
+        ],
+    )
+    return output

@@ -2,15 +2,16 @@ completion_date: '2018-05-18'
 description: Over-engineered rack mount for the Valve Index.
 domain: hardware
 explanation: Needed a way to house this VR headset in an already overcrowded space, ended up designing a geometrically interesting series of print friendly models based on the open source models of the headset published by Valve. This project ended up gaining some popularity, having several remixes published on thingiverse. The modeling was certanly challenging but I felt the design of the Index deserved it.
-gallery:
+youtube_videos:
 - label: Project overview video, contains installation instructions and design rationale.
-  link: https://youtu.be/vPsgj4sFM2w
+  video_id: vPsgj4sFM2w
+local_media:
 - label: All parts installed with their components inserted.
-  path: devon_bray_portfolio/content/esologic/index_mount/index_mount_images/index_mount_1.jpg
+  path: ./index_mount_images/index_mount_1.jpg
 - label: Detail view of knuckles installed.
-  path: devon_bray_portfolio/content/esologic/index_mount/index_mount_images/index_mount_2.jpg
+  path: ./index_mount_images/index_mount_2.jpg
 - label: Detail view of headset installed.
-  path: devon_bray_portfolio/content/esologic/index_mount/index_mount_images/index_mount_3.jpg
+  path: ./index_mount_images/index_mount_3.jpg
 involvement: I modeled these parts then fabricated them.
 mediums:
 - 3d printer

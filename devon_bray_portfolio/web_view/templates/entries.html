@@ -5,7 +5,7 @@
 </head>
 <body>
    <!--- TODO: I think we can move the whole section thing into it's own template. --->
-    {% for section in sections %}
+    {% for section in portfolio.sections %}
 
     <div>
         <h1>{{ section.title }}</h1>
@@ -34,9 +34,27 @@
                 {% endfor %}
                 </ul>
                 {%endif %}
+                <p>Image Gallery</p>
+                <ul>
+                {% for local_media in entry.local_media  %}
+                    <li><img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" style="height:500px;"></li>
+                {% endfor %}
+                </ul>
+                {% if entry.youtube_videos %}
+                <p>Video Gallery</p>
+                <ul>
+                {% for youtube_video in entry.youtube_videos %}
+                    <li>
+                        <iframe width="420" height="315"
+                        src="https://www.youtube.com/embed/{{youtube_video.video_id}}">
+                        </iframe>
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
                 <p>Meta: </p>
                 <ul>
-                    <li><p>Size: {{ entry.size.value }}</p></li>
+                    <li><p>Size: {{ entry.size }}</p></li>
                     <li><p>Domain: {{ entry.domain }}</p></li>
                     <li><p>Involvement: {{ entry.involvement }}</p></li>
                     <li><p>Team Size: {{ entry.team_size }}</p></li>

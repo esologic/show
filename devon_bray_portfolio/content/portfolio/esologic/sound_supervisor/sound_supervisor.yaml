@@ -2,11 +2,12 @@ completion_date: '2016-09-22'
 description: Adds physical controls to the Windows volume mixer.
 domain: mixed (hardware, software)
 explanation: Completed as a hackathon (hackMIT) project, this device maps the indvidual application volumes for programs running on Windows to potentiometer knobs, so user can quickly adjust these volumes without having to open the window.
-gallery:
+youtube_video:
 - label: Demo video.
-  link: https://youtu.be/2z9O2YgUMyc
+  video_id: 2z9O2YgUMyc
+local_media:
 - label: Photo of finished product.
-  path: devon_bray_portfolio/content/esologic/sound_supervisor/sound_supervisor_images/frequency_counter_1.jpg
+  path: ./sound_supervisor_images/sound_supervisor_1.jpeg
 involvement: Designed and manufactured this project.
 mediums:
 - arduino
