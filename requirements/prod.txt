@@ -1,5 +1,6 @@
 flask==2.0.2
 mypy==0.812
+Pillow==8.4.0
 pyaml==21.10.1
 pydantic==1.8.2
 pypandoc==1.6.4

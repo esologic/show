@@ -3,12 +3,13 @@ Interface through which other components of this application access the content 
 TODO: There's a bit of redundancy, and a little more inheritance could be helpful.
 """
 
-import shutil
 import string
 import typing as t
 from datetime import date
 from pathlib import Path
 from typing import NamedTuple
+
+from PIL import Image
 
 from devon_bray_portfolio.content import schema
 
@@ -174,10 +175,14 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
 
         name = local_media["path"].name
 
-        # TODO: Compress this image.
-        shutil.copy(
-            src=yaml_path.parent.joinpath(local_media["path"]), dst=media_directory.joinpath(name)
-        )
+        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+
+        if image.mode in ("RGBA", "P"):
+            image = image.convert("RGB")
+
+        image.thumbnail((500, 500))
+
+        image.save(str(media_directory.joinpath(name)))
 
         return RenderedLocalMedia(label=local_media["label"], path=str(name))
 

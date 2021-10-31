@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!--- TODO: I think we can move the whole section thing into it's own template. --->
+    {% for section in portfolio.sections %}
+
+    <div>
+        <h1>{{ section.title }}</h1>
+        <p>{{ section.description }}</p>
+        <div class="gallery">
+        {% for entry in section.entries %}
+        <figure class="image">
+            <img src="{{url_for('static', filename=entry.local_media[0].path)}}">
+            <figcaption>{{entry.title}}<br><span>{{entry.description}}</span></figcaption>
+        </figure>
+        {% endfor %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+</body>
+</html>

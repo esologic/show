@@ -35,7 +35,7 @@ def create_app() -> Flask:
         :return:
         """
         return render_template(
-            "entries.html",
+            "portfolio.html",
             portfolio=current_portfolio,
         )
 
