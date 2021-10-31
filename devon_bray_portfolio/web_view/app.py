@@ -1,6 +1,7 @@
 """
 Flask entry point
 """
+
 import os
 from pathlib import Path
 

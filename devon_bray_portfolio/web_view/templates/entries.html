@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Portfolio</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css') }}">
 </head>
 <body>
    <!--- TODO: I think we can move the whole section thing into it's own template. --->
@@ -12,8 +13,8 @@
         <p>{{ section.description }}</p>
         <ul>
         {% for entry in section.entries %}
-        <li>
-            <div>
+        <li class="flex-container">
+            <div class="flex-item">
                 <h2>{{ entry.title }}</h2>
                 <h3>{{ entry.description }}</h3>
                 <p>{{ entry.explanation }}</p>
