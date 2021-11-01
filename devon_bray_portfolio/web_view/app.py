@@ -69,7 +69,6 @@ def create_app() -> Flask:
         :param e:
         :return:
         """
-        print(type(e))
         return f"No page! Exception: {e}", 404
 
     return app
