@@ -4,7 +4,9 @@ figure {
     grid-template-rows: 1fr auto;
     margin: 0 0 10px;
     break-inside: avoid;
-    background-color: grey;
+background: rgb(255,177,109);
+background: linear-gradient(300deg, rgba(255,177,109,0.6474964985994398) 0%, rgba(237,151,0,1) 100%);
+    box-shadow: 5px 10px 18px #888888;
 }
 
 figure > img {

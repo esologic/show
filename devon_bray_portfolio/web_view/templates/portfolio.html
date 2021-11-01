@@ -13,7 +13,7 @@
         <p>{{ section.description }}</p>
         <div class="container">
             {% for entry in section.entries %}
-            <figure>
+            <figure onclick="location.href='{{entry.slug}}';" style="cursor: pointer;">
                 <img src="{{url_for('static', filename=entry.local_media[0].path)}}" class="gallery-img">
                 <figcaption>
                     <h2>{{entry.title}}</h2>
