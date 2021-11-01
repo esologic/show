@@ -180,7 +180,7 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
         if image.mode in ("RGBA", "P"):
             image = image.convert("RGB")
 
-        image.thumbnail((500, 500))
+        image.thumbnail((1000, 1000))
 
         image.save(str(media_directory.joinpath(name)))
 

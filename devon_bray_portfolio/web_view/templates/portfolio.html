@@ -11,11 +11,14 @@
     <div>
         <h1>{{ section.title }}</h1>
         <p>{{ section.description }}</p>
-        <div class="gallery-grid">
+        <div class="container">
             {% for entry in section.entries %}
-            <figure class="gallery-frame">
+            <figure>
                 <img src="{{url_for('static', filename=entry.local_media[0].path)}}" class="gallery-img">
-                <figcaption>{{entry.title}}<br><span>{{entry.description}}</span></figcaption>
+                <figcaption>
+                    <h2>{{entry.title}}</h2>
+                    <p>{{entry.description}}</p>
+                </figcaption>
             </figure>
             {% endfor %}
         </div>
