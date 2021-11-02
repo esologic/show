@@ -1,1 +1,66 @@
-<p>{{entry}}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{entry.slug}}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='entry.css') }}">
+</head>
+<body>
+    <div class="container">
+
+        <div >
+        {% for local_media in entry.local_media[0:1]  %}
+            <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="item">
+        {% endfor %}
+        </div>
+
+        <div class="item">
+            <h1>{{ entry.title }}</h1>
+            <h3>{{ entry.description }}</h3>
+            <p>{{ entry.explanation }}</p>
+            <a href="{{ entry.primary_url.link }}">{{ entry.primary_url.label }}</a>
+            {% if entry.secondary_urls %}
+            <p>Further Reading</p>
+            <ul>
+            {% for secondary_url in entry.secondary_urls  %}
+                <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
+            {% endfor %}
+            </ul>
+            {%endif %}
+            {% if entry.press_urls %}
+            <p>As seen in</p>
+            <ul>
+            {% for press_url in entry.press_urls  %}
+                <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
+            {% endfor %}
+            </ul>
+            {%endif %}
+
+            <p>Meta: </p>
+            <ul>
+                <li><p>Size: {{ entry.size }}</p></li>
+                <li><p>Domain: {{ entry.domain }}</p></li>
+                <li><p>Involvement: {{ entry.involvement }}</p></li>
+                <li><p>Team Size: {{ entry.team_size }}</p></li>
+                <li><p>Completion Date: {{ entry.completion_date }}</p></li>
+                <li>
+                    <p>Mediums: </p>
+                    <ul>
+                    {% for medium in entry.mediums %}
+                        <li>{{medium}}</li>
+                    {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <p>Gallery</p>
+    {% if entry.youtube_videos %}
+    {% for youtube_video in entry.youtube_videos %}
+        <iframe src="https://www.youtube.com/embed/{{youtube_video.video_id}}" width="1000" height="1000"></iframe>
+    {% endfor %}
+    {% endif %}
+    {% for local_media in entry.local_media  %}
+        <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" style="height:500px;">
+    {% endfor %}
+</body>
+</html>

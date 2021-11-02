@@ -1,7 +1,5 @@
 
 figure {
-    display: grid;
-    grid-template-rows: 1fr auto;
     margin: 0 0 10px;
     break-inside: avoid;
     background: rgb(255,177,109);
@@ -22,8 +20,8 @@ figure > img {
 
 figcaption {
     padding: 1rem;
-
 }
+
 figcaption > p {
     margin-block-start: 0;
     margin-block-end: 0;

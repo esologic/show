@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <title>Portfolio</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='portfolio.css') }}">
 </head>
 <body>
     <!--- TODO: I think we can move the whole section thing into it's own template. --->
     {% for section in portfolio.sections %}
-
     <div>
         <h1>{{ section.title }}</h1>
         <p>{{ section.description }}</p>
@@ -24,6 +23,5 @@
         </div>
     </div>
     {% endfor %}
-
 </body>
 </html>
