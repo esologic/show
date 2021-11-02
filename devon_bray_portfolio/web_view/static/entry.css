@@ -1,11 +1,10 @@
-
-* {
-  box-sizing: border-box;
+body {
+     padding: 1rem;
 }
 
 /* Create four equal columns */
 .item {
-  flex: 25%;
+    flex: 25%;
     padding: 1rem;
 }
 
@@ -16,6 +15,13 @@
   align-items: center;
 }
 
+.container img {
+    display: block;
+    object-fit: contain;
+    max-height: 70vh;
+    box-sizing: border-box;
+}
+
 img {
     width: 100%;
 }
@@ -24,7 +30,6 @@ iframe {
     width: 100%;
 }
 
-
-.gallery-img {
-  width: 90%;
+.title {
+    text-align: center;
 }

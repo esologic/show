@@ -5,31 +5,34 @@
     <link rel="stylesheet" href="{{url_for('static', filename='entry.css') }}">
 </head>
 <body>
+
+           <h1 class="title">{{ entry.title }}</h1>
+
     <div class="container">
 
-        {% for local_media in entry.local_media[0:1]  %}
+                        {% for local_media in entry.local_media[0:1]  %}
             <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="item">
         {% endfor %}
 
         <div class="item">
-            <h1>{{ entry.title }}</h1>
+
             <h3>{{ entry.description }}</h3>
             <p>{{ entry.explanation }}</p>
             <a href="{{ entry.primary_url.link }}">{{ entry.primary_url.label }}</a>
             {% if entry.secondary_urls %}
             <p>Further Reading</p>
             <ul>
-            {% for secondary_url in entry.secondary_urls  %}
+                {% for secondary_url in entry.secondary_urls  %}
                 <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
-            {% endfor %}
+                {% endfor %}
             </ul>
             {%endif %}
             {% if entry.press_urls %}
             <p>As seen in</p>
             <ul>
-            {% for press_url in entry.press_urls  %}
+                {% for press_url in entry.press_urls  %}
                 <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
-            {% endfor %}
+                {% endfor %}
             </ul>
             {%endif %}
 
@@ -50,10 +53,9 @@
                 </li>
             </ul>
         </div>
+
     </div>
     <p>Gallery</p>
-
-
 
     {% if entry.youtube_videos %}
     {% for youtube_video in entry.youtube_videos %}
