@@ -7,11 +7,9 @@
 <body>
     <div class="container">
 
-        <div >
         {% for local_media in entry.local_media[0:1]  %}
             <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="item">
         {% endfor %}
-        </div>
 
         <div class="item">
             <h1>{{ entry.title }}</h1>
@@ -54,13 +52,33 @@
         </div>
     </div>
     <p>Gallery</p>
+
+
+
     {% if entry.youtube_videos %}
     {% for youtube_video in entry.youtube_videos %}
-        <iframe src="https://www.youtube.com/embed/{{youtube_video.video_id}}" width="1000" height="1000"></iframe>
+
+        <figure class="gallery-img">
+        <iframe src="https://www.youtube.com/embed/{{youtube_video.video_id}}" width="1000" height="1000" class="gallery-item"></iframe>
+        <figcaption>
+            <p>{{youtube_video.label}}</p>
+        </figcaption>
+    </figure>
+
+
+
     {% endfor %}
     {% endif %}
     {% for local_media in entry.local_media  %}
-        <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" style="height:500px;">
+
+            <figure class="gallery-img">
+        <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="gallery-item">
+        <figcaption>
+            <p>{{local_media.label}}</p>
+        </figcaption>
+    </figure>
+
+
     {% endfor %}
 </body>
 </html>

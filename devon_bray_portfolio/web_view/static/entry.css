@@ -6,11 +6,25 @@
 /* Create four equal columns */
 .item {
   flex: 25%;
-  padding: 20px;
+    padding: 1rem;
 }
 
 /* Create four equal columns */
 .container {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+img {
+    width: 100%;
+}
+
+iframe {
+    width: 100%;
+}
+
+
+.gallery-img {
+  width: 90%;
 }
