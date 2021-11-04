@@ -9,25 +9,13 @@ It should be very low overhead to add a new piece of work to the portfolio, or r
 I should be able to update the style and presentation of the portfolio without having to rethink entering the content 
 
 
-
 ## Usage
 
-####  Environment variables
+To serve the static files, in the `build` directory, run:
 
-Add if needed
-
-#### Correct usage
-
-With the virtual env activated, run: 
-
+```bash
+python3 -m http.server
 ```
-python devon_bray_portfolio.py --fill-me-in
-```
-
-#### Incorrect usage
-
-Add if needed
-
 
 ## Getting Started
 

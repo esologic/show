@@ -48,7 +48,7 @@ def create_app() -> Flask:
             portfolio=current_portfolio,
         )
 
-    @app.route("/<string:slug>")
+    @app.route("/<string:slug>/")
     def render_slug(slug: str) -> str:  # pylint: disable=unused-variable
         """
 

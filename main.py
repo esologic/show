@@ -1,11 +1,21 @@
 """Main module."""
 
+from flask_frozen import Freezer
+
+from devon_bray_portfolio.web_view.app import create_app
+
 
 def main() -> None:
     """
-    Main entry point for devon_bray_portfolio
+    This function creates a number of static HTML files that can be served on their own as the
+    portfolio.
+    TODO: iron out render location etc
     :return: None
     """
+
+    app = create_app()
+    freezer = Freezer(app)
+    freezer.freeze()
 
 
 if __name__ == "__main__":
