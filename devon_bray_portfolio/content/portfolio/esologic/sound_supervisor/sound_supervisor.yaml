@@ -1,7 +1,9 @@
 completion_date: '2016-09-22'
 description: Adds physical controls to the Windows volume mixer.
 domain: mixed (hardware, software)
-explanation: Completed as a hackathon (hackMIT) project, this device maps the indvidual application volumes for programs running on Windows to potentiometer knobs, so user can quickly adjust these volumes without having to open the window.
+explanation: Completed as a hackathon (hackMIT) project, this device maps the indvidual
+  application volumes for programs running on Windows to potentiometer knobs, so user
+  can quickly adjust these volumes without having to open the window.
 youtube_video:
 - label: Demo video.
   video_id: 2z9O2YgUMyc
