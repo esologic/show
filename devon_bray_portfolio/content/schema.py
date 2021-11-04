@@ -64,6 +64,7 @@ class Medium(str, Enum):
     c_sharp = "c#"
     python = "python"
     raspberry_pi = "raspberry pi"
+    led_art = "led art"
 
 
 class TeamSize(str, Enum):

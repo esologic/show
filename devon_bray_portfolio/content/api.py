@@ -130,7 +130,7 @@ def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
     """
 
     def convert(medium: str) -> str:
-        for bad, good in [("3d", "3D"), ("Cad", "CAD")]:
+        for bad, good in [("3d", "3D"), ("Cad", "CAD"), ("Led", "LED")]:
             if bad in medium:
                 return medium.replace(bad, good)
 
