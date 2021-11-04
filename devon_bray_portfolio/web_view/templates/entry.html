@@ -2,20 +2,16 @@
 <html lang="en">
 <head>
     <title>{{entry.slug}}</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='entry.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='entry.css') }}">
 </head>
 <body>
-
-           <h1 class="title">{{ entry.title }}</h1>
-
+    <h1 class="title">{{ entry.title }}</h1>
     <div class="container">
-
-                        {% for local_media in entry.local_media[0:1]  %}
-            <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="item">
+        {% for local_media in entry.local_media[0:1]  %}
+        <img src="{{ url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="item">
         {% endfor %}
 
         <div class="item">
-
             <h3>{{ entry.description }}</h3>
             <p>{{ entry.explanation }}</p>
             <a href="{{ entry.primary_url.link }}">{{ entry.primary_url.label }}</a>
@@ -35,7 +31,6 @@
                 {% endfor %}
             </ul>
             {%endif %}
-
             <p>Meta: </p>
             <ul>
                 <li><p>Size: {{ entry.size }}</p></li>
@@ -53,34 +48,25 @@
                 </li>
             </ul>
         </div>
-
     </div>
     <p>Gallery</p>
-
     {% if entry.youtube_videos %}
     {% for youtube_video in entry.youtube_videos %}
-
-        <figure class="gallery-img">
+    <figure class="gallery-img">
         <iframe src="https://www.youtube.com/embed/{{youtube_video.video_id}}" width="1000" height="1000" class="gallery-item"></iframe>
         <figcaption>
             <p>{{youtube_video.label}}</p>
         </figcaption>
     </figure>
-
-
-
     {% endfor %}
     {% endif %}
     {% for local_media in entry.local_media  %}
-
-            <figure class="gallery-img">
+    <figure class="gallery-img">
         <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="gallery-item">
         <figcaption>
             <p>{{local_media.label}}</p>
         </figcaption>
     </figure>
-
-
     {% endfor %}
 </body>
 </html>
