@@ -11,6 +11,7 @@ local_media:
 involvement: Wrote/used this software.
 mediums:
 - arduino
+- breadboard electronics
 primary_url:
   label: Blog post (contains code, test results etc.)
   link: https://www.esologic.com/multiple-frequency-counter-arduino/

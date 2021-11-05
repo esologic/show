@@ -60,6 +60,8 @@ class Medium(str, Enum):
     arduino = "arduino"
     fritzing = "fritzing"
     breadboard_electronics = "breadboard electronics"
+    protoboard_electronics = "protoboard electronics"
+    electrical_cad = "electrical cad"
     mechanical_cad = "mechanical cad"
     c_sharp = "c#"
     python = "python"
