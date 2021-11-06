@@ -1,0 +1,51 @@
+completion_date: '2018-07-22'
+description: Test instrument for addressable LED development.
+domain: mixed (hardware, software)
+explanation: The addressable LED has worked it's way into nearly every hardware project
+  I've worked on over the years, and one of the foundational technologies that enabled
+  Telapush. I needed a simple, durable and robust way to debug these devices during
+  development and created blinkbox to do just that. I wanted something with the form
+  of a piece of "benchtop" equipment like an oscilloscope or multimeter but could
+  also be carried in a toolbox if need be. A hardware UI enables user to select the
+  type and LED count, and a mode button changes the color patter displayed on the
+  LEDs.
+youtube_videos:
+- label: Walkthrough and demonstration.
+  video_id: rg_kiPnU8oM
+local_media:
+- label: Isometric detail shot of blinkbox operating.
+  path: ./blinkbox_images/blinkbox_1.JPG
+- label: Shot of blinkbox being used to debug a high density strip of clocked LEDs.
+  path: ./blinkbox_images/blinkbox_2.png
+- label: Upward shot of blinkbox operating.
+  path: ./blinkbox_images/blinkbox_3.JPG
+- label: Detail view of hardware UI.
+  path: ./blinkbox_images/blinkbox_4.JPG
+- label: Render of mechanical design.
+  path: ./blinkbox_images/blinkbox_5.jpg
+involvement: Designed and manufactured this project for use in my studio.
+mediums:
+- arduino
+- 3d printer
+- mechanical cad
+- led art
+- protoboard electronics
+- electrical cad
+primary_url:
+  label: Blog post (contains links to schematics, code, models, BOM etc) as well as
+    a further design explanation.
+  link: https://www.esologic.com/blinkbox/
+size: medium
+secondary_urls:
+- label: Thingiverse
+  link: https://www.thingiverse.com/thing:3014213
+- label: Github (source code, ecad/mcad)
+  link: https://github.com/esologic/blinkbox
+team_size: solo
+title: Blinkbox
+version_number: 0
+press_urls:
+- label: 'BlinkBox: Debugging Tool For Addressable LEDs (Hackaday)'
+  link: https://hackaday.com/2018/07/25/blinkbox-debugging-tool-for-addressable-leds/
+- label: Ramp up programmable LED troubleshooting with the BlinkBox (Arduino Blog)
+  link: https://blog.arduino.cc/2018/07/23/ramp-up-programmable-led-troubleshooting-with-the-blinkbox/

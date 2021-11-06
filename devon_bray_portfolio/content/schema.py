@@ -60,10 +60,15 @@ class Medium(str, Enum):
     arduino = "arduino"
     fritzing = "fritzing"
     breadboard_electronics = "breadboard electronics"
+    protoboard_electronics = "protoboard electronics"
+    pcb_electronics = "pcb electronics"
+    electrical_cad = "electrical cad"
     mechanical_cad = "mechanical cad"
     c_sharp = "c#"
     python = "python"
     raspberry_pi = "raspberry pi"
+    led_art = "led art"
+    twitter = "twitter"
 
 
 class TeamSize(str, Enum):
@@ -72,7 +77,8 @@ class TeamSize(str, Enum):
     """
 
     solo = "solo"
-    group = "group"
+    small_group = "small group"
+    large_group = "large group"
 
 
 class LocalMedia(TypedDict):
