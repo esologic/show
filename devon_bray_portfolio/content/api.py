@@ -9,7 +9,7 @@ from datetime import date
 from pathlib import Path
 from typing import NamedTuple
 
-from PIL import Image
+from PIL import Image, ImageSequence
 
 from devon_bray_portfolio.content import schema
 
@@ -173,16 +173,37 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
         :return: Fields converted to strings, paths relative to `media_directory`.
         """
 
+        max_size = (3000, 3000)
         name = local_media["path"].name
+        output_path = str(media_directory.joinpath(name))
 
         image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
-        if image.mode in ("RGBA", "P"):
-            image = image.convert("RGB")
+        if getattr(image, "is_animated", False):
 
-        image.thumbnail((3000, 3000))
+            frames = ImageSequence.Iterator(image)
 
-        image.save(str(media_directory.joinpath(name)))
+            # Wrap on-the-fly thumbnail generator
+            def thumbnails(f: Image) -> t.Iterator[Image]:
+                for frame in f:
+                    thumbnail = frame.copy()
+                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                    yield thumbnail
+
+            frames = thumbnails(frames)
+
+            # Save output
+            om = next(frames)  # Handle first frame separately
+            om.info = image.info  # Copy sequence info
+            om.save(output_path, save_all=True, append_images=list(frames), loop=0)
+
+        else:
+            if image.mode in ("RGBA", "P"):
+                image = image.convert("RGB")
+
+            image.thumbnail(max_size)
+
+            image.save(output_path)
 
         return RenderedLocalMedia(label=local_media["label"], path=str(name))
 

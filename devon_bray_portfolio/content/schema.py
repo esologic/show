@@ -76,7 +76,8 @@ class TeamSize(str, Enum):
     """
 
     solo = "solo"
-    group = "group"
+    small_group = "small group"
+    large_group = "large group"
 
 
 class LocalMedia(TypedDict):
