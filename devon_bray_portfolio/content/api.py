@@ -6,6 +6,8 @@ TODO: There's a bit of redundancy, and a little more inheritance could be helpfu
 import string
 import typing as t
 from datetime import date
+from functools import partial
+from multiprocessing import Pool
 from pathlib import Path
 from typing import NamedTuple
 
@@ -150,6 +152,52 @@ def _render_link_list(
     return [_render_link(url) for url in link_list] if link_list else None
 
 
+def _render_local_media(
+    media_directory: Path, yaml_path: Path, local_media: schema.LocalMedia
+) -> RenderedLocalMedia:
+    """
+    Copies, processes images from their origins in the entry folders to their destinations
+    in the `media_directory` folder. Returns a new NT, with a reference to their path
+    relative to `media_directory`.
+    :param local_media: Reference to the file in the entry directory.
+    :return: Fields converted to strings, paths relative to `media_directory`.
+    """
+
+    max_size = (3000, 3000)
+    name = local_media["path"].name
+    output_path = str(media_directory.joinpath(name))
+
+    image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+
+    if getattr(image, "is_animated", False):
+
+        frames = ImageSequence.Iterator(image)
+
+        # Wrap on-the-fly thumbnail generator
+        def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
+            for frame in f:
+                thumbnail = frame.copy()
+                thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                yield thumbnail
+
+        frames = thumbnails(frames)
+
+        # Save output
+        om = next(frames)  # Handle first frame separately
+        om.info = image.info  # Copy sequence info
+        om.save(output_path, save_all=True, append_images=list(frames), loop=0)
+
+    else:
+        if image.mode in ("RGBA", "P"):
+            image = image.convert("RGB")
+
+        image.thumbnail(max_size)
+
+        image.save(output_path)
+
+    return RenderedLocalMedia(label=local_media["label"], path=str(name))
+
+
 def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
@@ -164,55 +212,17 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
 
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
-    def render_local_media(local_media: schema.LocalMedia) -> RenderedLocalMedia:
-        """
-        Copies, processes images from their origins in the entry folders to their destinations
-        in the `media_directory` folder. Returns a new NT, with a reference to their path
-        relative to `media_directory`.
-        :param local_media: Reference to the file in the entry directory.
-        :return: Fields converted to strings, paths relative to `media_directory`.
-        """
-
-        max_size = (3000, 3000)
-        name = local_media["path"].name
-        output_path = str(media_directory.joinpath(name))
-
-        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
-
-        if getattr(image, "is_animated", False):
-
-            frames = ImageSequence.Iterator(image)
-
-            # Wrap on-the-fly thumbnail generator
-            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-                for frame in f:
-                    thumbnail = frame.copy()
-                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                    yield thumbnail
-
-            frames = thumbnails(frames)
-
-            # Save output
-            om = next(frames)  # Handle first frame separately
-            om.info = image.info  # Copy sequence info
-            om.save(output_path, save_all=True, append_images=list(frames), loop=0)
-
-        else:
-            if image.mode in ("RGBA", "P"):
-                image = image.convert("RGB")
-
-            image.thumbnail(max_size)
-
-            image.save(output_path)
-
-        return RenderedLocalMedia(label=local_media["label"], path=str(name))
+    with Pool() as p:
+        local_media = p.map(
+            partial(_render_local_media, media_directory, yaml_path), serialized_entry.local_media
+        )
 
     return RenderedEntry(
         slug=yaml_path.with_suffix("").name,
         title=serialized_entry.title,
         description=serialized_entry.description,
         explanation=serialized_entry.explanation,
-        local_media=[render_local_media(loc) for loc in serialized_entry.local_media],
+        local_media=local_media,
         youtube_videos=[
             t.cast(RenderedYouTubeVideo, video) for video in serialized_entry.youtube_videos
         ]

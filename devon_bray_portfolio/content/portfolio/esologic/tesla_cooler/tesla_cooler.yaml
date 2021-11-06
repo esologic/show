@@ -53,5 +53,5 @@ team_size: solo
 title: Tesla Cooler
 version_number: 0
 press_urls:
-- label: (Hackaday)(Hackaday)(Hackaday)(Hackaday)
-  link: http://hackaday.com
+- label: 3d-printed Fan Mount Keeps Server Gpu Cool In Desktop Case (Hackaday)
+  link: https://hackaday.com/2021/11/06/3d-printed-fan-mount-keeps-server-gpu-cool-in-desktop-case/
