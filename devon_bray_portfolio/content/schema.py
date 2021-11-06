@@ -67,6 +67,7 @@ class Medium(str, Enum):
     python = "python"
     raspberry_pi = "raspberry pi"
     led_art = "led art"
+    twitter = "twitter"
 
 
 class TeamSize(str, Enum):

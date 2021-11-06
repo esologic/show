@@ -1,0 +1,30 @@
+completion_date: '2020-10-29'
+description: I've published a number of single-purpose 3d printable designs. This
+  entry entry aggregates this collection of publications.
+domain: software
+explanation: 3D printing is one of my favorite mediums and leaverage it heavily in
+  my work.
+local_media:
+- label: Pen/notebook organizer. A gift to a family member. [Blog Post](https://www.esologic.com/3d-printed-pen-notebook-organizer/).
+  path: ./3d_prints_images/3d_prints_1.jpg
+- label: Desktop microphone stand. [Blog Post](https://www.esologic.com/mic-stand/).
+  path: ./3d_prints_images/3d_prints_2.jpg
+- label: Wall-mounted drybox for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-drybox-for-3d-printing-with-nylon/).
+  path: ./3d_prints_images/3d_prints_3.jpg
+- label: 1x1 Parts drawer for bringing the lab on the go. [Blog Post](https://www.esologic.com/singer-parts-drawer-holder/).
+  path: ./3d_prints_images/3d_prints_4.jpeg
+- label: Wire shelf keyboard holder. [Blog Post](https://www.esologic.com/tiny-apartment-improvement-project-wire-shelf-keyboard-holder/).
+  path: ./3d_prints_images/3d_prints_5.jpeg
+- label: Wire shelf Raspberry Pi mount. [Blog Post](https://www.esologic.com/goodprints-episode-1/).
+  path: ./3d_prints_images/3d_prints_6.jpg
+involvement: Wrote the (bad) code for this project.
+mediums:
+- mechanical cad
+- 3d printer
+primary_url:
+  label: 3D printing category on esologic.com
+  link: https://www.esologic.com/category/3d-printing/
+size: small
+team_size: solo
+title: 3D Print Gallery
+version_number: 0

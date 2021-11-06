@@ -136,7 +136,7 @@ def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
 
         return medium
 
-    return [convert(medium) for medium in [string.capwords(medium) for medium in mediums]]
+    return sorted([convert(medium) for medium in [string.capwords(medium) for medium in mediums]])
 
 
 def _render_link_list(
