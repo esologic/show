@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='portfolio.css') }}">
 </head>
 <body>
-    <!--- TODO: I think we can move the whole section thing into it's own template. --->
     {% for section in portfolio.sections %}
     <div>
         <h1>{{ section.title }}</h1>
@@ -14,10 +13,13 @@
             {% for entry in section.entries %}
             {% set url = url_for('render_slug', slug=entry.slug) %}
             <figure onclick="location.href='{{ url }}';" style="cursor: pointer;">
-                <img src="{{ url_for('static', filename=entry.local_media[0].path) }}" class="gallery-img">
+                <img
+                    src="{{ url_for('static', filename=entry.local_media[0].path) }}"
+                    class="gallery-img"
+                >
                 <figcaption>
-                    <h2>{{entry.title}}</h2>
-                    <p>{{entry.description}}</p>
+                    <h2>{{ entry.title  }}</h2>
+                    <p>{{ entry.description }}</p>
                 </figcaption>
             </figure>
             {% endfor %}

@@ -8,12 +8,16 @@
     <h1 class="title">{{ entry.title }}</h1>
     <div class="container">
         {% for local_media in entry.local_media[0:1]  %}
-        <img src="{{ url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="item">
+        <img
+            src="{{ url_for('static', filename=local_media.path) }}"
+            alt="{{local_media.label}}"
+            class="item"
+        >
         {% endfor %}
 
         <div class="item">
             <h3>{{ entry.description }}</h3>
-            <p>{{ entry.explanation }}</p>
+            {{ entry.explanation | safe }}
             <a href="{{ entry.primary_url.link }}">{{ entry.primary_url.label }}</a>
             {% if entry.secondary_urls %}
             <p>Further Reading</p>
@@ -42,7 +46,7 @@
                     <p>Mediums: </p>
                     <ul>
                     {% for medium in entry.mediums %}
-                        <li>{{medium}}</li>
+                        <li>{{ medium }}</li>
                     {% endfor %}
                     </ul>
                 </li>
@@ -53,19 +57,24 @@
     {% if entry.youtube_videos %}
     {% for youtube_video in entry.youtube_videos %}
     <figure class="gallery-img">
-        <iframe src="https://www.youtube.com/embed/{{youtube_video.video_id}}" width="1000" height="1000" class="gallery-item"></iframe>
-        <figcaption>
-            <p>{{youtube_video.label}}</p>
-        </figcaption>
+        <iframe
+            src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
+            width="1000"
+            height="1000"
+            class="gallery-item">
+        </iframe>
+        <figcaption>{{ youtube_video.label | safe }}</figcaption>
     </figure>
     {% endfor %}
     {% endif %}
     {% for local_media in entry.local_media  %}
     <figure class="gallery-img">
-        <img src="{{url_for('static', filename=local_media.path) }}" alt="{{local_media.label}}" class="gallery-item">
-        <figcaption>
-            <p>{{local_media.label}}</p>
-        </figcaption>
+        <img
+            src="{{ url_for('static', filename=local_media.path) }}"
+            alt="{{local_media.label}}"
+            class="gallery-item"
+        >
+        <figcaption>{{ local_media.label | safe }}</figcaption>
     </figure>
     {% endfor %}
 </body>

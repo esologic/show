@@ -11,6 +11,7 @@ from multiprocessing import Pool
 from pathlib import Path
 from typing import NamedTuple
 
+from markdown import markdown
 from PIL import Image, ImageSequence
 
 from devon_bray_portfolio.content import schema
@@ -195,7 +196,7 @@ def _render_local_media(
 
         image.save(output_path)
 
-    return RenderedLocalMedia(label=local_media["label"], path=str(name))
+    return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
 
 def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
@@ -221,10 +222,11 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
         slug=yaml_path.with_suffix("").name,
         title=serialized_entry.title,
         description=serialized_entry.description,
-        explanation=serialized_entry.explanation,
+        explanation=markdown(serialized_entry.explanation),
         local_media=local_media,
         youtube_videos=[
-            t.cast(RenderedYouTubeVideo, video) for video in serialized_entry.youtube_videos
+            RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
+            for video in serialized_entry.youtube_videos
         ]
         if serialized_entry.youtube_videos
         else None,
