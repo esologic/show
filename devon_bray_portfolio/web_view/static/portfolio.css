@@ -1,5 +1,6 @@
 
 figure {
+      justify-self: center;
     margin: 0 0 10px;
     break-inside: avoid;
     background: rgb(255,177,109);
@@ -15,7 +16,15 @@ figure > img {
 }
 
 .container {
-    columns: 500px;
+  display: grid;
+  grid: auto-flow / repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+  grid-auto-flow: dense;
+}
+
+
+.large {
+    grid-column: 1/4;
 }
 
 figcaption {

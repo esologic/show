@@ -12,7 +12,7 @@
         <div class="container">
             {% for entry in section.entries %}
             {% set url = url_for('render_slug', slug=entry.slug) %}
-            <figure onclick="location.href='{{ url }}';" style="cursor: pointer;">
+            <figure onclick="location.href='{{ url }}';" style="cursor: pointer;" class="{{entry.size}}">
                 <img
                     src="{{ url_for('static', filename=entry.local_media[0].path) }}"
                     class="gallery-img"

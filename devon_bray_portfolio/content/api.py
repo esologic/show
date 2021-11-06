@@ -166,35 +166,37 @@ def _render_local_media(
 
     max_size = (3000, 3000)
     name = local_media["path"].name
-    output_path = str(media_directory.joinpath(name))
+    output_path = media_directory.joinpath(name)
 
-    image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+    if not output_path.exists():
 
-    if getattr(image, "is_animated", False):
+        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
-        frames = ImageSequence.Iterator(image)
+        if getattr(image, "is_animated", False):
 
-        # Wrap on-the-fly thumbnail generator
-        def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-            for frame in f:
-                thumbnail = frame.copy()
-                thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                yield thumbnail
+            frames = ImageSequence.Iterator(image)
 
-        frames = thumbnails(frames)
+            # Wrap on-the-fly thumbnail generator
+            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
+                for frame in f:
+                    thumbnail = frame.copy()
+                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                    yield thumbnail
 
-        # Save output
-        om = next(frames)  # Handle first frame separately
-        om.info = image.info  # Copy sequence info
-        om.save(output_path, save_all=True, append_images=list(frames), loop=0)
+            frames = thumbnails(frames)
 
-    else:
-        if image.mode in ("RGBA", "P"):
-            image = image.convert("RGB")
+            # Save output
+            om = next(frames)  # Handle first frame separately
+            om.info = image.info  # Copy sequence info
+            om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
 
-        image.thumbnail(max_size)
+        else:
+            if image.mode in ("RGBA", "P"):
+                image = image.convert("RGB")
 
-        image.save(output_path)
+            image.thumbnail(max_size)
+
+            image.save(str(output_path))
 
     return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
@@ -230,7 +232,7 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
         ]
         if serialized_entry.youtube_videos
         else None,
-        size=string.capwords(serialized_entry.size.value),
+        size=serialized_entry.size.value,
         domain=string.capwords(serialized_entry.domain.value),
         primary_url=_render_link(serialized_entry.primary_url),
         secondary_urls=_render_link_list(serialized_entry.secondary_urls),
