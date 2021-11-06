@@ -56,7 +56,7 @@ primary_url:
   label: See more photos on the installations page.
   link: https://telapush.com/installs
 secondary_urls:
-  label: User interactions.
+- label: User interactions.
   link: https://twitter.com/hashtag/BNT90?src=hashtag_click
 size: large
 team_size: small group

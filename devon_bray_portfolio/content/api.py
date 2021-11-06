@@ -130,7 +130,7 @@ def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
     """
 
     def convert(medium: str) -> str:
-        for bad, good in [("3d", "3D"), ("Cad", "CAD"), ("Led", "LED")]:
+        for bad, good in [("3d", "3D"), ("Cad", "CAD"), ("Led", "LED"), ("Pcb", "PCB")]:
             if bad in medium:
                 return medium.replace(bad, good)
 
@@ -184,7 +184,7 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
             frames = ImageSequence.Iterator(image)
 
             # Wrap on-the-fly thumbnail generator
-            def thumbnails(f: Image) -> t.Iterator[Image]:
+            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
                 for frame in f:
                     thumbnail = frame.copy()
                     thumbnail.thumbnail(max_size, Image.ANTIALIAS)

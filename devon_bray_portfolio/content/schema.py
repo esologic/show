@@ -61,6 +61,7 @@ class Medium(str, Enum):
     fritzing = "fritzing"
     breadboard_electronics = "breadboard electronics"
     protoboard_electronics = "protoboard electronics"
+    pcb_electronics = "pcb electronics"
     electrical_cad = "electrical cad"
     mechanical_cad = "mechanical cad"
     c_sharp = "c#"
