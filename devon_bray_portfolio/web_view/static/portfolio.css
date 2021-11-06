@@ -1,34 +1,39 @@
 
-figure {
-      justify-self: center;
-    margin: 0 0 10px;
-    break-inside: avoid;
-    background: rgb(255,177,109);
-    background: linear-gradient(300deg, rgba(255,177,109,0.6474964985994398) 0%, rgba(237,151,0,1) 100%);
-    box-shadow: 5px 10px 18px #888888;
+body {
+    margin: 5rem;
 }
 
-figure > img {
-    display: block;
-    padding: 1rem 1rem 0;
+.item {
+    justify-self: center;
+    margin: 0;
+    break-inside: avoid;
+    box-shadow: 5px 10px 18px #888888;
+    position: relative;
+}
+
+.gallery-img {
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    object-fit: cover;
 }
 
 .container {
-  display: grid;
-  grid: auto-flow / repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 10px;
-  grid-auto-flow: dense;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 2rem;
+    grid-auto-flow: dense;
 }
 
-
-.large {
-    grid-column: 1/4;
-}
-
-figcaption {
+.item figcaption {
+    background: rgba(0,0,0,.7);
+    color: #ccc;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-family: helvetica;
     padding: 1rem;
+    font-size: 2vmin;
 }
 
 figcaption > p {
