@@ -6,9 +6,15 @@
 </head>
 <body>
     {% for section in portfolio.sections %}
-    <div>
-        <h1>{{ section.title }}</h1>
-        <p>{{ section.description }}</p>
+    <div style="background-color: {{ section.primary_color }}" class="section-container">
+        <div class="section-header">
+            <h1 class="section-container-item">{{ section.title }}</h1>
+            <p class="section-container-item">{{ section.description }}</p>
+            <img
+                src="{{ url_for('static', filename=section.logo.path) }}"
+                class="section-container-item"
+            >
+        </div>
         <div class="container">
             {% for entry in section.entries %}
             {% set url = url_for('render_slug', slug=entry.slug) %}

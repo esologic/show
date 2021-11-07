@@ -1,3 +1,7 @@
+primary_color: '#FFA500'
+logo:
+  label: Esologic logo
+  path: ./esologic_logo.jpg
 description: Originally started in highschool, esologic.com is where my work is published.
   These projects are a selection of the most interesting, most popular and best quality
   over the years.

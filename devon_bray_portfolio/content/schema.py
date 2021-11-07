@@ -9,6 +9,7 @@ from typing import List, Optional
 
 from pyaml import yaml
 from pydantic import BaseModel, HttpUrl, ValidationError, validator
+from pydantic.color import Color
 from typing_extensions import TypedDict
 
 
@@ -212,6 +213,12 @@ class SerializedSectionDescription(BaseModel):
 
     # Instead of a description here, this should be a call to action. Ex: "Check out the blog post"
     primary_url: Link
+
+    # CSS color, used to set the background of the section.
+    primary_color: Color
+
+    # Relative path to a logo for this section
+    logo: LocalMedia
 
 
 class SerializedPortfolioDescription(BaseModel):

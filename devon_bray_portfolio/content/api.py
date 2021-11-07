@@ -94,6 +94,8 @@ class Section(NamedTuple):
     description: str
     primary_url: RenderedLink
     entries: t.List[RenderedEntry]
+    primary_color: str
+    logo: RenderedLocalMedia
 
 
 class Portfolio(NamedTuple):
@@ -155,7 +157,10 @@ def _render_link_list(
 
 
 def _render_local_media(
-    media_directory: Path, yaml_path: Path, local_media: schema.LocalMedia
+    media_directory: Path,
+    yaml_path: Path,
+    max_size: t.Tuple[int, int],
+    local_media: schema.LocalMedia,
 ) -> RenderedLocalMedia:
     """
     Copies, processes images from their origins in the entry folders to their destinations
@@ -165,7 +170,6 @@ def _render_local_media(
     :return: Fields converted to strings, paths relative to `media_directory`.
     """
 
-    max_size = (3000, 3000)
     name = local_media["path"].name
     output_path = media_directory.joinpath(name)
 
@@ -218,7 +222,8 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
 
     with Pool() as p:
         local_media = p.map(
-            partial(_render_local_media, media_directory, yaml_path), serialized_entry.local_media
+            partial(_render_local_media, media_directory, yaml_path, (3000, 3000)),
+            serialized_entry.local_media,
         )
 
     return RenderedEntry(
@@ -303,6 +308,10 @@ def _read_section(section_directory: Path, static_content_directory: Path) -> Se
             _read_entry(_find_yaml(path), static_content_directory)
             for path in _directories_in_directory(section_directory)
         ],
+        primary_color=str(section_description.primary_color),
+        logo=_render_local_media(
+            static_content_directory, section_description_path, (500, 500), section_description.logo
+        ),
     )
 
 

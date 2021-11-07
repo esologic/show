@@ -1,0 +1,12 @@
+primary_color: '#008000'
+logo:
+  label: Block The Wind Logo
+  path: ./block_the_wind_logo.png
+description: I have operated a freelance practice for a number of years. Typically
+  clients reach out after seeing my work from the blog. The following are the more
+  complex interesting jobs that I've taken on.
+title: Freelance Practice
+primary_url:
+  link: https://www.esologic.com
+  label: Visit the blog.
+version_number: 0

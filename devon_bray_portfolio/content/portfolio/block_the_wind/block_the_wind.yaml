@@ -1,0 +1,10 @@
+primary_color: '#000000'
+logo:
+  label: Block The Wind Logo
+  path: ./block_the_wind_logo.png
+description: Music festival
+title: Block The Wind
+primary_url:
+  link: https://www.esologic.com
+  label: Visit the blog.
+version_number: 0
