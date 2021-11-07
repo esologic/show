@@ -13,8 +13,6 @@ youtube_videos:
 local_media:
 - label: Sample twitter interaction
   path: ./heywpi_images/heywpi_1.PNG
-- label: Sample twitter interaction
-  path: ./heywpi_images/heywpi_1.PNG
 involvement: Designed and displayed this project.
 mediums:
 - raspberry pi
