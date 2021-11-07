@@ -1,84 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{entry.slug}}</title>
+    <title>{{entry.title}}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='entry.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename=entry.favicon_path) }}" type="image/x-icon">
 </head>
 <body>
-    <h1 class="title">{{ entry.title }}</h1>
-    <div class="container">
+    <div class="entry-container" style="background-color: {{ entry.primary_color }}">
+        <h1 class="title">{{ entry.title }} <span>({{ entry.completion_date_verbose }})</span></h1>
+        <div class="container">
+            <img
+                src="{{ url_for('static', filename=entry.featured_media.path) }}"
+                alt="{{entry.featured_media.label}}"
+                class="item"
+            >
 
-        <img
-            src="{{ url_for('static', filename=entry.featured_media.path) }}"
-            alt="{{entry.featured_media.label}}"
-            class="item"
-        >
-
-        <div class="item">
-            <h3>{{ entry.description }}</h3>
-            {{ entry.explanation | safe }}
-            <a href="{{ entry.primary_url.link }}">{{ entry.primary_url.label }}</a>
-            {% if entry.secondary_urls %}
-            <p>Further Reading</p>
-            <ul>
-                {% for secondary_url in entry.secondary_urls  %}
-                <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
-                {% endfor %}
-            </ul>
-            {%endif %}
-            {% if entry.press_urls %}
-            <p>As seen in</p>
-            <ul>
-                {% for press_url in entry.press_urls  %}
-                <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
-                {% endfor %}
-            </ul>
-            {%endif %}
-            <p>Meta: </p>
-            <ul>
-                <li><p>Size: {{ entry.size }}</p></li>
-                <li><p>Domain: {{ entry.domain }}</p></li>
-                <li><p>Involvement: {{ entry.involvement }}</p></li>
-                <li><p>Team Size: {{ entry.team_size }}</p></li>
-                <li><p>Completion Date: {{ entry.completion_date_verbose }}</p></li>
-                <li>
-                    <p>Mediums: </p>
-                    <ul>
-                    {% for medium in entry.mediums %}
-                        <li>{{ medium }}</li>
+            <div class="item">
+                <h3>{{ entry.description }}</h3>
+                {{ entry.explanation | safe }}
+                <div class="primary-url dimmer" onclick="location.href='{{ entry.primary_url.link }}';" style="cursor: pointer;">{{ entry.primary_url.label }}</div>
+                {% if entry.secondary_urls %}
+                <p>Further Reading</p>
+                <ul>
+                    {% for secondary_url in entry.secondary_urls  %}
+                    <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
                     {% endfor %}
-                    </ul>
-                </li>
-            </ul>
+                </ul>
+                {%endif %}
+                {% if entry.press_urls %}
+                <p>As seen in</p>
+                <ul>
+                    {% for press_url in entry.press_urls  %}
+                    <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
+                    {% endfor %}
+                </ul>
+                {%endif %}
+                <p>Meta: </p>
+                <ul>
+                    <li><p>Size: {{ entry.size }}</p></li>
+                    <li><p>Domain: {{ entry.domain }}</p></li>
+                    <li><p>Involvement: {{ entry.involvement }}</p></li>
+                    <li><p>Team Size: {{ entry.team_size }}</p></li>
+                    <li>
+                        <p>Mediums: </p>
+                        <ul>
+                        {% for medium in entry.mediums %}
+                            <li>{{ medium }}</li>
+                        {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
+        {% if entry.youtube_videos or entry.local_media %}
+        <h2>Gallery</h2>
+        {% if entry.youtube_videos %}
+        {% for youtube_video in entry.youtube_videos %}
+        <figure class="gallery-img">
+            <iframe
+                src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
+                width="1000"
+                height="1000"
+                class="gallery-item">
+            </iframe>
+            <figcaption>{{ youtube_video.label | safe }}</figcaption>
+        </figure>
+        {% endfor %}
+        {% endif %}
+        {% if entry.local_media %}
+        {% for local_media in entry.local_media  %}
+        <figure class="gallery-img">
+            <img
+                src="{{ url_for('static', filename=local_media.path) }}"
+                alt="{{local_media.label}}"
+                class="gallery-item"
+            >
+            <figcaption>{{ local_media.label | safe }}</figcaption>
+        </figure>
+        {% endfor %}
+        {% endif %}
+        {% endif %}
     </div>
-    {% if entry.youtube_videos or entry.local_media %}
-    <p>Gallery</p>
-    {% if entry.youtube_videos %}
-    {% for youtube_video in entry.youtube_videos %}
-    <figure class="gallery-img">
-        <iframe
-            src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
-            width="1000"
-            height="1000"
-            class="gallery-item">
-        </iframe>
-        <figcaption>{{ youtube_video.label | safe }}</figcaption>
-    </figure>
-    {% endfor %}
-    {% endif %}
-    {% if entry.local_media %}
-    {% for local_media in entry.local_media  %}
-    <figure class="gallery-img">
-        <img
-            src="{{ url_for('static', filename=local_media.path) }}"
-            alt="{{local_media.label}}"
-            class="gallery-item"
-        >
-        <figcaption>{{ local_media.label | safe }}</figcaption>
-    </figure>
-    {% endfor %}
-    {% endif %}
-    {% endif %}
 </body>
 </html>

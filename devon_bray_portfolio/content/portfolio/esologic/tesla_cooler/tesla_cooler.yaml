@@ -19,14 +19,14 @@ featured_media:
   label: Another shot of the single cooler config.
   path: ./tesla_cooler_images/tesla_cooler_2.JPG
 local_media:
+- label: Top-down shot of two K80s installed in server, feedback thermistors are visible.
+  path: ./tesla_cooler_images/tesla_cooler_5.JPG
 - label: Single cooler configuration installed in a K80.
   path: ./tesla_cooler_images/tesla_cooler_1.JPG
 - label: Dual cooler configuration installed in two K80s installed in server.
   path: ./tesla_cooler_images/tesla_cooler_3.JPG
 - label: Wider shot of two K80s installed in server.
   path: ./tesla_cooler_images/tesla_cooler_4.JPG
-- label: Top-down shot of two K80s installed in server, feedback thermistors are visible.
-  path: ./tesla_cooler_images/tesla_cooler_5.JPG
 - label: Detail view of thermistors.
   path: ./tesla_cooler_images/tesla_cooler_6.JPG
 - label: Shot of intake ports of both coolers.
@@ -54,5 +54,5 @@ team_size: solo
 title: Tesla Cooler
 version_number: 0
 press_urls:
-- label: 3d-printed Fan Mount Keeps Server Gpu Cool In Desktop Case (Hackaday)
+- label: 3d-printed Fan Mount Keeps Server GPU Cool In Desktop Case (Hackaday)
   link: https://hackaday.com/2021/11/06/3d-printed-fan-mount-keeps-server-gpu-cool-in-desktop-case/

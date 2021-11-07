@@ -1,5 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+
 body {
-     padding: 1rem;
+    margin: 3rem;
+    font-family: 'Inconsolata';
+    background-color: #FFFFF0;
+    color: white;
+}
+
+.dimmer {
+    -webkit-filter: brightness(100%);
+	-moz-filter: brightness(100%);
+	-o-filter: brightness(100%);
+	-ms-filter: brightness(100%);
+	filter: brightness(100%);
+}
+
+.dimmer:hover {
+    -webkit-filter: brightness(90%);
+    -moz-filter: brightness(90%);
+    -o-filter: brightness(90%);
+    -ms-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+a:link {
+  font-weight: bold;
+  color: white;
+    -webkit-filter: brightness(100%);
+    -moz-filter: brightness(100%);
+    -o-filter: brightness(100%);
+    -ms-filter: brightness(100%);
+    filter: brightness(100%);
+}
+
+a:hover {
+    -webkit-filter: brightness(90%);
+    -moz-filter: brightness(90%);
+    -o-filter: brightness(90%);
+    -ms-filter: brightness(90%);
+    filter: brightness(90%);
+}
+
+a:visited {
+    color: white;
+}
+
+.entry-container {
+    margin-top: 1rem;
+    padding: 2rem;
 }
 
 /* Create four equal columns */
@@ -22,14 +70,31 @@ body {
     box-sizing: border-box;
 }
 
+.primary-url {
+    text-align: center;
+    font-weight: bold;
+    color: blue;
+    padding: 1rem;
+    background-color: deepskyblue;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
+}
+
 img {
     width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
 }
 
 iframe {
     width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
 }
 
 .title {
     text-align: center;
+}
+
+.title span {
+    font-style: italic;
 }
