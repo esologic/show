@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+
+
 
 body {
     margin: 5rem;
@@ -30,10 +33,11 @@ body {
     display: inline-block;
     position: absolute;
     bottom: 0;
-    right: 0;
-    font-family: helvetica;
+    left: 0;
     padding: 1rem;
-    font-size: 2vmin;
+    font-family: Inconsolata;
+    vertical-align: middle;
+    font-size: 1.3vmin;
 }
 
 figcaption > p {
@@ -45,4 +49,25 @@ figcaption > h2 {
     margin-block-end: 0;
 }
 
+.medium {
+    grid-column: span 2;
+}
 
+.large {
+    grid-column: span 3;
+}
+
+.entry-title {
+    font-size: 2.5vmin;
+    font-weight: bold;
+}
+
+.entry-description {
+    font-size: 1.5vmin;
+    font-style: italic;
+}
+
+.entry-medium {
+    font-size: 1.3vmin;
+    font-weight: bold;
+}

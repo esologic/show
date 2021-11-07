@@ -18,8 +18,14 @@
                     class="gallery-img"
                 >
                 <figcaption>
-                    <h2>{{ entry.title  }}</h2>
-                    <p>{{ entry.description }}</p>
+                    <span class="entry-title">{{ entry.title  }} (c. {{ entry.completion_year }}) •</span>
+                    <span class="entry-description">{{ entry.description }}</span>
+                    {% for medium in entry.mediums %}
+                        <span class="entry-medium">{{ medium }}</span>
+                        {% if not loop.last %}
+                            <span>/</span>
+                        {% endif %}
+                    {% endfor %}
                 </figcaption>
             </figure>
             {% endfor %}

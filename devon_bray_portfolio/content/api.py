@@ -73,7 +73,8 @@ class RenderedEntry(NamedTuple):
     primary_url: RenderedLink
     secondary_urls: t.Optional[t.List[RenderedLink]]
     press_urls: t.Optional[t.List[RenderedLink]]
-    completion_date: str
+    completion_date_verbose: str
+    completion_year: str
     team_size: str
     involvement: str
     mediums: t.List[str]
@@ -114,14 +115,14 @@ def _render_link(url: schema.Link) -> RenderedLink:
     return RenderedLink(label=url["label"], link=str(url["link"]))  # just a plain string now
 
 
-def _render_date(d: date) -> str:
+def _render_date(d: date, verbose: bool) -> str:
     """
     Canonical method to go from an entry's completion date to the way that's displayed in the
     portfolio.
     :param d: Date to convert.
     :return: String representation of the date.
     """
-    return d.strftime("%B of %Y")
+    return d.strftime("%B of %Y") if verbose else d.strftime("%Y")
 
 
 def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
@@ -237,7 +238,8 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
         primary_url=_render_link(serialized_entry.primary_url),
         secondary_urls=_render_link_list(serialized_entry.secondary_urls),
         press_urls=_render_link_list(serialized_entry.press_urls),
-        completion_date=_render_date(serialized_entry.completion_date),
+        completion_date_verbose=_render_date(serialized_entry.completion_date, verbose=True),
+        completion_year=_render_date(serialized_entry.completion_date, verbose=False),
         team_size=string.capwords(serialized_entry.team_size.value),
         involvement=serialized_entry.involvement,
         mediums=_render_mediums(serialized_entry.mediums),

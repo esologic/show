@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from pyaml import yaml
-from pydantic import BaseModel, HttpUrl, ValidationError
+from pydantic import BaseModel, HttpUrl, ValidationError, validator
 from typing_extensions import TypedDict
 
 
@@ -176,6 +176,21 @@ class SerializedEntry(BaseModel):
 
     # See type docs.
     mediums: List[Medium]
+
+    @validator("description")
+    def ends_with_period(  # pylint: disable=no-self-argument,no-self-use
+        cls: "SerializedEntry", description: str
+    ) -> str:
+        """
+        Enforced on read rather than being added later.
+        :param description: To check.
+        :return: Validated, raises otherwise.
+        """
+
+        if not description.endswith("."):
+            raise ValueError("Descriptions must end with a period!")
+
+        return description
 
 
 class SerializedSectionDescription(BaseModel):
