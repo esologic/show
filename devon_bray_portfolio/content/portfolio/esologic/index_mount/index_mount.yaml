@@ -9,9 +9,10 @@ explanation: Needed a way to house this VR headset in an already overcrowded spa
 youtube_videos:
 - label: Project overview video, contains installation instructions and design rationale.
   video_id: vPsgj4sFM2w
-local_media:
-- label: All parts installed with their components inserted.
+featured_media:
+  label: All parts installed with their components inserted.
   path: ./index_mount_images/index_mount_1.jpg
+local_media:
 - label: Detail view of knuckles installed.
   path: ./index_mount_images/index_mount_2.jpg
 - label: Detail view of headset installed.

@@ -12,10 +12,11 @@ explanation: The addressable LED has worked it's way into nearly every hardware 
 youtube_videos:
 - label: Walkthrough and demonstration.
   video_id: rg_kiPnU8oM
-local_media:
-- label: Isometric detail shot of blinkbox operating.
+featured_media:
+  label: Isometric detail shot of blinkbox operating.
   path: ./blinkbox_images/blinkbox_1.JPG
-- label: Shot of blinkbox being used to debug a high density strip of clocked LEDs.
+local_media:
+- label: Shot of blinkbox being used to debug a high density strip of timer LEDs.
   path: ./blinkbox_images/blinkbox_2.png
 - label: Upward shot of blinkbox operating.
   path: ./blinkbox_images/blinkbox_3.JPG

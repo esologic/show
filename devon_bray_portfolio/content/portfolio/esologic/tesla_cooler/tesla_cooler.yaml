@@ -15,11 +15,12 @@ youtube_videos:
     lot more long winded than my other project summaries, wanted to try a new live
     format.
   video_id: ax6S3I81yAg
+featured_media:
+  label: Another shot of the single cooler config.
+  path: ./tesla_cooler_images/tesla_cooler_2.JPG
 local_media:
 - label: Single cooler configuration installed in a K80.
   path: ./tesla_cooler_images/tesla_cooler_1.JPG
-- label: Another shot of the single cooler config.
-  path: ./tesla_cooler_images/tesla_cooler_2.JPG
 - label: Dual cooler configuration installed in two K80s installed in server.
   path: ./tesla_cooler_images/tesla_cooler_3.JPG
 - label: Wider shot of two K80s installed in server.

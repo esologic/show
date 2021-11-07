@@ -8,7 +8,8 @@ from pathlib import Path
 from typing import List, Optional
 
 from pyaml import yaml
-from pydantic import BaseModel, HttpUrl, ValidationError
+from pydantic import BaseModel, HttpUrl, ValidationError, validator
+from pydantic.color import Color
 from typing_extensions import TypedDict
 
 
@@ -140,8 +141,12 @@ class SerializedEntry(BaseModel):
     # complete idea as to what the project was about.
     explanation: str
 
+    # Best image (piece of media) representation of the entry. Will be featured on the overview
+    # page and on the top of the entry page.
+    featured_media: LocalMedia
+
     # Key pieces of media to describe the project. Shouldn't be too many.
-    local_media: List[LocalMedia]
+    local_media: Optional[List[LocalMedia]]
 
     # Videos from YouTube can also be embedded into the portfolio renderings.
     youtube_videos: Optional[List[YouTubeVideo]]
@@ -177,6 +182,22 @@ class SerializedEntry(BaseModel):
     # See type docs.
     mediums: List[Medium]
 
+    # TODO I also want this for labels on local media/videos
+    @validator("description")
+    def ends_with_period(  # pylint: disable=no-self-argument,no-self-use
+        cls: "SerializedEntry", description: str
+    ) -> str:
+        """
+        Enforced on read rather than being added later.
+        :param description: To check.
+        :return: Validated, raises otherwise.
+        """
+
+        if not description.endswith("."):
+            raise ValueError("Descriptions must end with a period!")
+
+        return description
+
 
 class SerializedSectionDescription(BaseModel):
     """
@@ -195,8 +216,15 @@ class SerializedSectionDescription(BaseModel):
     # See type docs.
     version_number: VersionNumber
 
-    # Instead of a description here, this should be a call to action. Ex: "Check out the blog post"
-    primary_url: Link
+    # CSS color, used to set the background of the section.
+    primary_color: Color
+
+    # Relative path to a logo for this section
+    logo: LocalMedia
+
+    # Controls the presentation order of the different sections. Lower numbers are ranked higher
+    # and will appear first.
+    rank: int
 
 
 class SerializedPortfolioDescription(BaseModel):

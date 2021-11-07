@@ -11,6 +11,7 @@ from multiprocessing import Pool
 from pathlib import Path
 from typing import NamedTuple
 
+from markdown import markdown
 from PIL import Image, ImageSequence
 
 from devon_bray_portfolio.content import schema
@@ -65,14 +66,16 @@ class RenderedEntry(NamedTuple):
     title: str
     description: str
     explanation: str
-    local_media: t.List[RenderedLocalMedia]
+    featured_media: RenderedLocalMedia
+    local_media: t.Optional[t.List[RenderedLocalMedia]]
     youtube_videos: t.Optional[t.List[RenderedYouTubeVideo]]
     size: str
     domain: str
     primary_url: RenderedLink
     secondary_urls: t.Optional[t.List[RenderedLink]]
     press_urls: t.Optional[t.List[RenderedLink]]
-    completion_date: str
+    completion_date_verbose: str
+    completion_year: str
     team_size: str
     involvement: str
     mediums: t.List[str]
@@ -90,8 +93,10 @@ class Section(NamedTuple):
 
     title: str
     description: str
-    primary_url: RenderedLink
     entries: t.List[RenderedEntry]
+    primary_color: str
+    logo: RenderedLocalMedia
+    rank: int
 
 
 class Portfolio(NamedTuple):
@@ -113,14 +118,14 @@ def _render_link(url: schema.Link) -> RenderedLink:
     return RenderedLink(label=url["label"], link=str(url["link"]))  # just a plain string now
 
 
-def _render_date(d: date) -> str:
+def _render_date(d: date, verbose: bool) -> str:
     """
     Canonical method to go from an entry's completion date to the way that's displayed in the
     portfolio.
     :param d: Date to convert.
     :return: String representation of the date.
     """
-    return d.strftime("%B of %Y")
+    return d.strftime("%B of %Y") if verbose else d.strftime("%Y")
 
 
 def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
@@ -153,7 +158,10 @@ def _render_link_list(
 
 
 def _render_local_media(
-    media_directory: Path, yaml_path: Path, local_media: schema.LocalMedia
+    media_directory: Path,
+    yaml_path: Path,
+    max_size: t.Tuple[int, int],
+    local_media: schema.LocalMedia,
 ) -> RenderedLocalMedia:
     """
     Copies, processes images from their origins in the entry folders to their destinations
@@ -163,39 +171,40 @@ def _render_local_media(
     :return: Fields converted to strings, paths relative to `media_directory`.
     """
 
-    max_size = (3000, 3000)
     name = local_media["path"].name
-    output_path = str(media_directory.joinpath(name))
+    output_path = media_directory.joinpath(name)
 
-    image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+    if not output_path.exists():
 
-    if getattr(image, "is_animated", False):
+        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
-        frames = ImageSequence.Iterator(image)
+        if getattr(image, "is_animated", False):
 
-        # Wrap on-the-fly thumbnail generator
-        def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-            for frame in f:
-                thumbnail = frame.copy()
-                thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                yield thumbnail
+            frames = ImageSequence.Iterator(image)
 
-        frames = thumbnails(frames)
+            # Wrap on-the-fly thumbnail generator
+            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
+                for frame in f:
+                    thumbnail = frame.copy()
+                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                    yield thumbnail
 
-        # Save output
-        om = next(frames)  # Handle first frame separately
-        om.info = image.info  # Copy sequence info
-        om.save(output_path, save_all=True, append_images=list(frames), loop=0)
+            frames = thumbnails(frames)
 
-    else:
-        if image.mode in ("RGBA", "P"):
-            image = image.convert("RGB")
+            # Save output
+            om = next(frames)  # Handle first frame separately
+            om.info = image.info  # Copy sequence info
+            om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
 
-        image.thumbnail(max_size)
+        else:
+            if image.mode in ("RGBA", "P"):
+                image = image.convert("RGB")
 
-        image.save(output_path)
+            image.thumbnail(max_size)
 
-    return RenderedLocalMedia(label=local_media["label"], path=str(name))
+            image.save(str(output_path))
+
+    return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
 
 def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
@@ -212,28 +221,38 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
 
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
-    with Pool() as p:
-        local_media = p.map(
-            partial(_render_local_media, media_directory, yaml_path), serialized_entry.local_media
-        )
+    media_processor = partial(_render_local_media, media_directory, yaml_path, (3000, 3000))
+
+    if serialized_entry.local_media is not None:
+
+        with Pool() as p:
+            local_media = p.map(
+                media_processor,
+                serialized_entry.local_media,
+            )
+    else:
+        local_media = None
 
     return RenderedEntry(
         slug=yaml_path.with_suffix("").name,
         title=serialized_entry.title,
         description=serialized_entry.description,
-        explanation=serialized_entry.explanation,
+        explanation=markdown(serialized_entry.explanation),
+        featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
         youtube_videos=[
-            t.cast(RenderedYouTubeVideo, video) for video in serialized_entry.youtube_videos
+            RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
+            for video in serialized_entry.youtube_videos
         ]
         if serialized_entry.youtube_videos
         else None,
-        size=string.capwords(serialized_entry.size.value),
+        size=serialized_entry.size.value,
         domain=string.capwords(serialized_entry.domain.value),
         primary_url=_render_link(serialized_entry.primary_url),
         secondary_urls=_render_link_list(serialized_entry.secondary_urls),
         press_urls=_render_link_list(serialized_entry.press_urls),
-        completion_date=_render_date(serialized_entry.completion_date),
+        completion_date_verbose=_render_date(serialized_entry.completion_date, verbose=True),
+        completion_year=_render_date(serialized_entry.completion_date, verbose=False),
         team_size=string.capwords(serialized_entry.team_size.value),
         involvement=serialized_entry.involvement,
         mediums=_render_mediums(serialized_entry.mediums),
@@ -290,13 +309,17 @@ def _read_section(section_directory: Path, static_content_directory: Path) -> Se
     )
 
     return Section(
-        description=section_description.description,
+        description=markdown(section_description.description),
         title=section_description.title,
-        primary_url=_render_link(section_description.primary_url),
         entries=[
             _read_entry(_find_yaml(path), static_content_directory)
             for path in _directories_in_directory(section_directory)
         ],
+        primary_color=str(section_description.primary_color),
+        logo=_render_local_media(
+            static_content_directory, section_description_path, (500, 500), section_description.logo
+        ),
+        rank=section_description.rank,
     )
 
 
@@ -316,12 +339,14 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         portfolio_description_path, schema.SerializedPortfolioDescription
     )
 
-    output = Portfolio(
+    return Portfolio(
         title=portfolio_description.title,
         description=portfolio_description.description,
-        sections=[
-            _read_section(section_directory, static_content_directory)
-            for section_directory in _directories_in_directory(sections_directory)
-        ],
+        sections=sorted(
+            [
+                _read_section(section_directory, static_content_directory)
+                for section_directory in _directories_in_directory(sections_directory)
+            ],
+            key=lambda section: section.rank,
+        ),
     )
-    return output
