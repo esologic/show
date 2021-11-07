@@ -7,8 +7,8 @@ explanation: Completed as a hackathon (hackMIT) project, this device maps the in
 youtube_video:
 - label: Demo video.
   video_id: 2z9O2YgUMyc
-local_media:
-- label: Photo of finished product.
+featured_media:
+  label: Photo of finished product.
   path: ./sound_supervisor_images/sound_supervisor_1.jpeg
 involvement: Designed and manufactured this project.
 mediums:

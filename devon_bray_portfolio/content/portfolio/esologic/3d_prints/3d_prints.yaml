@@ -4,9 +4,10 @@ description: I've published a number of single-purpose 3d printable designs. Thi
 domain: software
 explanation: 3D printing is one of my favorite mediums and leaverage it heavily in
   my work.
-local_media:
-- label: Pen/notebook organizer. A gift to a family member. [Blog Post](https://www.esologic.com/3d-printed-pen-notebook-organizer/).
+featured_media:
+  label: Pen/notebook organizer. A gift to a family member. [Blog Post](https://www.esologic.com/3d-printed-pen-notebook-organizer/).
   path: ./3d_prints_images/3d_prints_1.jpg
+local_media:
 - label: Desktop microphone stand. [Blog Post](https://www.esologic.com/mic-stand/).
   path: ./3d_prints_images/3d_prints_2.jpg
 - label: Wall-mounted drybox for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-drybox-for-3d-printing-with-nylon/).

@@ -7,13 +7,12 @@
 <body>
     <h1 class="title">{{ entry.title }}</h1>
     <div class="container">
-        {% for local_media in entry.local_media[0:1]  %}
+
         <img
-            src="{{ url_for('static', filename=local_media.path) }}"
-            alt="{{local_media.label}}"
+            src="{{ url_for('static', filename=entry.featured_media.path) }}"
+            alt="{{entry.featured_media.label}}"
             class="item"
         >
-        {% endfor %}
 
         <div class="item">
             <h3>{{ entry.description }}</h3>
@@ -53,6 +52,7 @@
             </ul>
         </div>
     </div>
+    {% if entry.youtube_videos or entry.local_media %}
     <p>Gallery</p>
     {% if entry.youtube_videos %}
     {% for youtube_video in entry.youtube_videos %}
@@ -67,6 +67,7 @@
     </figure>
     {% endfor %}
     {% endif %}
+    {% if entry.local_media %}
     {% for local_media in entry.local_media  %}
     <figure class="gallery-img">
         <img
@@ -77,5 +78,7 @@
         <figcaption>{{ local_media.label | safe }}</figcaption>
     </figure>
     {% endfor %}
+    {% endif %}
+    {% endif %}
 </body>
 </html>

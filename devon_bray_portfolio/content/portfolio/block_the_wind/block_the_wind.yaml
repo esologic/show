@@ -2,9 +2,8 @@ primary_color: '#000000'
 logo:
   label: Block The Wind Logo
   path: ./block_the_wind_logo.png
-description: Music festival
+description: For more information, visit the websites for the [music festival](https://www.blockthewindfestival.com/)
+  or [online store](https://www.blockthewind.com/).
 title: Block The Wind
-primary_url:
-  link: https://www.esologic.com
-  label: Visit the blog.
 version_number: 0
+rank: 3

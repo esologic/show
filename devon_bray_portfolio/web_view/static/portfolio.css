@@ -23,7 +23,8 @@ body {
     display: grid;
     padding-bottom: 1rem;
     grid-template-columns: repeat(3, minmax(250px, 1fr));
-    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
 }
 
 @media (max-width: 1000px) {
@@ -36,10 +37,6 @@ body {
 .section-container {
     margin-top: 1rem;
     padding: 2rem;
-}
-
-.section-container-item {
-    place-self: center;
 }
 
 .section-header img {

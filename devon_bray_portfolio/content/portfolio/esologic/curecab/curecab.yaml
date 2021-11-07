@@ -11,10 +11,11 @@ explanation: This project was a task of mine during my internship at MADE@MassCh
   need any maintenance. I didn't know it at the time but this project would end up
   living in this shop until it's closure years later and be upgraded several times
   by several different engineers.
-local_media:
-- label: Cabinet opened with the lights turned on. Note the part platform and hardware
+featured_media:
+  label: Cabinet opened with the lights turned on. Note the part platform and hardware
     UI.
   path: ./curecab_images/curecab_1.JPG
+local_media:
 - label: Detail view of the electronics housing. Wanted visitors to see "how it worked"
     so lid was transparent.
   path: ./curecab_images/curecab_2.JPG

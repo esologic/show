@@ -9,7 +9,7 @@
     <div style="background-color: {{ section.primary_color }}" class="section-container">
         <div class="section-header">
             <h1 class="section-container-item">{{ section.title }}</h1>
-            <p class="section-container-item">{{ section.description }}</p>
+            {{ section.description | safe }}
             <img
                 src="{{ url_for('static', filename=section.logo.path) }}"
                 class="section-container-item"
@@ -20,11 +20,11 @@
             {% set url = url_for('render_slug', slug=entry.slug) %}
             <figure onclick="location.href='{{ url }}';" style="cursor: pointer;" class="item {{entry.size}}">
                 <img
-                    src="{{ url_for('static', filename=entry.local_media[0].path) }}"
+                    src="{{ url_for('static', filename=entry.featured_media.path) }}"
                     class="gallery-img"
                 >
                 <figcaption>
-                    <span class="entry-title">{{ entry.title  }} (c. {{ entry.completion_year }}) •</span>
+                    <span class="entry-title">{{ entry.title  }} (c. {{ entry.completion_year }}) <span>&#8226;</span> </span>
                     <span class="entry-description">{{ entry.description }}</span>
                     {% for medium in entry.mediums %}
                         <span class="entry-medium">{{ medium }}</span>

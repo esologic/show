@@ -4,9 +4,8 @@ logo:
   path: ./telapush_logo.png
 description: Telapush is a company that creates interactive light art driven by social
   media. As a cofounder, I was responsible for the development of all the hardware
-  and the majority of the software.
+  and the majority of the software. More information can be found on the [company
+  website](https://telapush.com/).
 title: Telapush
-primary_url:
-  link: https://telapush.com/
-  label: Company website
 version_number: 0
+rank: 0

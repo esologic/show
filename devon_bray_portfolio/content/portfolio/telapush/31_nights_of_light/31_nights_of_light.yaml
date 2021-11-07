@@ -21,9 +21,10 @@ explanation: >-
 youtube_videos:
 - label: Promotional video for this installation.
   video_id: np7pZtG-Ofo
-local_media:
-- label: Installed in the center of the mall, animating.
+featured_media:
+  label: Installed in the center of the mall, animating.
   path: ./31_nights_of_light_images/31_7.gif
+local_media:
 - label: Instructions post.
   path: ./31_nights_of_light_images/31_2.gif
 - label: Front view.

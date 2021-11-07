@@ -10,9 +10,10 @@ explanation: >-
 youtube_videos:
 - label: Demo
   video_id: vkzwySQfeJs
-local_media:
-- label: Isometric shot of 3d printed lettering
+featured_media:
+  label: Isometric shot of 3d printed lettering
   path: ./livepush_images/livepush_1.JPG
+local_media:
 - label: Front facing view of complete installation.
   path: ./livepush_images/livepush_2.JPG
 - label: Another view of complete installation.

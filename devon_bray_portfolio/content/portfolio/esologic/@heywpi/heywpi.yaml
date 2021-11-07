@@ -10,9 +10,12 @@ youtube_videos:
   video_id: rNKmVJ7Pi0c
 - label: Second set of features.
   video_id: JDliZ-xXPwI
-local_media:
-- label: Sample twitter interaction
+featured_media:
+  label: Sample twitter interaction
   path: ./heywpi_images/heywpi_1.PNG
+local_media:
+- label: Sample response to user
+  path: ./heywpi_images/heywpi_2.png
 involvement: Designed and displayed this project.
 mediums:
 - raspberry pi

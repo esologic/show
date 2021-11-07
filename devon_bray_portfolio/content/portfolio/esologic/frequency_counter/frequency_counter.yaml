@@ -5,9 +5,12 @@ explanation: This simple project was completed very quickly and has served me we
   over the years. It is a simple Arduino sketch that uses interrupts to measure the
   frequencies of singals coming in on digital pins. I've recylced this code many times
   over the years to great effect.
-local_media:
-- label: Breadboard implementation of circuit.
+featured_media:
+  label: Breadboard implementation of circuit.
   path: ./frequency_counter_images/frequency_counter_1.jpg
+local_media:
+- label: Demo of operation.
+  path: ./frequency_counter_images/frequency_counter_2.jpg
 involvement: Wrote/used this software.
 mediums:
 - arduino

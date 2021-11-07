@@ -66,7 +66,8 @@ class RenderedEntry(NamedTuple):
     title: str
     description: str
     explanation: str
-    local_media: t.List[RenderedLocalMedia]
+    featured_media: RenderedLocalMedia
+    local_media: t.Optional[t.List[RenderedLocalMedia]]
     youtube_videos: t.Optional[t.List[RenderedYouTubeVideo]]
     size: str
     domain: str
@@ -92,10 +93,10 @@ class Section(NamedTuple):
 
     title: str
     description: str
-    primary_url: RenderedLink
     entries: t.List[RenderedEntry]
     primary_color: str
     logo: RenderedLocalMedia
+    rank: int
 
 
 class Portfolio(NamedTuple):
@@ -220,17 +221,24 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
 
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
-    with Pool() as p:
-        local_media = p.map(
-            partial(_render_local_media, media_directory, yaml_path, (3000, 3000)),
-            serialized_entry.local_media,
-        )
+    media_processor = partial(_render_local_media, media_directory, yaml_path, (3000, 3000))
+
+    if serialized_entry.local_media is not None:
+
+        with Pool() as p:
+            local_media = p.map(
+                media_processor,
+                serialized_entry.local_media,
+            )
+    else:
+        local_media = None
 
     return RenderedEntry(
         slug=yaml_path.with_suffix("").name,
         title=serialized_entry.title,
         description=serialized_entry.description,
         explanation=markdown(serialized_entry.explanation),
+        featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
         youtube_videos=[
             RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
@@ -301,9 +309,8 @@ def _read_section(section_directory: Path, static_content_directory: Path) -> Se
     )
 
     return Section(
-        description=section_description.description,
+        description=markdown(section_description.description),
         title=section_description.title,
-        primary_url=_render_link(section_description.primary_url),
         entries=[
             _read_entry(_find_yaml(path), static_content_directory)
             for path in _directories_in_directory(section_directory)
@@ -312,6 +319,7 @@ def _read_section(section_directory: Path, static_content_directory: Path) -> Se
         logo=_render_local_media(
             static_content_directory, section_description_path, (500, 500), section_description.logo
         ),
+        rank=section_description.rank,
     )
 
 
@@ -331,12 +339,14 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         portfolio_description_path, schema.SerializedPortfolioDescription
     )
 
-    output = Portfolio(
+    return Portfolio(
         title=portfolio_description.title,
         description=portfolio_description.description,
-        sections=[
-            _read_section(section_directory, static_content_directory)
-            for section_directory in _directories_in_directory(sections_directory)
-        ],
+        sections=sorted(
+            [
+                _read_section(section_directory, static_content_directory)
+                for section_directory in _directories_in_directory(sections_directory)
+            ],
+            key=lambda section: section.rank,
+        ),
     )
-    return output

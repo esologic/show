@@ -19,9 +19,10 @@ youtube_videos:
   video_id: O5oT7z4IbLY
 - label: Installation idling at an event.
   video_id: CPCDeOkGqcY
-local_media:
-- label: Animation activating on installation.
+featured_media:
+  label: Animation activating on installation.
   path: ./boston_new_technology_images/bnt_1.gif
+local_media:
 - label: Displayed at event (with a view of the pru which is pictured on the installation!)
   path: ./boston_new_technology_images/bnt_2.JPG
 - label: Detail view of illuminated printed lettering.

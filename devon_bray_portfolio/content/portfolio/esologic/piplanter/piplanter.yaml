@@ -25,9 +25,11 @@ youtube_videos:
   video_id: LIsfs72cTq0
 - label: Video overview of first iteration of this project.
   video_id: k3OU84bd3oU
-local_media:
-- label: Version 1's harvest.
+
+featured_media:
+  label: Version 1's harvest.
   path: ./piplanter_images/piplanter_1.jpeg
+local_media:
 - label: Version 1 overview.
   path: ./piplanter_images/piplanter_2.jpeg
 - label: Version 1 electronics detail.
