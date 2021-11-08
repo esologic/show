@@ -18,11 +18,11 @@
                 <figcaption>{{ entry.featured_media.label | safe }}</figcaption>
             </figure>
             <div class="entry-title-item">
-                <h3>{{ entry.description }}</h3>
+                <h3 class="description-text">{{ entry.description }}</h3>
                 {{ entry.explanation | safe }}
                 <div class="primary-url dimmer" onclick="location.href='{{ entry.primary_url.link }}';" style="cursor: pointer;">{{ entry.primary_url.label }}</div>
                 {% if entry.secondary_urls %}
-                <p>Further Reading:</p>
+                <p class="heavy">Further Reading:</p>
                 <ul>
                     {% for secondary_url in entry.secondary_urls  %}
                     <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
@@ -30,28 +30,30 @@
                 </ul>
                 {%endif %}
                 {% if entry.press_urls %}
-                <p>As Seen In:</p>
+                <p class="heavy">As Seen In:</p>
                 <ul>
                     {% for press_url in entry.press_urls  %}
                     <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
                     {% endfor %}
                 </ul>
                 {%endif %}
-                <p>Meta: </p>
-                <ul>
-                    <li><p>Size: {{ entry.size }}</p></li>
-                    <li><p>Domain: {{ entry.domain }}</p></li>
-                    <li><p>Involvement: {{ entry.involvement }}</p></li>
-                    <li><p>Team Size: {{ entry.team_size }}</p></li>
-                    <li>
-                        <p>Mediums: </p>
-                        <ul>
-                        {% for medium in entry.mediums %}
-                            <li>{{ medium }}</li>
-                        {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
+                <p class="heavy">Metadata:</p>
+                <div class="entry-metadata">
+                    <span class="medium">Involvement:</span>
+                    <span>{{ entry.involvement }}</span>
+                    <span class="medium">/</span>
+                    <span class="medium">Size:</span>
+                    <span>{{ entry.size }}</span>
+                    <span class="medium">/</span>
+                    <span class="medium">Domain:</span>
+                    <span>{{ entry.domain }}</span>
+                    <span class="medium">/</span>
+                    <span class="medium">Team Size:</span>
+                    <span>{{ entry.team_size }}</span>
+                    <span class="medium">/</span>
+                    <span class="medium">Mediums:</span>
+                    {% for medium in entry.mediums %}<span>{{ medium }}</span>{% if not loop.last %}<span class="medium">,</span>{% endif %} {% endfor %}
+                </div>
             </div>
         </div>
         {% if entry.youtube_videos or entry.local_media %}
