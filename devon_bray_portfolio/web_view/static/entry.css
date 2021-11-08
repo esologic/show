@@ -1,35 +1,131 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+
 body {
-     padding: 1rem;
+    margin: 3rem;
+    font-family: 'Inconsolata';
+    background-color: #FFFFF0;
+    color: white;
 }
 
-/* Create four equal columns */
-.item {
-    flex: 35%;
+.entry-container {
+    margin-top: 1rem;
     padding: 1rem;
 }
 
-/* Create four equal columns */
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.area-title {
+    text-align: center;
 }
 
-.container img {
-    display: block;
-    object-fit: contain;
-    max-height: 75vh;
-    box-sizing: border-box;
+.area-title span {
+    font-style: italic;
+}
+
+.description-text {
+    margin-block-start: 0;
+}
+
+.entry-title-container {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+    align-items: center;
+    grid-gap: 2rem;
 }
 
 img {
     width: 100%;
+    display: block;
+    object-fit: contain;
+    box-sizing: border-box;
 }
 
-iframe {
-    width: 100%;
+.entry-title-container img {
+    max-height: 70vh;
 }
 
-.title {
+.gallery img {
+    max-height: 95vh;
+}
+
+.entry-title-item {
+    flex: 45%;
+}
+
+.primary-url {
     text-align: center;
+    font-weight: bold;
+    color: blue;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: deepskyblue;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
+}
+
+.heavy {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.medium {
+    font-weight: bolder;
+}
+
+.entry-metadata {
+    margin-left: 5%
+}
+
+.gallery {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 4px;
+    align-items: center;
+    justify-items: center;
+}
+
+figure {
+    margin: 0 auto;
+    text-align: center;
+    display: table;
+}
+
+.gallery-figure {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+figcaption {
+    margin-top: 0.5rem;
+    border-style: dotted;
+    border-width: 2px;
+    text-align: center;
+    display: table-caption;
+    caption-side: bottom;
+}
+
+figcaption p {
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
+}
+
+.dimmer {
+	filter: brightness(100%);
+}
+
+.dimmer:hover {
+    filter: brightness(90%);
+}
+
+a:link {
+    font-weight: bold;
+    color: white;
+    filter: brightness(100%);
+}
+
+a:hover {
+    filter: brightness(90%);
+}
+
+a:visited {
+    color: white;
 }

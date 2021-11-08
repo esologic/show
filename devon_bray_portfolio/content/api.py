@@ -79,6 +79,8 @@ class RenderedEntry(NamedTuple):
     team_size: str
     involvement: str
     mediums: t.List[str]
+    primary_color: str
+    favicon_path: str
 
 
 class Section(NamedTuple):
@@ -161,6 +163,7 @@ def _render_local_media(
     media_directory: Path,
     yaml_path: Path,
     max_size: t.Tuple[int, int],
+    output_name: t.Optional[str],
     local_media: schema.LocalMedia,
 ) -> RenderedLocalMedia:
     """
@@ -171,7 +174,7 @@ def _render_local_media(
     :return: Fields converted to strings, paths relative to `media_directory`.
     """
 
-    name = local_media["path"].name
+    name = local_media["path"].name if output_name is None else output_name
     output_path = media_directory.joinpath(name)
 
     if not output_path.exists():
@@ -207,7 +210,7 @@ def _render_local_media(
     return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
 
-def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
+def _read_entry(yaml_path: Path, media_directory: Path, primary_color: str) -> RenderedEntry:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
     different fields then return the resulting NT.
@@ -221,7 +224,7 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
 
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
-    media_processor = partial(_render_local_media, media_directory, yaml_path, (3000, 3000))
+    media_processor = partial(_render_local_media, media_directory, yaml_path, (3000, 3000), None)
 
     if serialized_entry.local_media is not None:
 
@@ -233,8 +236,10 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
     else:
         local_media = None
 
+    slug = yaml_path.with_suffix("").name
+
     return RenderedEntry(
-        slug=yaml_path.with_suffix("").name,
+        slug=slug,
         title=serialized_entry.title,
         description=serialized_entry.description,
         explanation=markdown(serialized_entry.explanation),
@@ -256,6 +261,14 @@ def _read_entry(yaml_path: Path, media_directory: Path) -> RenderedEntry:
         team_size=string.capwords(serialized_entry.team_size.value),
         involvement=serialized_entry.involvement,
         mediums=_render_mediums(serialized_entry.mediums),
+        primary_color=primary_color,
+        favicon_path=_render_local_media(
+            media_directory,
+            yaml_path,
+            (15, 15),
+            f"{slug}_icon.png",
+            serialized_entry.featured_media,
+        ).path,
     )
 
 
@@ -308,16 +321,22 @@ def _read_section(section_directory: Path, static_content_directory: Path) -> Se
         section_description_path, schema.SerializedSectionDescription
     )
 
+    primary_color = str(section_description.primary_color)
+
     return Section(
         description=markdown(section_description.description),
         title=section_description.title,
         entries=[
-            _read_entry(_find_yaml(path), static_content_directory)
+            _read_entry(_find_yaml(path), static_content_directory, primary_color)
             for path in _directories_in_directory(section_directory)
         ],
-        primary_color=str(section_description.primary_color),
+        primary_color=primary_color,
         logo=_render_local_media(
-            static_content_directory, section_description_path, (500, 500), section_description.logo
+            static_content_directory,
+            section_description_path,
+            (500, 500),
+            None,
+            section_description.logo,
         ),
         rank=section_description.rank,
     )

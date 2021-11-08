@@ -34,7 +34,7 @@ mediums:
 - electrical cad
 primary_url:
   label: Blog post (contains links to schematics, code, models, BOM etc) as well as
-    a further design explanation.
+    a complete design explanation.
   link: https://www.esologic.com/blinkbox/
 size: medium
 secondary_urls:

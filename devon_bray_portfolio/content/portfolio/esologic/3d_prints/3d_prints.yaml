@@ -10,14 +10,14 @@ featured_media:
 local_media:
 - label: Desktop microphone stand. [Blog Post](https://www.esologic.com/mic-stand/).
   path: ./3d_prints_images/3d_prints_2.jpg
-- label: Wall-mounted drybox for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-drybox-for-3d-printing-with-nylon/).
-  path: ./3d_prints_images/3d_prints_3.jpg
+- label: Wire shelf Raspberry Pi mount. [Blog Post](https://www.esologic.com/goodprints-episode-1/).
+  path: ./3d_prints_images/3d_prints_6.jpg
 - label: 1x1 Parts drawer for bringing the lab on the go. [Blog Post](https://www.esologic.com/singer-parts-drawer-holder/).
   path: ./3d_prints_images/3d_prints_4.jpeg
 - label: Wire shelf keyboard holder. [Blog Post](https://www.esologic.com/tiny-apartment-improvement-project-wire-shelf-keyboard-holder/).
   path: ./3d_prints_images/3d_prints_5.jpeg
-- label: Wire shelf Raspberry Pi mount. [Blog Post](https://www.esologic.com/goodprints-episode-1/).
-  path: ./3d_prints_images/3d_prints_6.jpg
+- label: Wall-mounted drybox for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-drybox-for-3d-printing-with-nylon/).
+  path: ./3d_prints_images/3d_prints_3.jpg
 involvement: Wrote the (bad) code for this project.
 mediums:
 - mechanical cad
