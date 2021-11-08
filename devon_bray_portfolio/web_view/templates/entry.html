@@ -7,20 +7,22 @@
 </head>
 <body>
     <div class="entry-container" style="background-color: {{ entry.primary_color }}">
-        <h1 class="title">{{ entry.title }} <span>({{ entry.completion_date_verbose }})</span></h1>
-        <div class="container">
-            <img
+        <h1 class="area-title">{{ entry.title }} <span>({{ entry.completion_date_verbose }})</span></h1>
+        <div class="entry-title-container">
+            <figure>
+                <img
+                class="entry-title-item"
                 src="{{ url_for('static', filename=entry.featured_media.path) }}"
                 alt="{{entry.featured_media.label}}"
-                class="item"
-            >
-
-            <div class="item">
+                >
+                <figcaption>{{ entry.featured_media.label | safe }}</figcaption>
+            </figure>
+            <div class="entry-title-item">
                 <h3>{{ entry.description }}</h3>
                 {{ entry.explanation | safe }}
                 <div class="primary-url dimmer" onclick="location.href='{{ entry.primary_url.link }}';" style="cursor: pointer;">{{ entry.primary_url.label }}</div>
                 {% if entry.secondary_urls %}
-                <p>Further Reading</p>
+                <p>Further Reading:</p>
                 <ul>
                     {% for secondary_url in entry.secondary_urls  %}
                     <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
@@ -28,7 +30,7 @@
                 </ul>
                 {%endif %}
                 {% if entry.press_urls %}
-                <p>As seen in</p>
+                <p>As Seen In:</p>
                 <ul>
                     {% for press_url in entry.press_urls  %}
                     <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
@@ -53,33 +55,34 @@
             </div>
         </div>
         {% if entry.youtube_videos or entry.local_media %}
-        <h2>Gallery</h2>
-        {% if entry.youtube_videos %}
-        {% for youtube_video in entry.youtube_videos %}
-        <figure class="gallery-img">
-            <iframe
-                src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
-                width="1000"
-                height="1000"
-                class="gallery-item">
-            </iframe>
-            <figcaption>{{ youtube_video.label | safe }}</figcaption>
-        </figure>
-        {% endfor %}
-        {% endif %}
-        {% if entry.local_media %}
-        {% for local_media in entry.local_media  %}
-        <figure class="gallery-img">
-            <img
-                src="{{ url_for('static', filename=local_media.path) }}"
-                alt="{{local_media.label}}"
-                class="gallery-item"
-            >
-            <figcaption>{{ local_media.label | safe }}</figcaption>
-        </figure>
-        {% endfor %}
-        {% endif %}
-        {% endif %}
+        <div class="gallery">
+            <h2 class="area-title">Gallery</h2>
+            {% if entry.youtube_videos %}
+            {% for youtube_video in entry.youtube_videos %}
+            <figure>
+                <iframe
+                    src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
+                    width="1000"
+                    height="1000"
+                >
+                </iframe>
+                <figcaption>{{ youtube_video.label | safe }}</figcaption>
+            </figure>
+            {% endfor %}
+            {% endif %}
+            {% if entry.local_media %}
+            {% for local_media in entry.local_media  %}
+            <figure>
+                <img
+                    src="{{ url_for('static', filename=local_media.path) }}"
+                    alt="{{local_media.label}}"
+                >
+                <figcaption>{{ local_media.label | safe }}</figcaption>
+            </figure>
+            {% endfor %}
+            {% endif %}
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>

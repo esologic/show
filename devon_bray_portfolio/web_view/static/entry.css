@@ -7,67 +7,43 @@ body {
     color: white;
 }
 
-.dimmer {
-    -webkit-filter: brightness(100%);
-	-moz-filter: brightness(100%);
-	-o-filter: brightness(100%);
-	-ms-filter: brightness(100%);
-	filter: brightness(100%);
-}
-
-.dimmer:hover {
-    -webkit-filter: brightness(90%);
-    -moz-filter: brightness(90%);
-    -o-filter: brightness(90%);
-    -ms-filter: brightness(90%);
-    filter: brightness(90%);
-}
-
-a:link {
-  font-weight: bold;
-  color: white;
-    -webkit-filter: brightness(100%);
-    -moz-filter: brightness(100%);
-    -o-filter: brightness(100%);
-    -ms-filter: brightness(100%);
-    filter: brightness(100%);
-}
-
-a:hover {
-    -webkit-filter: brightness(90%);
-    -moz-filter: brightness(90%);
-    -o-filter: brightness(90%);
-    -ms-filter: brightness(90%);
-    filter: brightness(90%);
-}
-
-a:visited {
-    color: white;
-}
-
 .entry-container {
     margin-top: 1rem;
-    padding: 2rem;
-}
-
-/* Create four equal columns */
-.item {
-    flex: 35%;
     padding: 1rem;
 }
 
-/* Create four equal columns */
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.area-title {
+    text-align: center;
 }
 
-.container img {
+.area-title span {
+    font-style: italic;
+}
+
+.entry-title-container {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+img {
+    width: 100%;
     display: block;
     object-fit: contain;
-    max-height: 75vh;
     box-sizing: border-box;
+}
+
+.entry-title-container img {
+    max-height: 70vh;
+}
+
+.gallery img {
+    max-height: 95vh;
+}
+
+.entry-title-item {
+    flex: 35%;
 }
 
 .primary-url {
@@ -79,22 +55,54 @@ a:visited {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
 }
 
-img {
-    width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
+.gallery {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 4px;
+    align-items: center;
+    justify-items: center;
+}
+
+figure {
+    display: table;
 }
 
 iframe {
     width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
 }
 
-.title {
+figcaption {
+    margin-top: 0.5rem;
+    border-style: dotted;
+    border-width: 2px;
     text-align: center;
+    display: table-caption;
+    caption-side: bottom;
 }
 
-.title span {
-    font-style: italic;
+figcaption p {
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
+}
+
+.dimmer {
+	filter: brightness(100%);
+}
+
+.dimmer:hover {
+    filter: brightness(90%);
+}
+
+a:link {
+    font-weight: bold;
+    color: white;
+    filter: brightness(100%);
+}
+
+a:hover {
+    filter: brightness(90%);
+}
+
+a:visited {
+    color: white;
 }
