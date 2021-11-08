@@ -61,7 +61,7 @@
             <h2 class="area-title">Gallery</h2>
             {% if entry.youtube_videos %}
             {% for youtube_video in entry.youtube_videos %}
-            <figure>
+            <figure class="gallery-figure">
                 <iframe
                         width="560"
                         height="315"
@@ -76,7 +76,7 @@
             {% endif %}
             {% if entry.local_media %}
             {% for local_media in entry.local_media  %}
-            <figure>
+            <figure class="gallery-figure">
                 <img
                     src="{{ url_for('static', filename=local_media.path) }}"
                     alt="{{ local_media.label }}"

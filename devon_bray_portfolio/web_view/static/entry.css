@@ -29,8 +29,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
     align-items: center;
-    grid-gap: 1rem;
-
+    grid-gap: 2rem;
 }
 
 img {
@@ -50,7 +49,6 @@ img {
 
 .entry-title-item {
     flex: 45%;
-    align-self: center;
 }
 
 .primary-url {
@@ -86,7 +84,14 @@ img {
 }
 
 figure {
+    margin: 0 auto;
+    text-align: center;
     display: table;
+}
+
+.gallery-figure {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 figcaption {
