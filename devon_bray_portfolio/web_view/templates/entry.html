@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{entry.title}}</title>
+    <title>{{ entry.title }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='entry.css') }}">
     <link rel="icon" href="{{ url_for('static', filename=entry.favicon_path) }}" type="image/x-icon">
 </head>
@@ -13,7 +13,7 @@
                 <img
                 class="entry-title-item"
                 src="{{ url_for('static', filename=entry.featured_media.path) }}"
-                alt="{{entry.featured_media.label}}"
+                alt="{{ entry.featured_media.label }}"
                 >
                 <figcaption>{{ entry.featured_media.label | safe }}</figcaption>
             </figure>
@@ -61,10 +61,12 @@
             {% for youtube_video in entry.youtube_videos %}
             <figure>
                 <iframe
-                    src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
-                    width="1000"
-                    height="1000"
-                >
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
                 </iframe>
                 <figcaption>{{ youtube_video.label | safe }}</figcaption>
             </figure>
@@ -75,7 +77,7 @@
             <figure>
                 <img
                     src="{{ url_for('static', filename=local_media.path) }}"
-                    alt="{{local_media.label}}"
+                    alt="{{ local_media.label }}"
                 >
                 <figcaption>{{ local_media.label | safe }}</figcaption>
             </figure>
