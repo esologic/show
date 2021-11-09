@@ -6,17 +6,13 @@ body {
     background-color: #FFFFF0;
 }
 
-.ph-bound {
-
-}
-
 .header-image {
     width: 100%;
     object-fit: cover;
-    height: 7vh;
+    height: 13vh;
 }
 
-.portfolio-header{
+.portfolio-header {
    margin-left: 2rem;
    margin-right: 2rem;
     padding-top: 0.5rem;
@@ -116,4 +112,32 @@ figcaption > h2 {
 .entry-medium {
     font-size: 1.3vmin;
     font-weight: bold;
+}
+
+a:link {
+    font-weight: bold;
+    color: white;
+    filter: brightness(100%);
+}
+
+a:hover {
+    filter: brightness(90%);
+}
+
+a:visited {
+    color: white;
+}
+
+.header-link:link {
+    color: blue;
+    filter: brightness(100%);
+}
+
+
+.header-link:hover {
+    filter: brightness(50%);
+}
+
+.header-link:visited {
+    color: blue;
 }

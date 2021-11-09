@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from pyaml import yaml
-from pydantic import BaseModel, HttpUrl, ValidationError, validator
+from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError, validator
 from pydantic.color import Color
 from typing_extensions import TypedDict
 
@@ -240,6 +240,20 @@ class SerializedPortfolioDescription(BaseModel):
 
     # See type docs.
     version_number: VersionNumber
+
+    explanation: str
+
+    conclusion: str
+
+    email: EmailStr
+
+    contact_urls: t.List[Link]
+
+    header_top_image: LocalMedia
+
+    header_bottom_image: LocalMedia
+
+    icon: LocalMedia
 
 
 def read_yaml(path: Path) -> t.Dict[str, t.Any]:  # type: ignore[misc]

@@ -108,7 +108,14 @@ class Portfolio(NamedTuple):
 
     title: str
     description: str
+    explanation: str
+    conclusion: str
     sections: t.List[Section]
+    contact_urls: t.List[RenderedLink]
+    email: str
+    header_top_image: RenderedLocalMedia
+    header_bottom_image: RenderedLocalMedia
+    icon: RenderedLocalMedia
 
 
 def _render_link(url: schema.Link) -> RenderedLink:
@@ -360,12 +367,37 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
 
     return Portfolio(
         title=portfolio_description.title,
-        description=portfolio_description.description,
+        description=markdown(portfolio_description.description),
         sections=sorted(
             [
                 _read_section(section_directory, static_content_directory)
                 for section_directory in _directories_in_directory(sections_directory)
             ],
             key=lambda section: section.rank,
+        ),
+        conclusion=markdown(portfolio_description.conclusion),
+        contact_urls=_render_link_list(portfolio_description.contact_urls),
+        email=portfolio_description.email,
+        explanation=markdown(portfolio_description.explanation),
+        header_top_image=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (4000, 4000),
+            None,
+            portfolio_description.header_top_image,
+        ),
+        header_bottom_image=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (4000, 4000),
+            None,
+            portfolio_description.header_bottom_image,
+        ),
+        icon=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (15, 15),
+            None,
+            portfolio_description.icon,
         ),
     )
