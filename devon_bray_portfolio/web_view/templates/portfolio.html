@@ -5,6 +5,38 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='portfolio.css') }}">
 </head>
 <body>
+
+    <div class="ph-bound">
+        <img
+            src="{{ url_for('static', filename='banner_5.jpg') }}"
+            class="header-image"
+        >
+        <div class="portfolio-header">
+        		<h1>Devon Bray</h1>
+
+			<p>Boston-based Engineer with an educational background in <span class="special">Electrical & Computer Engineering</span>, <span class="special">Computer Science</span> and <span class="special">English Literature</span>.</p>
+            <p>This is may artist's statment Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus orci ac auctor augue mauris augue neque gravida in. Tincidunt tortor aliquam nulla facilisi cras fermentum. Purus sit amet volutpat consequat mauris nunc congue. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Facilisi etiam dignissim diam quis enim. In dictum non consectetur a erat nam at lectus. Velit aliquet sagittis id consectetur purus. Eget nunc scelerisque viverra mauris in. Eget duis at tellus at urna. Nisl pretium fusce id velit ut tortor.</p>
+
+
+			<ul>
+				<li><a href="mailto:dev@esologic.com?Subject=Website%20Intro" target="_top" class= "link">Email</a></li>
+				<li><a href="https://twitter.com/eso_logic" class= "link">Twitter</a></li>
+				<li><a href="https://www.linkedin.com/in/braydevon/" class= "link">Linkedin</a></li>
+			</ul>
+
+                    <p>The following is my portfolio, a selection of the best projects across the different places I'm active. if you have questions please reach out via email.</p>
+
+        </div>
+
+
+
+        <img
+            src="{{ url_for('static', filename='banner_8.jpg') }}"
+            class="header-image"
+        >
+
+    </div>
+
     {% for section in portfolio.sections %}
     <div style="background-color: {{ section.primary_color }}" class="section-container">
         <div class="section-header">

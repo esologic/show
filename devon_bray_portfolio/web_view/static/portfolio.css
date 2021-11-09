@@ -6,6 +6,24 @@ body {
     background-color: #FFFFF0;
 }
 
+.ph-bound {
+
+}
+
+.header-image {
+    width: 100%;
+    object-fit: cover;
+    height: 7vh;
+}
+
+.portfolio-header{
+   margin-left: 2rem;
+   margin-right: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
 .item {
     position: relative;
     display: flex;
