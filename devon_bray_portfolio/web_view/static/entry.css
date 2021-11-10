@@ -7,6 +7,32 @@ body {
     color: white;
 }
 
+.back-button {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.back-button img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    box-sizing: border-box;
+    height: 5vh;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
+}
+
+
+/* Centered text */
+.back-button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-style: italic;
+    font-weight: lighter;
+}
+
 .entry-container {
     margin-top: 1rem;
     padding: 1rem;

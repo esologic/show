@@ -24,6 +24,9 @@ header_top_image:
 header_bottom_image:
   label: Sunset over Cape Cod bay.
   path: ./banner_8.jpg
+return_image:
+  label: Sunset over Cape Cod bay.
+  path: ./banner_1.jpg
 icon:
   label: Self-portrait.
   path: ./icon.jpg

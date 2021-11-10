@@ -81,6 +81,7 @@ class RenderedEntry(NamedTuple):
     mediums: t.List[str]
     primary_color: str
     favicon_path: str
+    top_image: RenderedLocalMedia
 
 
 class Section(NamedTuple):
@@ -217,7 +218,9 @@ def _render_local_media(
     return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
 
-def _read_entry(yaml_path: Path, media_directory: Path, primary_color: str) -> RenderedEntry:
+def _read_entry(
+    yaml_path: Path, media_directory: Path, primary_color: str, top_image: RenderedLocalMedia
+) -> RenderedEntry:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
     different fields then return the resulting NT.
@@ -276,6 +279,7 @@ def _read_entry(yaml_path: Path, media_directory: Path, primary_color: str) -> R
             f"{slug}_icon.png",
             serialized_entry.featured_media,
         ).path,
+        top_image=top_image,
     )
 
 
@@ -313,7 +317,9 @@ def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
     yield from [path for path in directory.iterdir() if path.is_dir()]
 
 
-def _read_section(section_directory: Path, static_content_directory: Path) -> Section:
+def _read_section(
+    section_directory: Path, static_content_directory: Path, top_image: RenderedLocalMedia
+) -> Section:
     """
     Given a `section_directory` (so a directory with a top-level yaml, and a bunch of directories
     that each describe a portfolio entry), load the contents as a Section, modifying the contents
@@ -334,7 +340,7 @@ def _read_section(section_directory: Path, static_content_directory: Path) -> Se
         description=markdown(section_description.description),
         title=section_description.title,
         entries=[
-            _read_entry(_find_yaml(path), static_content_directory, primary_color)
+            _read_entry(_find_yaml(path), static_content_directory, primary_color, top_image)
             for path in _directories_in_directory(section_directory)
         ],
         primary_color=primary_color,
@@ -370,7 +376,17 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         description=markdown(portfolio_description.description),
         sections=sorted(
             [
-                _read_section(section_directory, static_content_directory)
+                _read_section(
+                    section_directory,
+                    static_content_directory,
+                    _render_local_media(
+                        static_content_directory,
+                        portfolio_description_path,
+                        (4000, 4000),
+                        None,
+                        portfolio_description.return_image,
+                    ),
+                )
                 for section_directory in _directories_in_directory(sections_directory)
             ],
             key=lambda section: section.rank,

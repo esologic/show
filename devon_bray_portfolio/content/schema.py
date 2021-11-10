@@ -253,6 +253,8 @@ class SerializedPortfolioDescription(BaseModel):
 
     header_bottom_image: LocalMedia
 
+    return_image: LocalMedia
+
     icon: LocalMedia
 
 
