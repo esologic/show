@@ -3,8 +3,35 @@
 <head>
     <title>Portfolio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='portfolio.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename=portfolio.icon.path) }}" type="image/x-icon">
 </head>
 <body>
+
+    <div>
+        <img
+            src="{{ url_for('static', filename=portfolio.header_top_image.path) }}"
+            class="header-image"
+            alt="{{ portfolio.header_top_image.label }}"
+        >
+        <div class="portfolio-header">
+            <h1>{{ portfolio.title }}</h1>
+			{{ portfolio.description | safe }}
+            {{ portfolio.explanation | safe }}
+            <ul>
+                <li><a href="mailto:{{portfolio.email}}" class="header-link">Email</a></li>
+                {% for contact_url in portfolio.contact_urls  %}
+                <li><a href="{{ contact_url.link }}" class="header-link">{{ contact_url.label }}</a></li>
+                {% endfor %}
+            </ul>
+            {{ portfolio.conclusion | safe }}
+        </div>
+        <img
+            src="{{ url_for('static', filename=portfolio.header_bottom_image.path) }}"
+            class="header-image"
+            alt="{{ portfolio.header_bottom_image.label }}"
+        >
+    </div>
+
     {% for section in portfolio.sections %}
     <div style="background-color: {{ section.primary_color }}" class="section-container">
         <div class="section-header">
@@ -13,6 +40,7 @@
             <img
                 src="{{ url_for('static', filename=section.logo.path) }}"
                 class="section-container-item"
+                alt="{{ section.logo.label }}"
             >
         </div>
         <div class="container">
@@ -22,6 +50,7 @@
                 <img
                     src="{{ url_for('static', filename=entry.featured_media.path) }}"
                     class="gallery-img"
+                    alt="{{ entry.featured_media.label }}"
                 >
                 <figcaption>
                     <span class="entry-title">{{ entry.title  }} (c. {{ entry.completion_year }}) <span>&#8226;</span> </span>

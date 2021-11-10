@@ -6,6 +6,17 @@
     <link rel="icon" href="{{ url_for('static', filename=entry.favicon_path) }}" type="image/x-icon">
 </head>
 <body>
+
+    {% set k = url_for('render_portfolio') %}
+    <div class="back-button dimmer" onclick="location.href='/';">
+        <img
+            class="entry-title-item"
+            src="{{ url_for('static', filename=entry.top_image.path) }}"
+            alt="{{ entry.featured_media.label }}"
+        >
+        <div class="back-button-text">To Portfolio</div>
+    </div>
+
     <div class="entry-container" style="background-color: {{ entry.primary_color }}">
         <h1 class="area-title">{{ entry.title }} <span>({{ entry.completion_date_verbose }})</span></h1>
         <div class="entry-title-container">

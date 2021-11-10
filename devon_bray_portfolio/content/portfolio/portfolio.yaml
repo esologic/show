@@ -1,3 +1,32 @@
 version_number: 0
-title: Selected works of Devon Bray
-description: My life's work!
+title: Devon Bray
+description: Boston-based Engineer with an educational background in **Electrical
+  & Computer Engineering**, **Computer Science** and **English Literature**.
+explanation: This is may artist's statment Lorem ipsum dolor sit amet, consectetur
+  adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Tellus orci ac auctor augue mauris augue neque gravida in. Tincidunt tortor aliquam
+  nulla facilisi cras fermentum. Purus sit amet volutpat consequat mauris nunc congue.
+  Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus.
+  Facilisi etiam dignissim diam quis enim. In dictum non consectetur a erat nam at
+  lectus. Velit aliquet sagittis id consectetur purus. Eget nunc scelerisque viverra
+  mauris in. *Eget duis at tellus at urna*. Nisl pretium fusce id velit ut tortor.
+conclusion: The following is my portfolio, a selection of the best projects across
+  the different places I'm active. if you have questions please reach out via email.
+email: dev@esologic.com
+contact_urls:
+- label: Twitter
+  link: https://twitter.com/eso_logic/
+- label: Linkedin
+  link: https://www.linkedin.com/in/braydevon/
+header_top_image:
+  label: Sunset over Cape Cod bay.
+  path: ./banner_18.jpg
+header_bottom_image:
+  label: Sunset over Cape Cod bay.
+  path: ./banner_8.jpg
+return_image:
+  label: Sunset over Cape Cod bay.
+  path: ./banner_1.jpg
+icon:
+  label: Self-portrait.
+  path: ./icon.jpg
