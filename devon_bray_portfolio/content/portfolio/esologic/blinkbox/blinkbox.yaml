@@ -24,6 +24,9 @@ local_media:
   path: ./blinkbox_images/blinkbox_4.JPG
 - label: Render of mechanical design.
   path: ./blinkbox_images/blinkbox_5.jpg
+- label: Blinkbox being used to drive an array of LEDs to evaluate light bleed through
+    printed plastic.
+  path: ./blinkbox_images/blinkbox_6.JPG
 involvement: Designed and manufactured this project for use in my studio.
 mediums:
 - arduino

@@ -42,8 +42,13 @@ secondary_urls:
 - label: Github (source code)
   link: https://github.com/esologic/pear
 team_size: solo
-title: Multi Audio
+title: Multiple Audio
 version_number: 0
 press_urls:
+- label: Play multiple sounds simultaneously with a Raspberry Pi (Raspberry Pi Blog)
+  link: https://www.raspberrypi.com/news/multiple-sounds-simultaneously-raspberry-pi/
 - label: Python Script Sends Each Speaker Its Own Sound File (Hackaday)
   link: https://hackaday.com/2019/02/14/python-script-sends-each-speaker-its-own-sound-file/
+- label: RPi-Powered Art Installation Plays Multiple Tracks on Ear-Shaped Speakers
+    (Hackster.io)
+  link: https://www.hackster.io/news/rpi-powered-art-installation-plays-multiple-tracks-on-ear-shaped-speakers-1ef3263c9441
