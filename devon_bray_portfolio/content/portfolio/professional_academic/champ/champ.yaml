@@ -27,12 +27,11 @@ youtube_videos:
   video_id: hnc2LSy0_20
 involvement: Responsible for electrical control system, and remote control application.
 mediums:
-- laser cutter
-- 3d printer
+- python
+- protoboad electronics
+- pcb electronics
+- electrical cad
 - arduino
-- fritzing
-- breadboard electronics
-- mechanical cad
 secondary_urls:
 - label: Blog post. Mostly a summary of the paper and my involvement.
   link: https://www.esologic.com/champ-compliant-hook-arboreal-mobility-platform-senior-thesis-project/
