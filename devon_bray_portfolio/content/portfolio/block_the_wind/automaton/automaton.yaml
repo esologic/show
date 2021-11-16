@@ -1,0 +1,39 @@
+completion_date: 2019-08-03
+description: Apparel for the 2019 music festival.
+domain: social
+explanation: Two colorways, goldenrod and blue. Embroidered design on front, two tone
+  screenprint on the back. Designed by collective member, [Luca Pascal](https://www.artstation.com/lucapascal).
+featured_media:
+  label: Both Colorways.
+  path: ./automaton_images/automaton_1.JPG
+local_media:
+- label: Detail of goldenrod front.
+  path: ./automaton_images/automaton_2.JPG
+- label: Detail of blue front.
+  path: ./automaton_images/automaton_3.JPG
+- label: Front of goldenrod/blue.
+  path: ./automaton_images/automaton_4.JPG
+- label: Back of goldenrod.
+  path: ./automaton_images/automaton_5.JPG
+- label: Back of blue.
+  path: ./automaton_images/automaton_6.JPG
+- label: Product shot of goldenrod front.
+  path: ./automaton_images/automaton_7.png
+- label: Product shot of goldenrod back.
+  path: ./automaton_images/automaton_8.png
+- label: Product shot of blue front.
+  path: ./automaton_images/automaton_9.png
+- label: Product shot of blue back.
+  path: ./automaton_images/automaton_10.png
+involvement: Coordinated production, photographed and edited lookbook, responsible
+  for fulfilling orders.
+mediums:
+- photography
+- apparel
+primary_url:
+  label: Store page.
+  link: http://entryTODO.com
+size: small
+team_size: small group
+title: Dimensions Hoodie
+version_number: 0

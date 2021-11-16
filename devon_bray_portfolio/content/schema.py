@@ -48,6 +48,8 @@ class Domain(str, Enum):
     # Tesla Cooler is an example of mixed, CHAMP is an example of mixed.
     mixed_hardware_software = "mixed (hardware, software)"
 
+    social = "social"
+
 
 class Medium(str, Enum):
     """
@@ -73,6 +75,7 @@ class Medium(str, Enum):
     frontend_web_development = "frontend web development"
     photography = "photography"
     events = "events"
+    apparel = "apparel"
 
 
 class TeamSize(str, Enum):
