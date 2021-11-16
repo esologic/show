@@ -1,12 +1,14 @@
 completion_date: '2015-01-18'
 description: Twitter-enabled window.
 domain: mixed (hardware, software)
-explanation: LEDs hung in my street-facing college dorm room change color based on
-  input from a public twitter account. Accepted text or images as input. After the
-  color change was completed, an image of the result was tweeted back to user. This
-  concept eventaully grew into [Telapush](https://telapush.com/).
+explanation: A strand of LEDs hung in my street-facing college dorm room could color
+  based on input from a public twitter account. Accepted text or images as input.
+  After the color change was completed, an image of the result was replied back to
+  user. This concept eventaully grew to become [Telapush](https://telapush.com/).
+  A preeiminent experience of mine in the thrilling medium of public installation
+  art.
 youtube_videos:
-- label: Initial publication + Demonstration.
+- label: Initial publication + demonstration.
   video_id: rNKmVJ7Pi0c
 - label: Second set of features.
   video_id: JDliZ-xXPwI
@@ -14,9 +16,9 @@ featured_media:
   label: Sample twitter interaction
   path: ./heywpi_images/heywpi_1.PNG
 local_media:
-- label: Sample response to user
+- label: Sample response to user.
   path: ./heywpi_images/heywpi_2.png
-involvement: Designed and displayed this project.
+involvement: Designed and displayed.
 mediums:
 - raspberry pi
 - python
@@ -25,7 +27,7 @@ mediums:
 primary_url:
   label: Project page, links to development log, code and design files.
   link: https://www.esologic.com/heywpi-project/
-size: medium
+size: small
 secondary_urls:
 - label: '@heywpi twitter'
   link: https://twitter.com/heywpi

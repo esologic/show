@@ -1,15 +1,16 @@
 completion_date: '2021-05-12'
 description: Creates perfect water dropplets in total silence.
 domain: mixed (hardware, software)
-explanation: Client needed a solution to reliably produce droplets of water for a
-  performance art piece. Because the piece was to be performed in a gallery setting,
-  no acustic noise could be created during operation. This ruled out convential dc
-  motor pumps and solenoids. Solution was a stepper motor fitted to a peristaltic
-  pump using motor drivers designed for making 3D printers operate quietly. Fabricated
-  PCB to package electronics, wrote firmware to read heartbeat sensor and drive motors,
-  and did mechanical design and manufacturing to produce the monolithic finished actuators.
-  This project is one of a series of jobs I've completed for interdisciplinary sculpture
-  artist, [Sara Dittrich](https://www.saradittrich.com/About).
+explanation: Client needed a device to reliably produce droplets of water for a piece
+  of performance art. Because the piece was to be performed in a gallery setting,
+  little to no acoustic noise was permissable during operation, ruling out convential
+  DC motor pumps and solenoids. Solution was a stepper motor fitted to a [peristaltic
+  pump](https://en.wikipedia.org/wiki/Peristaltic_pump) using motor drivers designed
+  for making 3D printers operate quietly. Fabricated PCB to package electronics, wrote
+  firmware to read heartbeat sensor and drive motors, and did mechanical design and
+  manufacturing to produce the monolithic finished actuators. This project is one
+  of a series of jobs I've completed for interdisciplinary sculpture artist, [Sara
+  Dittrich](https://www.saradittrich.com/About).
 featured_media:
   label: Operating demonstration, pulse sensor output is displayed next to operating
     drippers.

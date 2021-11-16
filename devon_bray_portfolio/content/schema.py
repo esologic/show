@@ -70,6 +70,9 @@ class Medium(str, Enum):
     raspberry_pi = "raspberry pi"
     led_art = "led art"
     twitter = "twitter"
+    frontend_web_development = "frontend web development"
+    photography = "photography"
+    events = "events"
 
 
 class TeamSize(str, Enum):

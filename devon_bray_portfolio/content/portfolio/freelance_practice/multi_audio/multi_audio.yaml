@@ -3,10 +3,10 @@ description: n-Channel Audio Driver for Sound Sculpture.
 domain: mixed (hardware, software)
 explanation: Client needed a way to have looping audio play sequntially/simultaneously
   on 8 different speakers housed in a sculpture. Also gave the requirement that audio
-  needed to be changed over time and couldn't be "hardcoded" into a solution, also
-  needed to be replaced by a non-technical gallery attendant. Total turnaround time
-  for this project was under three weeks, and one of a series of jobs I've completed
-  for interdisciplinary sculpture artist, [Sara Dittrich](https://www.saradittrich.com/About)
+  needed to be changed over time and couldn't be "hardcoded" into a solution, could
+  be replaced by a non-technical gallery attendant. Total turnaround time for this
+  project was under three weeks, and is one of a series of jobs I've completed for
+  interdisciplinary sculpture artist, [Sara Dittrich](https://www.saradittrich.com/About).
 youtube_videos:
 - label: Demonstration and design walkthrough.
   video_id: k1c2qlfvjBQ

@@ -5,15 +5,15 @@ explanation: Rendered desperate for VRAM by a stylegan-related project, I had to
   thermistor first into the concernedly hot and strange world of GPUs without video
   outputs to design a high performance cooler for the NVIDIA Tesla K80. The GPU is
   designed to be installed in server chassis that have a fan pressure delta, where
-  cool air is moved from the front of the case, through the cards and then out the
-  back. I wanted to be able to use the cooler in regualr 4U server chassis or an standard
+  cooled air is moved from the front of the case, through the cards and then out the
+  back. I wanted to be able to use the GPUs in a regular 4U server chassis or standard
   PC tower so needed to create a cooler. The design is based around off the shelf
-  parts and can be printed without supports. This entire project was designed and
-  manufactured on stream in the spirit of a hackathon.
+  parts and can be printed without supports. Electronics are centered around a Raspberry
+  Pi Pico running MicroPython. This entire project was designed and manufactured live
+  on stream in the spirit of a hackathon.
 youtube_videos:
-- label: Project history, design walkthrough and stress test. Note that this is a
-    lot more long winded than my other project summaries, wanted to try a new live
-    format.
+- label: Project history, design walkthrough and stress test. A bit more verbose than
+    other videos, wanted to try a direct-to-tape format.
   video_id: ax6S3I81yAg
 featured_media:
   label: Another shot of the single cooler config.

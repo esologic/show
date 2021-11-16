@@ -2,9 +2,10 @@ completion_date: '2018-03-18'
 description: Sketch to be able to measure multiple periodic squarewaves using an Arduino.
 domain: mixed (hardware, software)
 explanation: This simple project was completed very quickly and has served me well
-  over the years. It is a simple Arduino sketch that uses interrupts to measure the
-  frequencies of singals coming in on digital pins. I've recylced this code many times
-  over the years to great effect.
+  over the years. A simple Arduino sketch that uses interrupts to measure the frequencies
+  of singals coming in on digital pins. This code has been recycled a number of times
+  and is a great example of the strenghts of timer programming typically found on
+  embedded devices.
 featured_media:
   label: Breadboard implementation of circuit.
   path: ./frequency_counter_images/frequency_counter_1.jpg
@@ -16,9 +17,9 @@ mediums:
 - arduino
 - breadboard electronics
 primary_url:
-  label: Blog post (contains code, test results etc.)
+  label: Blog post (contains code, test results etc.).
   link: https://www.esologic.com/multiple-frequency-counter-arduino/
 size: small
 team_size: solo
-title: Multiple Frequency Counter for Arduino
+title: Multi-Channel Frequecy Counter
 version_number: 0

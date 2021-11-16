@@ -1,16 +1,16 @@
 completion_date: '2020-09-26'
 description: Converts footsteps into frame-by-frame video output.
 domain: mixed (hardware, software)
-explanation: Client wanted a solution that would detect foosteps on a treadmill, then
-  transmit detections to a host PC running OBS for broadcast. Each time a footstep
-  was detected, a video would be incremented. I designed the footstep detection algorithm
-  using an accellerometer, the hardware to transmit detections over UART was based
-  on Arduino. Wrote a python application using openCV to handle creating output frames.
-  Application also had to be able to change videos based on input from twitch chat.
-  Hardware ui was designed for flexibility. Knobs control different parameters of
-  the control algorithm, button indicates a footstep has been detected and can be
-  used to manually increment frame of video. This project is one of a series of jobs
-  I've completed for interdisciplinary sculpture artist, [Sara Dittrich](https://www.saradittrich.com/About).
+explanation: Client needed a solution that could detect foosteps on a treadmill, then
+  transmit detections to a host PC. Each time a footstep is detected, a video being
+  broadcast via [OBS](https://en.wikipedia.org/wiki/OBS_Studio) is incremented by
+  a frame. Designed an Arduino based footfall detection algortihm centered around
+  an accellerometer. Wrote a python application using openCV to handle creating output
+  frames. PC-side application also had to be able to change videos based on input
+  from twitch chat. Hardware UI was designed for flexibility. Knobs control different
+  parameters of the detection algorithm, button indicates a footstep has been detected
+  and can be used to manually increment frame of video. This project is one of a series
+  of jobs I've completed for interdisciplinary sculpture artist, [Sara Dittrich](https://www.saradittrich.com/About).
 featured_media:
   label: Operating demonstration, frames of video behind performer increment each
     time a footstep is detected.
@@ -34,3 +34,6 @@ size: medium
 team_size: solo
 title: Footsteps to Video
 version_number: 0
+press_urls:
+- label: 'Sara Dittrich: The Tender Interval (DiverseWorks)'
+  link: https://diverseworks.org/in-the-works/exhibtion-performance/sara-dittrich-the-tender-interval
