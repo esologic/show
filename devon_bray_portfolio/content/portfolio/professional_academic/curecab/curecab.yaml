@@ -38,7 +38,7 @@ mediums:
 primary_url:
   label: Blog post (contains links to schematics, code, models, BOM etc).
   link: https://www.esologic.com/uv-resin-curing-cabinet/
-size: medium
+size: small
 team_size: solo
 title: UV Resin Curing Cabinet
 version_number: 0

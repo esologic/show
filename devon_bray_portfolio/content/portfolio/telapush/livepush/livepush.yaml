@@ -8,10 +8,10 @@ explanation: >-
   and hardware components in a realistic scenario. Common twitter hashtags like #boston,
   #hardware, #startup were integrated to have a constant source of input for animations.
 youtube_videos:
-- label: Demo
+- label: Demonstration, shows a sample interaction.
   video_id: vkzwySQfeJs
 featured_media:
-  label: Isometric shot of 3d printed lettering
+  label: Isometric shot of 3d printed lettering.
   path: ./livepush_images/livepush_1.JPG
 local_media:
 - label: Front facing view of complete installation.

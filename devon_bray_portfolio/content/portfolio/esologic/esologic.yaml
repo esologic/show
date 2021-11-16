@@ -1,6 +1,6 @@
 primary_color: '#FFA500'
 logo:
-  label: Esologic logo
+  label: Esologic logo.
   path: ./esologic_logo.jpg
 description: Personal engineering [blog](https://www.esologic.com). Catalogs the developement
   of open-source projects, serving as the publication outlet for their releases alongside

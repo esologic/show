@@ -19,9 +19,9 @@ mediums:
 - python
 - raspberry pi
 press_urls:
-- label: Combine a Raspberry Pi with Google Calendar for a Smart Alarm Clock (Lifehacker)
+- label: Combine a Raspberry Pi with Google Calendar for a Smart Alarm Clock (Lifehacker).
   link: https://lifehacker.com/combine-a-raspberry-pi-with-google-calendar-for-a-smart-512265472
-- label: Alarm Clock Uses Raspberry Pi To Poll Google Calendar (Hackaday)
+- label: Alarm Clock Uses Raspberry Pi To Poll Google Calendar (Hackaday).
   link: https://hackaday.com/2013/06/06/alarm-clock-uses-raspberry-pi-to-poll-google-calendar/
 primary_url:
   label: Blog post (contains source code).

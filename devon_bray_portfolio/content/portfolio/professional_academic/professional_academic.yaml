@@ -1,6 +1,6 @@
 primary_color: '#AD2734'
 logo:
-  label: Block The Wind Logo
+  label: Block The Wind Logo.
   path: ./block_the_wind_logo.png
 description: A collection of open-sourced day job projects and academic projects completed
   while at [WPI](https://en.wikipedia.org/wiki/Worcester_Polytechnic_Institute).

@@ -28,7 +28,7 @@ youtube_videos:
 involvement: Responsible for electrical control system, and remote control application.
 mediums:
 - python
-- protoboad electronics
+- protoboard electronics
 - pcb electronics
 - electrical cad
 - arduino

@@ -83,11 +83,11 @@ team_size: solo
 title: PiPlanter
 version_number: 0
 press_urls:
-- label: 'PiPlanter: a plant growth monitor (Raspberry Pi Foundation)'
+- label: 'PiPlanter: a plant growth monitor (Raspberry Pi Foundation).'
   link: https://www.raspberrypi.com/news/piplanter-a-plant-growth-monitor/
-- label: Raspberry Pi Automates Your Tomato Farm (Hackaday)
+- label: Raspberry Pi Automates Your Tomato Farm (Hackaday).
   link: https://hackaday.com/2013/07/01/raspberry-pi-automates-your-tomato-farm/
-- label: PiPlanter 2 (Adafruit)
+- label: PiPlanter 2 (Adafruit).
   link: https://blog.adafruit.com/2014/10/03/piplanter-2-piday-raspberrypi-raspberry_pi-2/
-- label: Students win Giessler Foundation grants for independent projects (WPI News)
+- label: Students win Giessler Foundation grants for independent projects (WPI News).
   link: https://www.wpi.edu/news/giessler-foundation

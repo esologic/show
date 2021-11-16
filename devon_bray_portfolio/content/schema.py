@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from pyaml import yaml
-from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError, validator
+from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError
 from pydantic.color import Color
 from typing_extensions import TypedDict
 
@@ -88,6 +88,38 @@ class TeamSize(str, Enum):
     large_group = "large group"
 
 
+class ValidatedString(str):
+    """
+    Pydantic runs __get_validators__ upon loading a string.
+    This:
+        * Makes sure the input ends with a period.
+        * Warns any words that could potentially be misspelled.
+    """
+
+    @classmethod
+    def __get_validators__(  # type: ignore[misc]
+        cls: "ValidatedString",
+    ) -> t.Iterator[t.Callable[[str], str]]:
+        # one or more validators may be yielded which will be called in the
+        # order to validate the input, each validator will receive as an input
+        # the value returned from the previous validator
+        yield from [cls.ends_with_period]
+
+    def ends_with_period(  # pylint: disable=no-self-argument,no-self-use
+        cls: "ValidatedString", v: str
+    ) -> str:
+        """
+        Enforced on read rather than being added later.
+        :param description: To check.
+        :return: Validated, raises otherwise.
+        """
+
+        if not v.endswith("."):
+            raise ValueError("Descriptions must end with a period!")
+
+        return v
+
+
 class LocalMedia(TypedDict):
     """
     Describes a piece of media that is local to the repository ie NOT on the web.
@@ -96,7 +128,7 @@ class LocalMedia(TypedDict):
     """
 
     # Should be short, a description of what is in the piece of media.
-    label: str
+    label: ValidatedString
 
     # Path relative to the YAML referencing it.
     path: Path
@@ -109,7 +141,7 @@ class Link(TypedDict):
     """
 
     # A sentence saying where the link is going. Ex: "This project was featured on RaspberryPi.org"
-    label: str
+    label: ValidatedString
 
     # The actual link.
     link: HttpUrl
@@ -121,7 +153,7 @@ class YouTubeVideo(TypedDict):
     """
 
     # A sentence describing what the video is of.
-    label: str
+    label: ValidatedString
 
     # The YouTube video ID, used later to create an iframe.
     video_id: str
@@ -141,7 +173,7 @@ class SerializedEntry(BaseModel):
     title: str
 
     # A short description of the project, should be one or two sentences at the most.
-    description: str
+    description: ValidatedString
 
     # Between three and five sentences, combined with the `description`, should give reader a very
     # complete idea as to what the project was about.
@@ -187,22 +219,6 @@ class SerializedEntry(BaseModel):
 
     # See type docs.
     mediums: List[Medium]
-
-    # TODO I also want this for labels on local media/videos
-    @validator("description")
-    def ends_with_period(  # pylint: disable=no-self-argument,no-self-use
-        cls: "SerializedEntry", description: str
-    ) -> str:
-        """
-        Enforced on read rather than being added later.
-        :param description: To check.
-        :return: Validated, raises otherwise.
-        """
-
-        if not description.endswith("."):
-            raise ValueError("Descriptions must end with a period!")
-
-        return description
 
 
 class SerializedSectionDescription(BaseModel):
