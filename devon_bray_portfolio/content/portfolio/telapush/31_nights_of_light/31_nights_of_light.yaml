@@ -3,15 +3,14 @@ description: 30 Day Installation in the center of the Prudential Center mall in 
   MA.
 domain: mixed (hardware, software)
 explanation: >-
-  Commercial installation to Boston Properties to amplify their #31NightsOfLight campaign.
+  Commercial installation for [Boston Properties](https://www.bxp.com/) to amplify
+  their #31NightsOfLight campaign.
   Each night
   in December, the lights on the roof of the Prudential Center would change to a different
-  color
-  to raise awareness for a corresponding group or non-profit organization. Ceremonially,
-  representatives
-  of the group would flip a massive light switch in the center of the mall as a photo-op,
-  and there would
-  be speaking etc. Our installation was an illuminated sign attached to the top of
+  color, raising awareness for a corresponding group or non-profit organization. Ceremonially,
+  representatives from the group being showcased would flip a massive light switch
+  in the center of the mall as a photo-op.
+  Our installation was an illuminated sign attached to the top of
   this lightswitch
   that would animate when the organizations were mentioned, or corresponding hashtags
   used on social
@@ -43,6 +42,9 @@ local_media:
   path: ./31_nights_of_light_images/31_10.jpg
 - label: CAD rendering of installation.
   path: ./31_nights_of_light_images/31_9.PNG
+- label: Internal shot of custom computer and enclosure that was created to drive
+    this project.
+  path: ./31_nights_of_light_images/31_backbone.JPG
 involvement: Electrical/Mechanical designer, wrote software for social media parser
   and animation engine.
 mediums:

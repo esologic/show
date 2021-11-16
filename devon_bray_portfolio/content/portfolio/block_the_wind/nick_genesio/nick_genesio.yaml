@@ -1,0 +1,28 @@
+completion_date: 2019-01-12
+description: Entry in our collaboration series.
+domain: social
+explanation: Collaboration with Maine artist, [Nick Genesio](https://www.instagram.com/nickgenesio/).
+  Screenprinted tee shirt and hoodie. Artist-first collab paid out majority of profits
+  to designer.
+featured_media:
+  label: Tee.
+  path: ./nick_genesio_images/nick_1.jpg
+local_media:
+- label: Hoodie.
+  path: ./nick_genesio_images/nick_2.jpg
+- label: Product photo of tee.
+  path: ./nick_genesio_images/nick_3.jpg
+- label: Product photo of hoodie.
+  path: ./nick_genesio_images/nick_4.jpg
+involvement: Booked collaboration, coordinated production, photographed and edited
+  lookbook, responsible for fulfilling orders.
+mediums:
+- photography
+- apparel
+primary_url:
+  label: Store page.
+  link: http://entryTODO.com
+size: small
+team_size: small group
+title: BTW x Nick Genesio
+version_number: 0

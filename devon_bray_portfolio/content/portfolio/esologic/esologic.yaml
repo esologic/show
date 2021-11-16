@@ -2,9 +2,12 @@ primary_color: '#FFA500'
 logo:
   label: Esologic logo
   path: ./esologic_logo.jpg
-description: Originally started in highschool, [esologic.com](https://www.esologic.com/)
-  is where my work is published. These projects are a selection of the most interesting,
-  most popular and best quality over the years.
+description: Personal engineering [blog](https://www.esologic.com). Catalogs the developement
+  of open-source projects, serving as the publication outlet for their releases alongside
+  occasional tutorials and teardowns. My goal is to share useful engineering techniques
+  and methods, promoting the open exchange of ideas. There's an acompanying YouTube
+  channel [here](https://www.youtube.com/user/esological). The following is a representative
+  selection of works published over the 10+ year history of the site.
 title: esologic.com
 version_number: 0
 rank: 1

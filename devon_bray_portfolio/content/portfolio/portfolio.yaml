@@ -18,6 +18,8 @@ contact_urls:
   link: https://twitter.com/eso_logic/
 - label: Linkedin
   link: https://www.linkedin.com/in/braydevon/
+- label: Resume
+  link: https://www.todoFIXME.com
 header_top_image:
   label: Sunset over Cape Cod bay.
   path: ./banner_18.jpg
