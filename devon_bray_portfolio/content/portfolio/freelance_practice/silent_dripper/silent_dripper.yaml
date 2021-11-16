@@ -3,7 +3,7 @@ description: Reads heartbeat sensor to create perfect water dropplets in total s
 domain: mixed (hardware, software)
 explanation: Client needed a device to reliably produce droplets of water for a piece
   of performance art. Because the piece was to be performed in a gallery setting,
-  little to no acoustic noise was permissable during operation, ruling out convential
+  little to no acoustic noise was permissible during operation, ruling out conventional
   DC motor pumps and solenoids. Solution was a stepper motor fitted to a [peristaltic
   pump](https://en.wikipedia.org/wiki/Peristaltic_pump) using motor drivers designed
   for making 3D printers operate quietly. Fabricated PCB to package electronics, wrote

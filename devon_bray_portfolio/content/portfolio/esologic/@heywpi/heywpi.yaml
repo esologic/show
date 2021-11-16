@@ -4,9 +4,8 @@ domain: mixed (hardware, software)
 explanation: A strand of LEDs hung in my street-facing college dorm room could color
   based on input from a public twitter account. Accepted text or images as input.
   After the color change was completed, an image of the result was replied back to
-  user. This concept eventaully grew to become [Telapush](https://telapush.com/).
-  A preeiminent experience of mine in the thrilling medium of public installation
-  art.
+  user. This concept eventually grew to become [Telapush](https://telapush.com/).
+  A preeminent experience of mine in the thrilling medium of public installation art.
 youtube_videos:
 - label: Initial publication + demonstration.
   video_id: rNKmVJ7Pi0c

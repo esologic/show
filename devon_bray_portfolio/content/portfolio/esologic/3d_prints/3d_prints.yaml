@@ -22,7 +22,8 @@ local_media:
   path: ./3d_prints_images/3d_prints_4.jpeg
 - label: Wire shelf keyboard holder. [Blog Post](https://www.esologic.com/tiny-apartment-improvement-project-wire-shelf-keyboard-holder/).
   path: ./3d_prints_images/3d_prints_5.jpeg
-- label: Wall-mounted drybox for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-drybox-for-3d-printing-with-nylon/).
+- label: Wall-mounted dry box for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-dry
+    box-for-3d-printing-with-nylon/).
   path: ./3d_prints_images/3d_prints_3.jpg
 involvement: Designed and manufactured these parts.
 mediums:

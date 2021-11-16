@@ -4,6 +4,8 @@ Frozen-Flask==0.18
 Markdown==3.3.4
 mypy==0.812
 Pillow==8.4.0
+parse==1.19.0
 pyaml==21.10.1
 pydantic==1.8.2
 pypandoc==1.6.4
+pyspellchecker==0.6.2

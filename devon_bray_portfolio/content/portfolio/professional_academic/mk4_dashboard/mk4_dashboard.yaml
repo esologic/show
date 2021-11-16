@@ -11,7 +11,7 @@ explanation: Completed during my engineering residency at [Hitchcock Managment](
   parts for everything else. Car kit didn't have a CAN bus, so had to implement speedometer
   and tachometer from first principals on bare metal. Electrical environment was very
   noisy, so hardware communication protocols had to be very robust. Manufactured two
-  complete dashboards, one made of out anodized aluminium and one out of walnut. Sucussfully
+  complete dashboards, one made of out anodized aluminium and one out of walnut. successfully
   advocated for design to be open sourced upon this project's completion.
 featured_media:
   label: Rendering of Mechanical CAD model.
@@ -23,7 +23,7 @@ local_media:
   path: ./mk4_dashboard_images/mk4_3.JPG
 - label: UI view of the aluminum and wooden dashboards.
   path: ./mk4_dashboard_images/mk4_4.JPG
-- label: Detail view of lightswitch.
+- label: Detail view of light switch.
   path: ./mk4_dashboard_images/mk4_5.JPG
 - label: Assembled electronics of both dashboards.
   path: ./mk4_dashboard_images/mk4_6.JPG
