@@ -25,7 +25,7 @@ primary_url:
   label: Blog post (models, BOM etc.).
   link: https://www.esologic.com/a-3d-printed-solution-for-storing-a-valve-index-on-a-wire-shelf/
 secondary_urls:
-- label: Thingiverse
+- label: Thingiverse.
   link: https://www.thingiverse.com/thing:4370584
 size: small
 team_size: solo

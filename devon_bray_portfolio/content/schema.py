@@ -1,6 +1,8 @@
 """
 Describes the data that make up the portfolio.
 """
+
+import string
 import typing as t
 from datetime import date
 from enum import Enum, IntEnum
@@ -8,9 +10,12 @@ from pathlib import Path
 from typing import List, Optional
 
 from pyaml import yaml
-from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError, validator
+from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError
 from pydantic.color import Color
+from spellchecker import SpellChecker
 from typing_extensions import TypedDict
+
+GLOBAL_CHECKER = SpellChecker()
 
 
 class VersionNumber(IntEnum):
@@ -88,6 +93,74 @@ class TeamSize(str, Enum):
     large_group = "large group"
 
 
+def clean_and_split(value: str) -> t.List[str]:
+    """
+    Cleans up the given label or entry or description, returns the resulting words for
+    spell checking. Tries to intelligently replace punctuation.
+    :return: List of words in a given piece of text.
+    """
+
+    become_spaces = ["-", "/"]
+    delete = [character for character in string.punctuation if character not in become_spaces]
+    deleted = value.translate({ord(character): "" for character in delete})
+    spaced = deleted.translate(str.maketrans("".join(become_spaces), " " * len(become_spaces)))
+    lower_case = spaced.lower()
+
+    return lower_case.split(" ")
+
+
+class ValidatedString(str):
+    """
+    Pydantic runs __get_validators__ upon loading a string.
+    This:
+        * Makes sure the input ends with a period.
+        * Warns any words that could potentially be misspelled.
+    """
+
+    @classmethod
+    def __get_validators__(  # type: ignore[misc]
+        cls: "ValidatedString",
+    ) -> t.Iterator[t.Callable[[str], str]]:
+        # one or more validators may be yielded which will be called in the
+        # order to validate the input, each validator will receive as an input
+        # the value returned from the previous validator
+        yield from [cls.ends_with_period, cls.warn_on_misspelling]
+
+    def ends_with_period(  # pylint: disable=no-self-argument,no-self-use
+        cls: "ValidatedString", value: str
+    ) -> str:
+        """
+        Individual pieces of text must end with a period.
+        :param value: To check.
+        :return: `value` if there are no errors.
+        :raises: `ValueError` if the given check fails.
+        """
+
+        if not value.endswith("."):
+            raise ValueError("Descriptions must end with a period!")
+
+        return value
+
+    def warn_on_misspelling(  # pylint: disable=no-self-argument,no-self-use
+        cls: "ValidatedString",
+        value: str,
+    ) -> str:
+        """
+        Logs potential spelling mistakes.
+        :param value: To check.
+        :return: `value`.
+        """
+
+        # find those words that may be misspelled
+        misspelled = GLOBAL_CHECKER.unknown(clean_and_split(value))
+
+        for word in misspelled:
+            # TODO: want logger here eventually.
+            print(f"misspelling? [{word}] in [{value}]")
+
+        return value
+
+
 class LocalMedia(TypedDict):
     """
     Describes a piece of media that is local to the repository ie NOT on the web.
@@ -96,7 +169,7 @@ class LocalMedia(TypedDict):
     """
 
     # Should be short, a description of what is in the piece of media.
-    label: str
+    label: ValidatedString
 
     # Path relative to the YAML referencing it.
     path: Path
@@ -109,7 +182,7 @@ class Link(TypedDict):
     """
 
     # A sentence saying where the link is going. Ex: "This project was featured on RaspberryPi.org"
-    label: str
+    label: ValidatedString
 
     # The actual link.
     link: HttpUrl
@@ -121,7 +194,7 @@ class YouTubeVideo(TypedDict):
     """
 
     # A sentence describing what the video is of.
-    label: str
+    label: ValidatedString
 
     # The YouTube video ID, used later to create an iframe.
     video_id: str
@@ -141,11 +214,11 @@ class SerializedEntry(BaseModel):
     title: str
 
     # A short description of the project, should be one or two sentences at the most.
-    description: str
+    description: ValidatedString
 
     # Between three and five sentences, combined with the `description`, should give reader a very
     # complete idea as to what the project was about.
-    explanation: str
+    explanation: ValidatedString
 
     # Best image (piece of media) representation of the entry. Will be featured on the overview
     # page and on the top of the entry page.
@@ -183,26 +256,10 @@ class SerializedEntry(BaseModel):
     # Explanation as to my level of involvement on the project.
     # Team lead, solo developer, group of people etc.
     # One or two sentences at most.
-    involvement: str
+    involvement: ValidatedString
 
     # See type docs.
     mediums: List[Medium]
-
-    # TODO I also want this for labels on local media/videos
-    @validator("description")
-    def ends_with_period(  # pylint: disable=no-self-argument,no-self-use
-        cls: "SerializedEntry", description: str
-    ) -> str:
-        """
-        Enforced on read rather than being added later.
-        :param description: To check.
-        :return: Validated, raises otherwise.
-        """
-
-        if not description.endswith("."):
-            raise ValueError("Descriptions must end with a period!")
-
-        return description
 
 
 class SerializedSectionDescription(BaseModel):
@@ -217,7 +274,7 @@ class SerializedSectionDescription(BaseModel):
     title: str
 
     # A short description of the section, should be one or two sentences at the most.
-    description: str
+    description: ValidatedString
 
     # See type docs.
     version_number: VersionNumber
@@ -242,14 +299,14 @@ class SerializedPortfolioDescription(BaseModel):
     title: str
 
     # Can add a note about why projects were selected, probably want to go over nature of day job
-    description: str
+    description: ValidatedString
 
     # See type docs.
     version_number: VersionNumber
 
-    explanation: str
+    explanation: ValidatedString
 
-    conclusion: str
+    conclusion: ValidatedString
 
     email: EmailStr
 

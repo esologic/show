@@ -41,15 +41,15 @@ primary_url:
   link: https://www.esologic.com/blinkbox/
 size: medium
 secondary_urls:
-- label: Thingiverse
+- label: Thingiverse.
   link: https://www.thingiverse.com/thing:3014213
-- label: Github (source code, ecad/mcad)
+- label: Github (source code, ecad/mcad).
   link: https://github.com/esologic/blinkbox
 team_size: solo
 title: Blinkbox
 version_number: 0
 press_urls:
-- label: 'BlinkBox: Debugging Tool For Addressable LEDs (Hackaday)'
+- label: 'BlinkBox: Debugging Tool For Addressable LEDs (Hackaday).'
   link: https://hackaday.com/2018/07/25/blinkbox-debugging-tool-for-addressable-leds/
-- label: Ramp up programmable LED troubleshooting with the BlinkBox (Arduino Blog)
+- label: Ramp up programmable LED troubleshooting with the BlinkBox (Arduino Blog).
   link: https://blog.arduino.cc/2018/07/23/ramp-up-programmable-led-troubleshooting-with-the-blinkbox/

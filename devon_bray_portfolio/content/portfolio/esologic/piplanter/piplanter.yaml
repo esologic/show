@@ -6,13 +6,13 @@ explanation: During the summer break before heading off to college, I wrote a co
   of some tomato plants. This project ballooned in scope, a twitter integration was
   added to post temperature and soil moisture visualizations automatically. Encouraged
   by the positive feedback given to the development log, I applied for grant funding
-  through the Kurt Geisller Foundation for Youth  Achivement. Grant in hand, research
+  through the Kurt Geissler Foundation for Youth  achievement. Grant in hand, research
   continued alongside my undergraduate responsibilities at WPI. The grant also demonstrated
   my bona fides to a Professor of mine who graciously allowed me to set up shop in
   the corner of his basement lab in the Physics department. It was there where PiPlanter
-  2 was born, a mother/daughter confguration that used the Pi for high level work
+  2 was born, a mother/daughter configuration that used the Pi for high level work
   and an Arduino for interfacing with the sensors and controlling lights/pumps etc.
-  This second version also saw the integration of a timelapse camera and rudmentary
+  This second version also saw the integration of a timelapse camera and rudimentary
   computer vision to gauge plant health. There are still echos of this project in
   the work I do today, this was one of my first experiences walking along the edge
   between of hardware and software.
@@ -83,11 +83,11 @@ team_size: solo
 title: PiPlanter
 version_number: 0
 press_urls:
-- label: 'PiPlanter: a plant growth monitor (Raspberry Pi Foundation)'
+- label: 'PiPlanter: a plant growth monitor (Raspberry Pi Foundation).'
   link: https://www.raspberrypi.com/news/piplanter-a-plant-growth-monitor/
-- label: Raspberry Pi Automates Your Tomato Farm (Hackaday)
+- label: Raspberry Pi Automates Your Tomato Farm (Hackaday).
   link: https://hackaday.com/2013/07/01/raspberry-pi-automates-your-tomato-farm/
-- label: PiPlanter 2 (Adafruit)
+- label: PiPlanter 2 (Adafruit).
   link: https://blog.adafruit.com/2014/10/03/piplanter-2-piday-raspberrypi-raspberry_pi-2/
-- label: Students win Giessler Foundation grants for independent projects (WPI News)
+- label: Students win Giessler Foundation grants for independent projects (WPI News).
   link: https://www.wpi.edu/news/giessler-foundation

@@ -3,7 +3,7 @@ description: Sketch to be able to measure multiple periodic squarewaves using an
 domain: mixed (hardware, software)
 explanation: This simple project was completed very quickly and has served me well
   over the years. A simple Arduino sketch that uses interrupts to measure the frequencies
-  of singals coming in on digital pins. This code has been recycled a number of times
+  of signals coming in on digital pins. This code has been recycled a number of times
   and is a great example of the strenghts of timer programming typically found on
   embedded devices.
 featured_media:

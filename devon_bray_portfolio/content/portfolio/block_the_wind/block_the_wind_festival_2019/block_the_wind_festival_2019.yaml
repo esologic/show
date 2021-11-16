@@ -28,7 +28,7 @@ youtube_videos:
 - label: Primary Trailer.
   video_id: i1IXb80L-Zc
 involvement: Head organizer responsible for leading the booking, planning and organizing
-  of the event. I'm the creator of media gallery items unless otherwise specefied.
+  of the event. I'm the creator of media gallery items unless otherwise specified.
 mediums:
 - photography
 - events
@@ -36,7 +36,7 @@ secondary_urls:
 - label: Primary promotional video.
   link: https://www.instagram.com/p/By3A0QKArpK/
 primary_url:
-  label: Post on www.blockthewindfestival.com
+  label: www.blockthewindfestival.com summary post.
   link: https://www.blockthewindfestival.com/2019-1
 size: medium
 team_size: large group
