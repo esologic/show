@@ -18,6 +18,8 @@ local_media:
   path: ./champ_images/champ_3.JPG
 - label: Gripper demonstration.
   path: ./champ_images/champ_4.JPG
+- label: Loaded abodmen.
+  path: ./champ_images/champ_6.png
 - label: Poster.
   path: ./champ_images/champ_5.jpg
 youtube_videos:
