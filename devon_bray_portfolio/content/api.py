@@ -269,7 +269,7 @@ def _render_local_media(
     return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
 
-def _read_entry(
+def _read_entry_from_disk(
     yaml_path: Path, media_directory: Path, primary_color: str, top_image: RenderedLocalMedia
 ) -> RenderedEntryWithoutNeighbors:
     """
@@ -370,7 +370,7 @@ def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
     yield from [path for path in directory.iterdir() if path.is_dir()]
 
 
-def _read_section(
+def _read_section_from_disk(
     section_directory: Path, static_content_directory: Path, top_image: RenderedLocalMedia
 ) -> SectionIncompleteEntries:
     """
@@ -393,7 +393,9 @@ def _read_section(
         description=markdown(section_description.description),
         title=section_description.title,
         entries=[
-            _read_entry(_find_yaml(path), static_content_directory, primary_color, top_image)
+            _read_entry_from_disk(
+                _find_yaml(path), static_content_directory, primary_color, top_image
+            )
             for path in _directories_in_directory(section_directory)
         ],
         primary_color=primary_color,
@@ -466,7 +468,7 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
 
     sections = sorted(
         [
-            _read_section(
+            _read_section_from_disk(
                 section_directory,
                 static_content_directory,
                 _render_local_media(
