@@ -74,6 +74,7 @@ class RenderedEntryWithoutNeighbors(NamedTuple):
     primary_url: RenderedLink
     secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
     press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    completion_date: date
     completion_date_verbose: str
     completion_year: str
     team_size: str
@@ -101,6 +102,7 @@ class RenderedEntry(NamedTuple):
     primary_url: RenderedLink
     secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
     press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    completion_date: date
     completion_date_verbose: str
     completion_year: str
     team_size: str
@@ -319,6 +321,7 @@ def _read_entry_from_disk(
         primary_url=_render_link(serialized_entry.primary_url),
         secondary_urls=_render_link_list(serialized_entry.secondary_urls),
         press_urls=_render_link_list(serialized_entry.press_urls),
+        completion_date=serialized_entry.completion_date,
         completion_date_verbose=_render_date(serialized_entry.completion_date, verbose=True),
         completion_year=_render_date(serialized_entry.completion_date, verbose=False),
         team_size=string.capwords(serialized_entry.team_size.value),
@@ -392,12 +395,18 @@ def _read_section_from_disk(
     return SectionIncompleteEntries(
         description=markdown(section_description.description),
         title=section_description.title,
-        entries=[
-            _read_entry_from_disk(
-                _find_yaml(path), static_content_directory, primary_color, top_image
+        entries=list(
+            sorted(
+                [
+                    _read_entry_from_disk(
+                        _find_yaml(path), static_content_directory, primary_color, top_image
+                    )
+                    for path in _directories_in_directory(section_directory)
+                ],
+                key=lambda entry: entry.completion_date,
+                reverse=True,
             )
-            for path in _directories_in_directory(section_directory)
-        ],
+        ),
         primary_color=primary_color,
         logo=_render_local_media(
             static_content_directory,
@@ -437,6 +446,7 @@ def _fill_entry_neighbors(
         primary_url=entry.primary_url,
         secondary_urls=entry.secondary_urls,
         press_urls=entry.press_urls,
+        completion_date=entry.completion_date,
         completion_date_verbose=entry.completion_date_verbose,
         completion_year=entry.completion_year,
         team_size=entry.team_size,
