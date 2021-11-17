@@ -2,7 +2,7 @@
 Interface through which other components of this application access the content of the portfolio.
 TODO: There's a bit of redundancy, and a little more inheritance could be helpful.
 """
-
+import itertools
 import string
 import typing as t
 from datetime import date
@@ -67,21 +67,25 @@ class RenderedEntry(NamedTuple):
     description: str
     explanation: str
     featured_media: RenderedLocalMedia
-    local_media: t.Optional[t.List[RenderedLocalMedia]]
-    youtube_videos: t.Optional[t.List[RenderedYouTubeVideo]]
+    local_media: t.Optional[t.Tuple[RenderedLocalMedia, ...]]
+    youtube_videos: t.Optional[t.Tuple[RenderedYouTubeVideo, ...]]
     size: str
     domain: str
     primary_url: RenderedLink
-    secondary_urls: t.Optional[t.List[RenderedLink]]
-    press_urls: t.Optional[t.List[RenderedLink]]
+    secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
     completion_date_verbose: str
     completion_year: str
     team_size: str
     involvement: str
-    mediums: t.List[str]
+    mediums: t.Tuple[str, ...]
     primary_color: str
     favicon_path: str
     top_image: RenderedLocalMedia
+
+    # Filled when the section is rendered
+    previous_entry: t.Optional["RenderedEntry"] = None
+    next_entry: t.Optional["RenderedEntry"] = None
 
 
 class Section(NamedTuple):
@@ -138,7 +142,7 @@ def _render_date(d: date, verbose: bool) -> str:
     return d.strftime("%B of %Y") if verbose else d.strftime("%Y")
 
 
-def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
+def _render_mediums(mediums: t.List[schema.Medium]) -> t.Tuple[str, ...]:
     """
     Makes sure capitalization, and format etc are uniform.
     Implementation is a bit ugly, this could probably be done with a single regex if needed.
@@ -153,18 +157,20 @@ def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
 
         return medium
 
-    return sorted([convert(medium) for medium in [string.capwords(medium) for medium in mediums]])
+    return tuple(
+        sorted([convert(medium) for medium in [string.capwords(medium) for medium in mediums]])
+    )
 
 
 def _render_link_list(
     link_list: t.Optional[t.List[schema.Link]],
-) -> t.Optional[t.List[RenderedLink]]:
+) -> t.Optional[t.Tuple[RenderedLink, ...]]:
     """
     Helper function, renders a list of links.
     :param link_list: Links to render.
     :return: Rendered links.
     """
-    return [_render_link(url) for url in link_list] if link_list else None
+    return tuple(_render_link(url) for url in link_list) if link_list else None
 
 
 def _render_local_media(
@@ -238,10 +244,12 @@ def _read_entry(
 
     if serialized_entry.local_media is not None:
 
-        with Pool() as p:
-            local_media = p.map(
-                media_processor,
-                serialized_entry.local_media,
+        with Pool(processes=5) as p:
+            local_media = tuple(
+                p.map(
+                    media_processor,
+                    serialized_entry.local_media,
+                )
             )
     else:
         local_media = None
@@ -255,10 +263,12 @@ def _read_entry(
         explanation=markdown(serialized_entry.explanation),
         featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
-        youtube_videos=[
-            RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
-            for video in serialized_entry.youtube_videos
-        ]
+        youtube_videos=tuple(
+            [
+                RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
+                for video in serialized_entry.youtube_videos
+            ]
+        )
         if serialized_entry.youtube_videos
         else None,
         size=serialized_entry.size.value,
@@ -355,6 +365,43 @@ def _read_section(
     )
 
 
+def _fill_entry_neighbors(
+    entry: RenderedEntry, previous_next: t.Tuple[RenderedEntry, RenderedEntry]
+) -> RenderedEntry:
+    """
+
+    :param entry:
+    :param previous_next:
+    :return:
+    """
+    previous_entry, next_entry = previous_next
+
+    return RenderedEntry(
+        slug=entry.slug,
+        title=entry.title,
+        description=entry.description,
+        explanation=entry.explanation,
+        featured_media=entry.featured_media,
+        local_media=entry.local_media,
+        youtube_videos=entry.youtube_videos,
+        size=entry.size,
+        domain=entry.domain,
+        primary_url=entry.primary_url,
+        secondary_urls=entry.secondary_urls,
+        press_urls=entry.press_urls,
+        completion_date_verbose=entry.completion_date_verbose,
+        completion_year=entry.completion_year,
+        team_size=entry.team_size,
+        involvement=entry.involvement,
+        mediums=entry.mediums,
+        primary_color=entry.primary_color,
+        favicon_path=entry.favicon_path,
+        top_image=entry.top_image,
+        previous_entry=previous_entry,
+        next_entry=next_entry,
+    )
+
+
 def discover_portfolio(sections_directory: Path, static_content_directory: Path) -> Portfolio:
     """
     Loads the portfolio as it's represented on disk (as a collection of directories and images and
@@ -371,26 +418,54 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         portfolio_description_path, schema.SerializedPortfolioDescription
     )
 
+    sections = sorted(
+        [
+            _read_section(
+                section_directory,
+                static_content_directory,
+                _render_local_media(
+                    static_content_directory,
+                    portfolio_description_path,
+                    (4000, 4000),
+                    None,
+                    portfolio_description.return_image,
+                ),
+            )
+            for section_directory in _directories_in_directory(sections_directory)
+        ],
+        key=lambda section: section.rank,
+    )
+
+    entries = list(itertools.chain.from_iterable([section.entries for section in sections]))
+
+    def at_index(i):
+        if i < 0:
+            return None
+        try:
+            return entries[i]
+        except IndexError:
+            return None
+
+    lookup = {
+        entry: (at_index(index - 1), at_index(index + 1)) for index, entry in enumerate(entries)
+    }
+
+    sections_with_entry_neighbors = [
+        Section(
+            title=section.title,
+            description=section.description,
+            entries=[_fill_entry_neighbors(entry, lookup[entry]) for entry in section.entries],
+            primary_color=section.primary_color,
+            logo=section.logo,
+            rank=section.rank,
+        )
+        for section in sections
+    ]
+
     return Portfolio(
         title=portfolio_description.title,
         description=markdown(portfolio_description.description),
-        sections=sorted(
-            [
-                _read_section(
-                    section_directory,
-                    static_content_directory,
-                    _render_local_media(
-                        static_content_directory,
-                        portfolio_description_path,
-                        (4000, 4000),
-                        None,
-                        portfolio_description.return_image,
-                    ),
-                )
-                for section_directory in _directories_in_directory(sections_directory)
-            ],
-            key=lambda section: section.rank,
-        ),
+        sections=sections_with_entry_neighbors,
         conclusion=markdown(portfolio_description.conclusion),
         contact_urls=_render_link_list(portfolio_description.contact_urls),
         email=portfolio_description.email,

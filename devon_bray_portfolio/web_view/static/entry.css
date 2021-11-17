@@ -7,13 +7,20 @@ body {
     color: white;
 }
 
-.back-button {
-  position: relative;
-  text-align: center;
-  color: white;
+.nav {
+    display: flex;
+    width: 100%
 }
 
-.back-button img {
+.nav-button {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.nav-button img {
     width: 100%;
     display: block;
     object-fit: cover;
@@ -22,15 +29,14 @@ body {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
 }
 
-
 /* Centered text */
-.back-button-text {
+.nav-button-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-style: italic;
-    font-weight: lighter;
+    text-shadow: 2px 2px 1rem #000000, 2px 2px 0.5rem #000000, 2px 2px 0.25rem #000000, 1px 1px 1px #000000;
 }
 
 .entry-container {
