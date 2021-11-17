@@ -2,7 +2,7 @@
 Interface through which other components of this application access the content of the portfolio.
 TODO: There's a bit of redundancy, and a little more inheritance could be helpful.
 """
-
+import itertools
 import string
 import typing as t
 from datetime import date
@@ -52,7 +52,7 @@ class RenderedYouTubeVideo(NamedTuple):
     video_id: str
 
 
-class RenderedEntry(NamedTuple):
+class RenderedEntryWithoutNeighbors(NamedTuple):
     """
     Derived from the `SerializedEntry` TD in `schema.py`.
     All string fields, this structure will be directly input into the jinja html template
@@ -67,21 +67,70 @@ class RenderedEntry(NamedTuple):
     description: str
     explanation: str
     featured_media: RenderedLocalMedia
-    local_media: t.Optional[t.List[RenderedLocalMedia]]
-    youtube_videos: t.Optional[t.List[RenderedYouTubeVideo]]
+    local_media: t.Optional[t.Tuple[RenderedLocalMedia, ...]]
+    youtube_videos: t.Optional[t.Tuple[RenderedYouTubeVideo, ...]]
     size: str
     domain: str
     primary_url: RenderedLink
-    secondary_urls: t.Optional[t.List[RenderedLink]]
-    press_urls: t.Optional[t.List[RenderedLink]]
+    secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
     completion_date_verbose: str
     completion_year: str
     team_size: str
     involvement: str
-    mediums: t.List[str]
+    mediums: t.Tuple[str, ...]
     primary_color: str
     favicon_path: str
     top_image: RenderedLocalMedia
+
+
+class RenderedEntry(NamedTuple):
+    """
+    Adds the next and previous items.
+    """
+
+    slug: str  # not present in `SerializedEntry`. This is set to the name of the source yaml file.
+    title: str
+    description: str
+    explanation: str
+    featured_media: RenderedLocalMedia
+    local_media: t.Optional[t.Tuple[RenderedLocalMedia, ...]]
+    youtube_videos: t.Optional[t.Tuple[RenderedYouTubeVideo, ...]]
+    size: str
+    domain: str
+    primary_url: RenderedLink
+    secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    completion_date_verbose: str
+    completion_year: str
+    team_size: str
+    involvement: str
+    mediums: t.Tuple[str, ...]
+    primary_color: str
+    favicon_path: str
+    top_image: RenderedLocalMedia
+
+    # Filled when the section is rendered
+    previous_entry: t.Optional["RenderedEntryWithoutNeighbors"] = None
+    next_entry: t.Optional["RenderedEntryWithoutNeighbors"] = None
+
+
+class SectionIncompleteEntries(NamedTuple):
+    """
+    Composed of a `SerializedSectionDescription` and then a list of `SerializedEntry` TDs from
+    `schema.py`.
+    All string fields, this structure will be directly input into the jinja html template
+    by flask.
+    Contains the entries that make up a whole section of the portfolio. Ex: Telapush, esologic
+    Note: These could be written by hand but that would kind of complicate things.
+    """
+
+    title: str
+    description: str
+    entries: t.List[RenderedEntryWithoutNeighbors]
+    primary_color: str
+    logo: RenderedLocalMedia
+    rank: int
 
 
 class Section(NamedTuple):
@@ -112,7 +161,7 @@ class Portfolio(NamedTuple):
     explanation: str
     conclusion: str
     sections: t.List[Section]
-    contact_urls: t.List[RenderedLink]
+    contact_urls: t.Tuple[RenderedLink, ...]
     email: str
     header_top_image: RenderedLocalMedia
     header_bottom_image: RenderedLocalMedia
@@ -138,7 +187,7 @@ def _render_date(d: date, verbose: bool) -> str:
     return d.strftime("%B of %Y") if verbose else d.strftime("%Y")
 
 
-def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
+def _render_mediums(mediums: t.List[schema.Medium]) -> t.Tuple[str, ...]:
     """
     Makes sure capitalization, and format etc are uniform.
     Implementation is a bit ugly, this could probably be done with a single regex if needed.
@@ -153,18 +202,20 @@ def _render_mediums(mediums: t.List[schema.Medium]) -> t.List[str]:
 
         return medium
 
-    return sorted([convert(medium) for medium in [string.capwords(medium) for medium in mediums]])
+    return tuple(
+        sorted([convert(medium) for medium in [string.capwords(medium) for medium in mediums]])
+    )
 
 
 def _render_link_list(
     link_list: t.Optional[t.List[schema.Link]],
-) -> t.Optional[t.List[RenderedLink]]:
+) -> t.Optional[t.Tuple[RenderedLink, ...]]:
     """
     Helper function, renders a list of links.
     :param link_list: Links to render.
     :return: Rendered links.
     """
-    return [_render_link(url) for url in link_list] if link_list else None
+    return tuple(_render_link(url) for url in link_list) if link_list else None
 
 
 def _render_local_media(
@@ -218,9 +269,9 @@ def _render_local_media(
     return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
 
-def _read_entry(
+def _read_entry_from_disk(
     yaml_path: Path, media_directory: Path, primary_color: str, top_image: RenderedLocalMedia
-) -> RenderedEntry:
+) -> RenderedEntryWithoutNeighbors:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
     different fields then return the resulting NT.
@@ -238,27 +289,29 @@ def _read_entry(
 
     if serialized_entry.local_media is not None:
 
-        with Pool() as p:
-            local_media = p.map(
-                media_processor,
-                serialized_entry.local_media,
+        with Pool(processes=5) as p:
+            local_media = tuple(
+                p.map(
+                    media_processor,
+                    serialized_entry.local_media,
+                )
             )
     else:
         local_media = None
 
     slug = yaml_path.with_suffix("").name
 
-    return RenderedEntry(
+    return RenderedEntryWithoutNeighbors(
         slug=slug,
         title=serialized_entry.title,
         description=serialized_entry.description,
         explanation=markdown(serialized_entry.explanation),
         featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
-        youtube_videos=[
+        youtube_videos=tuple(
             RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
             for video in serialized_entry.youtube_videos
-        ]
+        )
         if serialized_entry.youtube_videos
         else None,
         size=serialized_entry.size.value,
@@ -317,9 +370,9 @@ def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
     yield from [path for path in directory.iterdir() if path.is_dir()]
 
 
-def _read_section(
+def _read_section_from_disk(
     section_directory: Path, static_content_directory: Path, top_image: RenderedLocalMedia
-) -> Section:
+) -> SectionIncompleteEntries:
     """
     Given a `section_directory` (so a directory with a top-level yaml, and a bunch of directories
     that each describe a portfolio entry), load the contents as a Section, modifying the contents
@@ -336,11 +389,13 @@ def _read_section(
 
     primary_color = str(section_description.primary_color)
 
-    return Section(
+    return SectionIncompleteEntries(
         description=markdown(section_description.description),
         title=section_description.title,
         entries=[
-            _read_entry(_find_yaml(path), static_content_directory, primary_color, top_image)
+            _read_entry_from_disk(
+                _find_yaml(path), static_content_directory, primary_color, top_image
+            )
             for path in _directories_in_directory(section_directory)
         ],
         primary_color=primary_color,
@@ -352,6 +407,46 @@ def _read_section(
             section_description.logo,
         ),
         rank=section_description.rank,
+    )
+
+
+def _fill_entry_neighbors(
+    entry: RenderedEntryWithoutNeighbors,
+    previous_next: t.Tuple[
+        t.Optional[RenderedEntryWithoutNeighbors], t.Optional[RenderedEntryWithoutNeighbors]
+    ],
+) -> RenderedEntry:
+    """
+    Promotes `RenderedEntry` it's two neighbors.
+    :param entry: Entry to modify.
+    :param previous_next: Neighbors.
+    :return: new NT.
+    """
+    previous_entry, next_entry = previous_next
+
+    return RenderedEntry(
+        slug=entry.slug,
+        title=entry.title,
+        description=entry.description,
+        explanation=entry.explanation,
+        featured_media=entry.featured_media,
+        local_media=entry.local_media,
+        youtube_videos=entry.youtube_videos,
+        size=entry.size,
+        domain=entry.domain,
+        primary_url=entry.primary_url,
+        secondary_urls=entry.secondary_urls,
+        press_urls=entry.press_urls,
+        completion_date_verbose=entry.completion_date_verbose,
+        completion_year=entry.completion_year,
+        team_size=entry.team_size,
+        involvement=entry.involvement,
+        mediums=entry.mediums,
+        primary_color=entry.primary_color,
+        favicon_path=entry.favicon_path,
+        top_image=entry.top_image,
+        previous_entry=previous_entry,
+        next_entry=next_entry,
     )
 
 
@@ -371,26 +466,64 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         portfolio_description_path, schema.SerializedPortfolioDescription
     )
 
+    sections = sorted(
+        [
+            _read_section_from_disk(
+                section_directory,
+                static_content_directory,
+                _render_local_media(
+                    static_content_directory,
+                    portfolio_description_path,
+                    (4000, 4000),
+                    None,
+                    portfolio_description.return_image,
+                ),
+            )
+            for section_directory in _directories_in_directory(sections_directory)
+        ],
+        key=lambda section: section.rank,
+    )
+
+    entries: t.List[RenderedEntryWithoutNeighbors] = list(
+        itertools.chain.from_iterable([section.entries for section in sections])
+    )
+
+    def at_index(i: int) -> t.Optional[RenderedEntryWithoutNeighbors]:
+        """
+        Biz logic for getting neighbors.
+        :param i: Index
+        :return: The entry or None if there shouldn't be an entry.
+        """
+        if i < 0:
+            return None
+        try:
+            return entries[i]
+        except IndexError:
+            return None
+
+    lookup: t.Dict[
+        RenderedEntryWithoutNeighbors,
+        t.Tuple[
+            t.Optional[RenderedEntryWithoutNeighbors], t.Optional[RenderedEntryWithoutNeighbors]
+        ],
+    ] = {entry: (at_index(index - 1), at_index(index + 1)) for index, entry in enumerate(entries)}
+
+    sections_with_entry_neighbors = [
+        Section(
+            title=section.title,
+            description=section.description,
+            entries=[_fill_entry_neighbors(entry, lookup[entry]) for entry in section.entries],
+            primary_color=section.primary_color,
+            logo=section.logo,
+            rank=section.rank,
+        )
+        for section in sections
+    ]
+
     return Portfolio(
         title=portfolio_description.title,
         description=markdown(portfolio_description.description),
-        sections=sorted(
-            [
-                _read_section(
-                    section_directory,
-                    static_content_directory,
-                    _render_local_media(
-                        static_content_directory,
-                        portfolio_description_path,
-                        (4000, 4000),
-                        None,
-                        portfolio_description.return_image,
-                    ),
-                )
-                for section_directory in _directories_in_directory(sections_directory)
-            ],
-            key=lambda section: section.rank,
-        ),
+        sections=sections_with_entry_neighbors,
         conclusion=markdown(portfolio_description.conclusion),
         contact_urls=_render_link_list(portfolio_description.contact_urls),
         email=portfolio_description.email,

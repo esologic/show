@@ -8,9 +8,9 @@ explanation: An ancient project, one of the very first published on the blog. Us
   rush of comments, and feedback that resulted from this post is probably what lead
   to me continuing to publish my work in this way for so long. Little did I know at
   the time, but both the Raspberry Pi and Python would remain a major part of my life
-  for years to come. It's probably inappropriate to include such an old project
-  in a portfolio like this but this work will always have a place in my heart, and
-  is the earliest example of my affinity for mixing disperate inputs and outputs.
+  for years to come. It's probably inappropriate to include such an old project in
+  a portfolio like this but this work will always have a place in my heart, and is
+  the earliest example of my affinity for mixing disperate inputs and outputs.
 featured_media:
   label: Code snippet.
   path: ./google_alarm_images/google_alarm_1.jpeg
@@ -28,5 +28,5 @@ primary_url:
   link: https://www.esologic.com/raspberry-pi-as-a-google-calender-alarm-clock/
 size: small
 team_size: solo
-title: Raspberry Pi as a Google Calendar Alarm Clock
+title: Raspberry Pi Google Calendar Alarm Clock
 version_number: 0
