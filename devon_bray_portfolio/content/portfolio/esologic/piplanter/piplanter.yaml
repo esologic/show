@@ -91,3 +91,4 @@ press_urls:
   link: https://blog.adafruit.com/2014/10/03/piplanter-2-piday-raspberrypi-raspberry_pi-2/
 - label: Students win Giessler Foundation grants for independent projects (WPI News).
   link: https://www.wpi.edu/news/giessler-foundation
+visible: true

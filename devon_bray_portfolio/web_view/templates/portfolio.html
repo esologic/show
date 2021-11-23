@@ -37,11 +37,6 @@
         <div class="section-header">
             <h1 class="section-container-item">{{ section.title }}</h1>
             {{ section.description | safe }}
-            <img
-                src="{{ url_for('static', filename=section.logo.path) }}"
-                class="section-container-item"
-                alt="{{ section.logo.label }}"
-            >
         </div>
         <div class="container">
             {% for entry in section.entries %}

@@ -81,6 +81,7 @@ class Medium(str, Enum):
     photography = "photography"
     events = "events"
     apparel = "apparel"
+    artificial_intelligence = "artificial intelligence"
 
 
 class TeamSize(str, Enum):
@@ -260,6 +261,9 @@ class SerializedEntry(BaseModel):
 
     # See type docs.
     mediums: List[Medium]
+
+    # If True, the item will be listed in the portfolio, if False it will be omitted.
+    visible: bool
 
 
 class SerializedSectionDescription(BaseModel):

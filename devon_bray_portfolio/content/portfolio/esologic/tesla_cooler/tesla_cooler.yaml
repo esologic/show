@@ -56,3 +56,4 @@ version_number: 0
 press_urls:
 - label: 3d-printed Fan Mount Keeps Server GPU Cool In Desktop Case (Hackaday).
   link: https://hackaday.com/2021/11/06/3d-printed-fan-mount-keeps-server-gpu-cool-in-desktop-case/
+visible: true

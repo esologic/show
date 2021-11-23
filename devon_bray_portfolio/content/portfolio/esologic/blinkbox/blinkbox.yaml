@@ -53,3 +53,4 @@ press_urls:
   link: https://hackaday.com/2018/07/25/blinkbox-debugging-tool-for-addressable-leds/
 - label: Ramp up programmable LED troubleshooting with the BlinkBox (Arduino Blog).
   link: https://blog.arduino.cc/2018/07/23/ramp-up-programmable-led-troubleshooting-with-the-blinkbox/
+visible: true
