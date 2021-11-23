@@ -11,10 +11,22 @@ I should be able to update the style and presentation of the portfolio without h
 
 ## Usage
 
+To build static files, run:
+
+```bash
+python main.py
+```
+
 To serve the static files, in the `build` directory, run:
 
 ```bash
 python3 -m http.server
+```
+
+To use the flask server, with the `venv` activated, run:
+
+```bash
+ python -m devon_bray_portfolio.web_view.app
 ```
 
 ## Getting Started
