@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import NamedTuple
 
 from markdown import markdown
-from PIL import Image, ImageSequence
+from PIL import Image, ImageOps, ImageSequence
 
 from devon_bray_portfolio.content import schema
 
@@ -74,6 +74,7 @@ class RenderedEntryWithoutNeighbors(NamedTuple):
     primary_url: RenderedLink
     secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
     press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    completion_date: date
     completion_date_verbose: str
     completion_year: str
     team_size: str
@@ -82,6 +83,7 @@ class RenderedEntryWithoutNeighbors(NamedTuple):
     primary_color: str
     favicon_path: str
     top_image: RenderedLocalMedia
+    visible: bool
 
 
 class RenderedEntry(NamedTuple):
@@ -101,6 +103,7 @@ class RenderedEntry(NamedTuple):
     primary_url: RenderedLink
     secondary_urls: t.Optional[t.Tuple[RenderedLink, ...]]
     press_urls: t.Optional[t.Tuple[RenderedLink, ...]]
+    completion_date: date
     completion_date_verbose: str
     completion_year: str
     team_size: str
@@ -109,6 +112,7 @@ class RenderedEntry(NamedTuple):
     primary_color: str
     favicon_path: str
     top_image: RenderedLocalMedia
+    visible: bool
 
     # Filled when the section is rendered
     previous_entry: t.Optional["RenderedEntryWithoutNeighbors"] = None
@@ -236,35 +240,35 @@ def _render_local_media(
     name = local_media["path"].name if output_name is None else output_name
     output_path = media_directory.joinpath(name)
 
-    if not output_path.exists():
+    image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
-        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+    if getattr(image, "is_animated", False):
 
-        if getattr(image, "is_animated", False):
+        frames = ImageSequence.Iterator(image)
 
-            frames = ImageSequence.Iterator(image)
+        # Wrap on-the-fly thumbnail generator
+        def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
+            for frame in f:
+                thumbnail = frame.copy()
+                thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                yield thumbnail
 
-            # Wrap on-the-fly thumbnail generator
-            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-                for frame in f:
-                    thumbnail = frame.copy()
-                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                    yield thumbnail
+        frames = thumbnails(frames)
 
-            frames = thumbnails(frames)
+        # Save output
+        om = next(frames)  # Handle first frame separately
+        om.info = image.info  # Copy sequence info
+        om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
+    else:
+        respect_rotation = ImageOps.exif_transpose(image)
+        if respect_rotation.mode == "RGBA":
+            background = Image.new("RGBA", respect_rotation.size, (0, 0, 0))
+            respect_rotation = Image.alpha_composite(background, respect_rotation)
+            respect_rotation = respect_rotation.convert("RGB")
 
-            # Save output
-            om = next(frames)  # Handle first frame separately
-            om.info = image.info  # Copy sequence info
-            om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
+        respect_rotation.thumbnail(max_size)
 
-        else:
-            if image.mode in ("RGBA", "P"):
-                image = image.convert("RGB")
-
-            image.thumbnail(max_size)
-
-            image.save(str(output_path))
+        respect_rotation.save(str(output_path))
 
     return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
 
@@ -319,6 +323,7 @@ def _read_entry_from_disk(
         primary_url=_render_link(serialized_entry.primary_url),
         secondary_urls=_render_link_list(serialized_entry.secondary_urls),
         press_urls=_render_link_list(serialized_entry.press_urls),
+        completion_date=serialized_entry.completion_date,
         completion_date_verbose=_render_date(serialized_entry.completion_date, verbose=True),
         completion_year=_render_date(serialized_entry.completion_date, verbose=False),
         team_size=string.capwords(serialized_entry.team_size.value),
@@ -333,6 +338,7 @@ def _read_entry_from_disk(
             serialized_entry.featured_media,
         ).path,
         top_image=top_image,
+        visible=serialized_entry.visible,
     )
 
 
@@ -389,15 +395,23 @@ def _read_section_from_disk(
 
     primary_color = str(section_description.primary_color)
 
+    entries = list(
+        sorted(
+            [
+                _read_entry_from_disk(
+                    _find_yaml(path), static_content_directory, primary_color, top_image
+                )
+                for path in _directories_in_directory(section_directory)
+            ],
+            key=lambda entry: entry.completion_date,
+            reverse=True,
+        )
+    )
+
     return SectionIncompleteEntries(
         description=markdown(section_description.description),
         title=section_description.title,
-        entries=[
-            _read_entry_from_disk(
-                _find_yaml(path), static_content_directory, primary_color, top_image
-            )
-            for path in _directories_in_directory(section_directory)
-        ],
+        entries=entries,
         primary_color=primary_color,
         logo=_render_local_media(
             static_content_directory,
@@ -437,6 +451,7 @@ def _fill_entry_neighbors(
         primary_url=entry.primary_url,
         secondary_urls=entry.secondary_urls,
         press_urls=entry.press_urls,
+        completion_date=entry.completion_date,
         completion_date_verbose=entry.completion_date_verbose,
         completion_year=entry.completion_year,
         team_size=entry.team_size,
@@ -447,6 +462,7 @@ def _fill_entry_neighbors(
         top_image=entry.top_image,
         previous_entry=previous_entry,
         next_entry=next_entry,
+        visible=entry.visible,
     )
 
 
@@ -512,7 +528,11 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         Section(
             title=section.title,
             description=section.description,
-            entries=[_fill_entry_neighbors(entry, lookup[entry]) for entry in section.entries],
+            entries=[
+                _fill_entry_neighbors(entry, lookup[entry])
+                for entry in section.entries
+                if entry.visible
+            ],
             primary_color=section.primary_color,
             logo=section.logo,
             rank=section.rank,

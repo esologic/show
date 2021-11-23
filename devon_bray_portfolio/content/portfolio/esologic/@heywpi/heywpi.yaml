@@ -26,7 +26,7 @@ mediums:
 primary_url:
   label: Project page, links to development log, code and design files.
   link: https://www.esologic.com/heywpi-project/
-size: small
+size: medium
 secondary_urls:
 - label: '@heywpi twitter account.'
   link: https://twitter.com/heywpi
@@ -36,3 +36,4 @@ version_number: 0
 press_urls:
 - label: Twitter-controlled Raspberry Pi lights up window on WPI campus (Adafruit).
   link: https://blog.adafruit.com/2015/01/23/twitter-controlled-raspberry-pi-lights-up-window-on-wpi-campus-piday-raspberrypi-raspberry_pi-heywpi/
+visible: true

@@ -1,6 +1,6 @@
 completion_date: '2018-03-07'
 description: Portable installation that followed the Boston New Technology meetup
-  group for 6 months.
+  group for six months.
 domain: mixed (hardware, software)
 explanation: >-
   Our first commercial installation, this project was unique in that it had to be
@@ -59,7 +59,10 @@ primary_url:
 secondary_urls:
 - label: User interactions.
   link: https://twitter.com/hashtag/BNT90?src=hashtag_click
+- label: Boston New Technology website.
+  link: https://bostonnewtechnology.com/
 size: large
 team_size: small group
 title: Boston New Technology
 version_number: 0
+visible: true

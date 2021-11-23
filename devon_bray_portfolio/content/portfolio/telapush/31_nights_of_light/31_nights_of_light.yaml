@@ -1,6 +1,5 @@
 completion_date: '2018-12-01'
-description: 30 Day Installation in the center of the Prudential Center mall in Boston,
-  MA.
+description: 30 Day Installation at the Prudential Center mall in Boston, MA.
 domain: mixed (hardware, software)
 explanation: >-
   Commercial installation for [Boston Properties](https://www.bxp.com/) to amplify
@@ -66,3 +65,4 @@ size: large
 team_size: small group
 title: 31 Nights Of Light
 version_number: 0
+visible: true

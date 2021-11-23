@@ -1,5 +1,5 @@
 completion_date: '2017-10-15'
-description: Persistent light installation livestreamed via Periscope.
+description: Persistent installation livestreamed via Periscope.
 domain: mixed (hardware, software)
 explanation: >-
   This persistent installation was live for around two months. This was used as a
@@ -35,3 +35,4 @@ size: medium
 team_size: small group
 title: Livepush
 version_number: 0
+visible: true

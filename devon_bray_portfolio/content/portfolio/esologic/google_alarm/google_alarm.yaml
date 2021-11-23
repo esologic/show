@@ -30,3 +30,4 @@ size: small
 team_size: solo
 title: Raspberry Pi Google Calendar Alarm Clock
 version_number: 0
+visible: true
