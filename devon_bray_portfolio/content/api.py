@@ -172,6 +172,16 @@ class Portfolio(NamedTuple):
     icon: RenderedLocalMedia
 
 
+def _render_markdown(text: str) -> str:
+    """
+
+    :param text:
+    :return:
+    """
+
+    return markdown(text, extensions=["markdown3_newtab"])
+
+
 def _render_link(url: schema.Link) -> RenderedLink:
     """
     Go from the serialized form to the rendered form.
@@ -270,7 +280,7 @@ def _render_local_media(
 
         respect_rotation.save(str(output_path))
 
-    return RenderedLocalMedia(label=markdown(local_media["label"]), path=str(name))
+    return RenderedLocalMedia(label=_render_markdown(local_media["label"]), path=str(name))
 
 
 def _read_entry_from_disk(
@@ -309,11 +319,11 @@ def _read_entry_from_disk(
         slug=slug,
         title=serialized_entry.title,
         description=serialized_entry.description,
-        explanation=markdown(serialized_entry.explanation),
+        explanation=_render_markdown(serialized_entry.explanation),
         featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
         youtube_videos=tuple(
-            RenderedYouTubeVideo(label=markdown(video["label"]), video_id=video["video_id"])
+            RenderedYouTubeVideo(label=_render_markdown(video["label"]), video_id=video["video_id"])
             for video in serialized_entry.youtube_videos
         )
         if serialized_entry.youtube_videos
@@ -409,7 +419,7 @@ def _read_section_from_disk(
     )
 
     return SectionIncompleteEntries(
-        description=markdown(section_description.description),
+        description=_render_markdown(section_description.description),
         title=section_description.title,
         entries=entries,
         primary_color=primary_color,
@@ -542,12 +552,12 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
 
     return Portfolio(
         title=portfolio_description.title,
-        description=markdown(portfolio_description.description),
+        description=_render_markdown(portfolio_description.description),
         sections=sections_with_entry_neighbors,
-        conclusion=markdown(portfolio_description.conclusion),
+        conclusion=_render_markdown(portfolio_description.conclusion),
         contact_urls=_render_link_list(portfolio_description.contact_urls),
         email=portfolio_description.email,
-        explanation=markdown(portfolio_description.explanation),
+        explanation=_render_markdown(portfolio_description.explanation),
         header_top_image=_render_local_media(
             static_content_directory,
             portfolio_description_path,

@@ -31,7 +31,7 @@ local_media:
   path: ./31_nights_of_light_images/31_4.png
 - label: Nighttime animation.
   path: ./31_nights_of_light_images/31_5.png
-- label: Prompt.
+- label: 3D printed prompt.
   path: ./31_nights_of_light_images/31_6.png
 - label: Animating.
   path: ./31_nights_of_light_images/31_1.gif

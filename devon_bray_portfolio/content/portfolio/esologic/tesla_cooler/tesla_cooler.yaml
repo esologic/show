@@ -16,7 +16,7 @@ youtube_videos:
     other videos, wanted to try a direct-to-tape format.
   video_id: ax6S3I81yAg
 featured_media:
-  label: Another shot of the single cooler config.
+  label: Single cooler attached to an NVIDIA Tesla K80.
   path: ./tesla_cooler_images/tesla_cooler_2.JPG
 local_media:
 - label: Top-down shot of two K80s installed in server, feedback thermistors are visible.

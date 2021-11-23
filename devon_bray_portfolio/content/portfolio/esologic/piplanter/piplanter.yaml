@@ -12,14 +12,14 @@ explanation: During the summer break before heading off to college, I wrote a co
   the corner of his basement lab in the Physics department. It was there where PiPlanter
   2 was born, a mother/daughter configuration that used the Pi for high level work
   and an Arduino for interfacing with the sensors and controlling lights/pumps etc.
-  This second version also saw the integration of a timelapse camera and rudimentary
-  computer vision to gauge plant health. There are still echos of this project in
+  This second version also saw the integration of a time lapse camera and rudimentary
+  computer vision to gauge plant health. There are still echoes of this project in
   the work I do today, this was one of my first experiences walking along the edge
   between of hardware and software.
 youtube_videos:
 - label: Overview of setup installed at WPI.
   video_id: I0wqVl8SeuU
-- label: PiPlanter assisted plant growth timelapse.
+- label: PiPlanter assisted plant growth time lapse.
   video_id: IyGJweVJrH8
 - label: Final overview of first version of this project.
   video_id: LIsfs72cTq0
@@ -73,7 +73,7 @@ secondary_urls:
   link: https://www.esologic.com/piplanter-project-page/
 - label: JG PiPiplanter, a replication of this project.
   link: http://joelgehringer.com/piplanter/
-- label: Inital blog post for the entire project (circa 2012!).
+- label: Initial blog post for the entire project (circa 2012!).
   link: https://www.esologic.com/basic-wetness-sensor
 - label: Twitter bot that posted updates.
   link: https://twitter.com/piplanter_bot

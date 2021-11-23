@@ -20,7 +20,7 @@
             <ul>
                 <li><a href="mailto:{{portfolio.email}}" class="header-link">Email</a></li>
                 {% for contact_url in portfolio.contact_urls  %}
-                <li><a href="{{ contact_url.link }}" class="header-link">{{ contact_url.label }}</a></li>
+                <li><a href="{{ contact_url.link }}" class="header-link" target="_blank" rel="noopener noreferrer">{{ contact_url.label }}</a></li>
                 {% endfor %}
             </ul>
             {{ portfolio.conclusion | safe }}

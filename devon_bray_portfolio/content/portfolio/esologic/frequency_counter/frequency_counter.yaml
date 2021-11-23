@@ -4,7 +4,7 @@ domain: mixed (hardware, software)
 explanation: This simple project was completed very quickly and has served me well
   over the years. A simple Arduino sketch that uses interrupts to measure the frequencies
   of signals coming in on digital pins. This code has been recycled a number of times
-  and is a great example of the strenghts of timer programming typically found on
+  and is a great example of the strengths of timer programming typically found on
   embedded devices.
 featured_media:
   label: Breadboard implementation of circuit.
@@ -21,6 +21,6 @@ primary_url:
   link: https://www.esologic.com/multiple-frequency-counter-arduino/
 size: small
 team_size: solo
-title: Multi-Channel Frequecy Counter
+title: Multi-Channel Frequency Counter
 version_number: 0
 visible: true

@@ -53,12 +53,12 @@
             <div class="entry-title-item">
                 <h3 class="description-text">{{ entry.description }}</h3>
                 {{ entry.explanation | safe }}
-                <div class="primary-url dimmer" onclick="location.href='{{ entry.primary_url.link }}';" style="cursor: pointer;">{{ entry.primary_url.label }}</div>
+                <a class="button-link" href='{{ entry.primary_url.link }}' target="_blank" rel="noopener noreferrer"><div class="primary-url dimmer">{{ entry.primary_url.label }}</div></a>
                 {% if entry.press_urls %}
                 <p class="heavy">As Seen In:</p>
                 <ul>
                     {% for press_url in entry.press_urls  %}
-                    <li><a href="{{ press_url.link }}">{{ press_url.label }}</a></li>
+                    <li><a href="{{ press_url.link }}" target="_blank" rel="noopener noreferrer">{{ press_url.label }}</a></li>
                     {% endfor %}
                 </ul>
                 {%endif %}
@@ -66,7 +66,7 @@
                 <p class="heavy">Further Reading:</p>
                 <ul>
                     {% for secondary_url in entry.secondary_urls  %}
-                    <li><a href="{{ secondary_url.link }}">{{ secondary_url.label }}</a></li>
+                    <li><a href="{{ secondary_url.link }}" target="_blank" rel="noopener noreferrer">{{ secondary_url.label }}</a></li>
                     {% endfor %}
                 </ul>
                 {%endif %}

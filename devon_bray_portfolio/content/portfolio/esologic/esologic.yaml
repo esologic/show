@@ -2,7 +2,7 @@ primary_color: '#FFA500'
 logo:
   label: Esologic logo.
   path: ./esologic_logo.jpg
-description: Personal engineering [blog](https://www.esologic.com). Catalogs the developement
+description: Personal engineering [blog](https://www.esologic.com). Catalogs the development
   of open-source projects, serving as the publication outlet for their releases alongside
   occasional tutorials and teardowns. My goal is to share useful engineering techniques
   and methods, promoting the open exchange of ideas. There's an accompanying YouTube

@@ -102,6 +102,10 @@ img {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
 }
 
+.button-link {
+    text-decoration: none;
+}
+
 .heavy {
     font-weight: bolder;
     font-size: 20px;

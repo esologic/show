@@ -1,7 +1,7 @@
 completion_date: '2018-07-22'
 description: Test instrument for addressable LEDs.
 domain: mixed (hardware, software)
-explanation: The humble addressable LED has worked it's way into nearly every hardware
+explanation: The humble addressable LED has worked its way into nearly every hardware
   project that has passed through my hands over the years, and is one of the foundational
   technologies that enables Telapush. I needed a simple, flexible and robust way to
   debug these devices during development and created blinkbox to do just that. Something

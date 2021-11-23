@@ -35,7 +35,7 @@ local_media:
     sound](https://www.esologic.com/gance/) is much better.
   path: ./gance_images/gance_11.gif
 - label: Debug view for music + video into StyleGAN network with active switching
-    enabled. [Version with sound](https://www.esologic.com/gance/) is much better..
+    enabled. [Version with sound](https://www.esologic.com/gance/) is much better.
   path: ./gance_images/gance_7.gif
 - label: Resulting still image pulled from sample output video.
   path: ./gance_images/gance_9.png
