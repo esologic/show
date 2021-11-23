@@ -9,6 +9,8 @@ conclusion: The following is my portfolio, a selection of the best projects acro
   the different areas I'm active. If you have questions please reach out via email.
 email: dev@esologic.com
 contact_urls:
+- label: GitHub.
+  link: https://github.com/esologic/
 - label: Twitter.
   link: https://twitter.com/eso_logic/
 - label: Linkedin.
