@@ -3,6 +3,7 @@ Interface through which other components of this application access the content 
 TODO: There's a bit of redundancy, and a little more inheritance could be helpful.
 """
 import itertools
+import shutil
 import string
 import typing as t
 from datetime import date
@@ -170,6 +171,7 @@ class Portfolio(NamedTuple):
     header_top_image: RenderedLocalMedia
     header_bottom_image: RenderedLocalMedia
     icon: RenderedLocalMedia
+    resume_path: t.Optional[str]
 
 
 def _render_markdown(text: str) -> str:
@@ -550,6 +552,18 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         for section in sections
     ]
 
+    if portfolio_description.resume_path is not None:
+        new_resume_path = static_content_directory.joinpath("resume").with_suffix(
+            portfolio_description.resume_path.suffix
+        )
+        shutil.copy(
+            src=portfolio_description_path.parent.joinpath(portfolio_description.resume_path),
+            dst=new_resume_path,
+        )
+        resume_path = new_resume_path.name
+    else:
+        resume_path = None
+
     return Portfolio(
         title=portfolio_description.title,
         description=_render_markdown(portfolio_description.description),
@@ -579,4 +593,5 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             None,
             portfolio_description.icon,
         ),
+        resume_path=resume_path,
     )

@@ -324,6 +324,8 @@ class SerializedPortfolioDescription(BaseModel):
 
     icon: LocalMedia
 
+    resume_path: Optional[Path]
+
 
 def read_yaml(path: Path) -> t.Dict[str, t.Any]:  # type: ignore[misc]
     """
