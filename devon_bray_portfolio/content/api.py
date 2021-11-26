@@ -172,6 +172,8 @@ class Portfolio(NamedTuple):
     header_bottom_image: RenderedLocalMedia
     icon: RenderedLocalMedia
     resume_path: t.Optional[str]
+    portrait: RenderedLocalMedia
+    header_background: RenderedLocalMedia
 
 
 def _render_markdown(text: str) -> str:
@@ -596,4 +598,16 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description.icon,
         ),
         resume_path=resume_path,
+        portrait=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (4000, 4000),
+            None,
+            portfolio_description.portrait),
+        header_background=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (4000, 4000),
+            None,
+            portfolio_description.header_background)
     )

@@ -326,6 +326,10 @@ class SerializedPortfolioDescription(BaseModel):
 
     resume_path: Optional[Path]
 
+    portrait: LocalMedia
+
+    header_background: Optional[LocalMedia]
+
 
 def read_yaml(path: Path) -> t.Dict[str, t.Any]:  # type: ignore[misc]
     """

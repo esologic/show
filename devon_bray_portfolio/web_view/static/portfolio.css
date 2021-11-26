@@ -15,10 +15,36 @@ body {
 }
 
 .portfolio-header {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    width: 100%;
+    background-size: cover;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+    align-items: center;
+    grid-gap: 2rem;
+}
+
+.portfolio-header-text {
+    background: rgba(0, 0, 0, .8);
+    color: #ccc;
+}
+
+.portfolio-header img {
+    max-height: 50vh;
+    height: 100%;
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+
+.dimmer {
+	filter: brightness(100%);
+}
+
+.dimmer:hover {
+    filter: brightness(60%);
 }
 
 .item {

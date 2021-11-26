@@ -8,31 +8,28 @@
 <body>
 
     <div>
-        <img
-            src="{{ url_for('static', filename=portfolio.header_top_image.path) }}"
-            class="header-image"
-            alt="{{ portfolio.header_top_image.label }}"
-        >
-        <div class="portfolio-header">
-            <h1>{{ portfolio.title }}</h1>
-			{{ portfolio.description | safe }}
-            {{ portfolio.explanation | safe }}
-            <ul>
-                <li><a href="mailto:{{portfolio.email}}" class="header-link">Email.</a></li>
-                {% for contact_url in portfolio.contact_urls  %}
-                <li><a href="{{ contact_url.link }}" class="header-link" target="_blank" rel="noopener noreferrer">{{ contact_url.label }}</a></li>
-                {% endfor %}
-                {% if portfolio.resume_path %}
-                <li><a href="{{ url_for('static', filename=portfolio.resume_path) }}" class="header-link" target="_blank" rel="noopener noreferrer">Resume.</a></li>
-                {% endif %}
-            </ul>
-            {{ portfolio.conclusion | safe }}
+        {% set image_url = url_for('static', filename=portfolio.header_background.path) %}
+        <div class="portfolio-header" style="background-image: url('{{image_url}}')">
+            <div class="portfolio-header-text">
+                <h1>{{ portfolio.title }}</h1>
+                {{ portfolio.description | safe }}
+                {{ portfolio.explanation | safe }}
+                <ul>
+                    <li><a href="mailto:{{portfolio.email}}" class="header-link">Email.</a></li>
+                    {% for contact_url in portfolio.contact_urls  %}
+                    <li><a href="{{ contact_url.link }}" class="header-link" target="_blank" rel="noopener noreferrer">{{ contact_url.label }}</a></li>
+                    {% endfor %}
+                    {% if portfolio.resume_path %}
+                    <li><a href="{{ url_for('static', filename=portfolio.resume_path) }}" class="header-link" target="_blank" rel="noopener noreferrer">Resume.</a></li>
+                    {% endif %}
+                </ul>
+                {{ portfolio.conclusion | safe }}
+            </div>
+            <img
+                src="{{ url_for('static', filename=portfolio.portrait.path) }}"
+                alt="{{ portfolio.portrait.label }}"
+            >
         </div>
-        <img
-            src="{{ url_for('static', filename=portfolio.header_bottom_image.path) }}"
-            class="header-image"
-            alt="{{ portfolio.header_bottom_image.label }}"
-        >
     </div>
 
     {% for section in portfolio.sections %}
@@ -44,7 +41,7 @@
         <div class="container">
             {% for entry in section.entries %}
             {% set url = url_for('render_slug', slug=entry.slug) %}
-            <figure onclick="location.href='{{ url }}';" style="cursor: pointer;" class="item {{entry.size}}">
+            <figure onclick="location.href='{{ url }}';" style="cursor: pointer;" class="dimmer item {{entry.size}}">
                 <img
                     src="{{ url_for('static', filename=entry.featured_media.path) }}"
                     class="gallery-img"
