@@ -1,4 +1,4 @@
-primary_color: '#800080'
+primary_color: RGBA(128, 0, 128, 1)
 logo:
   label: Telapush logo.
   path: ./telapush_logo.png

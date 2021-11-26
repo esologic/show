@@ -252,35 +252,37 @@ def _render_local_media(
     name = local_media["path"].name if output_name is None else output_name
     output_path = media_directory.joinpath(name)
 
-    image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+    if not output_path.exists():
 
-    if getattr(image, "is_animated", False):
+        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
-        frames = ImageSequence.Iterator(image)
+        if getattr(image, "is_animated", False):
 
-        # Wrap on-the-fly thumbnail generator
-        def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-            for frame in f:
-                thumbnail = frame.copy()
-                thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                yield thumbnail
+            frames = ImageSequence.Iterator(image)
 
-        frames = thumbnails(frames)
+            # Wrap on-the-fly thumbnail generator
+            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
+                for frame in f:
+                    thumbnail = frame.copy()
+                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                    yield thumbnail
 
-        # Save output
-        om = next(frames)  # Handle first frame separately
-        om.info = image.info  # Copy sequence info
-        om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
-    else:
-        respect_rotation = ImageOps.exif_transpose(image)
-        if respect_rotation.mode == "RGBA":
-            background = Image.new("RGBA", respect_rotation.size, (0, 0, 0))
-            respect_rotation = Image.alpha_composite(background, respect_rotation)
-            respect_rotation = respect_rotation.convert("RGB")
+            frames = thumbnails(frames)
 
-        respect_rotation.thumbnail(max_size)
+            # Save output
+            om = next(frames)  # Handle first frame separately
+            om.info = image.info  # Copy sequence info
+            om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
+        else:
+            respect_rotation = ImageOps.exif_transpose(image)
+            if respect_rotation.mode == "RGBA":
+                background = Image.new("RGBA", respect_rotation.size, (0, 0, 0))
+                respect_rotation = Image.alpha_composite(background, respect_rotation)
+                respect_rotation = respect_rotation.convert("RGB")
 
-        respect_rotation.save(str(output_path))
+            respect_rotation.thumbnail(max_size)
+
+            respect_rotation.save(str(output_path))
 
     return RenderedLocalMedia(label=_render_markdown(local_media["label"]), path=str(name))
 

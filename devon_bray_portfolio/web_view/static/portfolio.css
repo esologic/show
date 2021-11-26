@@ -54,7 +54,6 @@ body {
   }
 }
 
-
 .section-container {
     margin-top: 1rem;
     padding: 2rem;
@@ -75,9 +74,9 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    grid-gap: 2rem;
-    grid-auto-rows: 400px;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-gap: 1rem;
+    grid-auto-rows: 250px;
     grid-auto-flow: row dense; /* Fill all spaces with fitted images */
 }
 
@@ -90,7 +89,6 @@ body {
     left: 0;
     padding: 1rem;
     vertical-align: middle;
-    font-size: 1.3vmin;
 }
 
 figcaption > h2 {
@@ -107,17 +105,17 @@ figcaption > h2 {
   }
 
 .entry-title {
-    font-size: 2.5vmin;
     font-weight: bold;
+    font-size: x-large;
 }
 
 .entry-description {
-    font-size: 1.5vmin;
+    font-size: smaller;
     font-style: italic;
 }
 
 .entry-medium {
-    font-size: 1.3vmin;
+    font-size: smaller;
     font-weight: bold;
 }
 

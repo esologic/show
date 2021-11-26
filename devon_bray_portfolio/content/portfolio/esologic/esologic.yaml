@@ -1,4 +1,4 @@
-primary_color: '#FFA500'
+primary_color: RGBA(255, 165, 0, 1)
 logo:
   label: Esologic logo.
   path: ./esologic_logo.jpg

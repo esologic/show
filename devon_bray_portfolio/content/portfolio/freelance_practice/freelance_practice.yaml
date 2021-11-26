@@ -1,4 +1,4 @@
-primary_color: '#008000'
+primary_color: RGBA(0, 128, 0, 1)
 logo:
   label: Block The Wind Logo.
   path: ./block_the_wind_logo.png
