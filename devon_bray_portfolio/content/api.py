@@ -603,11 +603,13 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
-            portfolio_description.portrait),
+            portfolio_description.portrait,
+        ),
         header_background=_render_local_media(
             static_content_directory,
             portfolio_description_path,
             (4000, 4000),
             None,
-            portfolio_description.header_background)
+            portfolio_description.header_background,
+        ),
     )

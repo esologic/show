@@ -7,20 +7,20 @@
 </head>
 <body>
 
-    <div>
-        {% set image_url = url_for('static', filename=portfolio.header_background.path) %}
-        <div class="portfolio-header" style="background-image: url('{{image_url}}')">
+{% set image_url = url_for('static', filename=portfolio.header_background.path) %}
+    <div class="internal-pad" style="background-image: url('{{image_url}}')">
+        <div class="portfolio-header">
             <div class="portfolio-header-text">
                 <h1>{{ portfolio.title }}</h1>
                 {{ portfolio.description | safe }}
                 {{ portfolio.explanation | safe }}
                 <ul>
-                    <li><a href="mailto:{{portfolio.email}}" class="header-link">Email.</a></li>
+                    <li><a href="mailto:{{portfolio.email}}">Email.</a></li>
                     {% for contact_url in portfolio.contact_urls  %}
-                    <li><a href="{{ contact_url.link }}" class="header-link" target="_blank" rel="noopener noreferrer">{{ contact_url.label }}</a></li>
+                    <li><a href="{{ contact_url.link }}" target="_blank" rel="noopener noreferrer">{{ contact_url.label }}</a></li>
                     {% endfor %}
                     {% if portfolio.resume_path %}
-                    <li><a href="{{ url_for('static', filename=portfolio.resume_path) }}" class="header-link" target="_blank" rel="noopener noreferrer">Resume.</a></li>
+                    <li><a href="{{ url_for('static', filename=portfolio.resume_path) }}" target="_blank" rel="noopener noreferrer">Resume.</a></li>
                     {% endif %}
                 </ul>
                 {{ portfolio.conclusion | safe }}
