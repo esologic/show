@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 
 body {
-    padding-top: 1rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     font-family: 'Inconsolata';
     background-color: #FFFFF0;
     max-width: 1700px;
@@ -26,7 +26,7 @@ body {
 }
 
 .internal-pad {
-    background-size: 100% 100%;
+    background-size: cover;
     padding: 2rem;
 }
 
@@ -115,7 +115,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
     grid-gap: 1rem;
     grid-auto-rows: 230px;
     grid-auto-flow: row dense; /* Fill all spaces with fitted images */
