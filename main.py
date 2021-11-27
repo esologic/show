@@ -13,7 +13,7 @@ def main() -> None:
     :return: None
     """
 
-    app = create_app()
+    app = create_app(write_images=True)
 
     # This lets you just copy and paste the resulting directory anywhere and assets are located
     # correctly.

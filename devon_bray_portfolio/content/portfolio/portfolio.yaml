@@ -27,7 +27,7 @@ return_image:
   path: ./banner_1.jpg
 icon:
   label: Self-portrait.
-  path: ./icon.jpg
+  path: ./portrait.jpg
 portrait:
   label: Photo take at Marconi Station.
   path: ./portrait.jpg

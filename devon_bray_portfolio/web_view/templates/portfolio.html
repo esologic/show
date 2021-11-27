@@ -35,7 +35,7 @@
     {% for section in portfolio.sections %}
     <div style="background-color: {{ section.primary_color }}" class="section-container">
         <div class="section-header">
-            <h1 class="section-container-item">{{ section.title }}</h1>
+            <h1 class="section-container-title">{{ section.title }}</h1>
             {{ section.description | safe }}
         </div>
         <div class="container">

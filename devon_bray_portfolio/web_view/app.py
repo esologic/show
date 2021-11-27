@@ -14,7 +14,7 @@ from devon_bray_portfolio.content.api import discover_portfolio
 _CURRENT_DIRECTORY = Path(os.path.dirname(os.path.abspath(__file__)))
 
 
-def create_app() -> Flask:
+def create_app(write_images: bool = False) -> Flask:
     """
 
     :return:
@@ -28,6 +28,7 @@ def create_app() -> Flask:
             "/devon_bray_portfolio/content/portfolio"
         ),
         static_content_directory=_CURRENT_DIRECTORY.joinpath("static"),
+        write_images=write_images,
     )
 
     lookup = {

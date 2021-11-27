@@ -241,20 +241,26 @@ def _render_local_media(
     yaml_path: Path,
     max_size: t.Tuple[int, int],
     output_name: t.Optional[str],
+    force_recreate: bool,
     local_media: schema.LocalMedia,
 ) -> RenderedLocalMedia:
     """
     Copies, processes images from their origins in the entry folders to their destinations
     in the `media_directory` folder. Returns a new NT, with a reference to their path
     relative to `media_directory`.
-    :param local_media: Reference to the file in the entry directory.
-    :return: Fields converted to strings, paths relative to `media_directory`.
+    :param media_directory: Destination path parent.
+    :param yaml_path: Config file image was read from.
+    :param max_size: Max image size in pixels.
+    :param output_name: Filename of output
+    :param local_media: To copy.
+    :param force_recreate: Force a recompute.
+    :return: For addition to portfolio.
     """
 
     name = local_media["path"].name if output_name is None else output_name
     output_path = media_directory.joinpath(name)
 
-    if not output_path.exists():
+    if not output_path.exists() or force_recreate:
 
         image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
@@ -290,7 +296,11 @@ def _render_local_media(
 
 
 def _read_entry_from_disk(
-    yaml_path: Path, media_directory: Path, primary_color: str, top_image: RenderedLocalMedia
+    yaml_path: Path,
+    media_directory: Path,
+    primary_color: str,
+    top_image: RenderedLocalMedia,
+    write_images: bool,
 ) -> RenderedEntryWithoutNeighbors:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
@@ -305,7 +315,9 @@ def _read_entry_from_disk(
 
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
-    media_processor = partial(_render_local_media, media_directory, yaml_path, (3000, 3000), None)
+    media_processor = partial(
+        _render_local_media, media_directory, yaml_path, (3000, 3000), None, write_images
+    )
 
     if serialized_entry.local_media is not None:
 
@@ -349,8 +361,9 @@ def _read_entry_from_disk(
         favicon_path=_render_local_media(
             media_directory,
             yaml_path,
-            (15, 15),
+            (50, 50),
             f"{slug}_icon.png",
+            write_images,
             serialized_entry.featured_media,
         ).path,
         top_image=top_image,
@@ -393,7 +406,10 @@ def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
 
 
 def _read_section_from_disk(
-    section_directory: Path, static_content_directory: Path, top_image: RenderedLocalMedia
+    section_directory: Path,
+    static_content_directory: Path,
+    top_image: RenderedLocalMedia,
+    write_images: bool,
 ) -> SectionIncompleteEntries:
     """
     Given a `section_directory` (so a directory with a top-level yaml, and a bunch of directories
@@ -415,7 +431,11 @@ def _read_section_from_disk(
         sorted(
             [
                 _read_entry_from_disk(
-                    _find_yaml(path), static_content_directory, primary_color, top_image
+                    _find_yaml(path),
+                    static_content_directory,
+                    primary_color,
+                    top_image,
+                    write_images,
                 )
                 for path in _directories_in_directory(section_directory)
             ],
@@ -434,6 +454,7 @@ def _read_section_from_disk(
             section_description_path,
             (500, 500),
             None,
+            write_images,
             section_description.logo,
         ),
         rank=section_description.rank,
@@ -482,7 +503,9 @@ def _fill_entry_neighbors(
     )
 
 
-def discover_portfolio(sections_directory: Path, static_content_directory: Path) -> Portfolio:
+def discover_portfolio(
+    sections_directory: Path, static_content_directory: Path, write_images: bool
+) -> Portfolio:
     """
     Loads the portfolio as it's represented on disk (as a collection of directories and images and
     yaml files) into memory so it can be displayed by other components of this application (flask)
@@ -508,8 +531,10 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
                     portfolio_description_path,
                     (4000, 4000),
                     None,
+                    write_images,
                     portfolio_description.return_image,
                 ),
+                write_images=write_images,
             )
             for section_directory in _directories_in_directory(sections_directory)
         ],
@@ -581,6 +606,7 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
+            write_images,
             portfolio_description.header_top_image,
         ),
         header_bottom_image=_render_local_media(
@@ -588,13 +614,15 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
+            write_images,
             portfolio_description.header_bottom_image,
         ),
         icon=_render_local_media(
             static_content_directory,
             portfolio_description_path,
-            (15, 15),
+            (50, 50),
             None,
+            write_images,
             portfolio_description.icon,
         ),
         resume_path=resume_path,
@@ -603,6 +631,7 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
+            write_images,
             portfolio_description.portrait,
         ),
         header_background=_render_local_media(
@@ -610,6 +639,7 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
+            write_images,
             portfolio_description.header_background,
         ),
     )
