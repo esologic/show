@@ -629,7 +629,7 @@ def discover_portfolio(
         portrait=_render_local_media(
             static_content_directory,
             portfolio_description_path,
-            (4000, 4000),
+            (3000, 3000),
             None,
             write_images,
             portfolio_description.portrait,
@@ -637,7 +637,7 @@ def discover_portfolio(
         header_background=_render_local_media(
             static_content_directory,
             portfolio_description_path,
-            (4000, 4000),
+            (3000, 3000),
             None,
             write_images,
             portfolio_description.header_background,
