@@ -30,7 +30,7 @@ icon:
   path: ./icon.jpg
 portrait:
   label: Photo take at Marconi Station.
-  path: ./portrait.JPG
+  path: ./portrait.jpg
 header_background:
   label: Sunset over Cape Cod bay.
   path: ./header_background.png
