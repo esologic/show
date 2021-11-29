@@ -1,16 +1,17 @@
 completion_date: '2021-11-03'
 description: High performance GPU cooler for the NVIDIA Tesla K80.
 domain: mixed (hardware, software)
-explanation: Rendered desperate for VRAM by a stylegan-related project, I had to wade
-  thermistor first into the concernedly hot and strange world of GPUs without video
-  outputs to design a high performance cooler for the NVIDIA Tesla K80. The GPU is
-  designed to be installed in server chassis that have a fan pressure delta, where
-  cooled air is moved from the front of the case, through the cards and then out the
-  back. I wanted to be able to use the GPUs in a regular 4U server chassis or standard
-  PC tower so needed to create a cooler. The design is based around off the shelf
-  parts and can be printed without supports. Electronics are centered around a Raspberry
-  Pi Pico running MicroPython. This entire project was designed and manufactured live
-  on stream in the spirit of a hackathon.
+explanation: Rendered desperate for VRAM by a [StyleGAN-related](https://www.esologic.com/gance/)
+  project, I had to wade thermistor-first into the concernedly hot and strange world
+  of GPUs without video outputs to design a high performance cooler for the NVIDIA
+  Tesla K80. The GPU is designed to be installed in server chassis that have a fan
+  pressure delta, where cooled air is moved from the front of the case, through the
+  cards and then out the back. I wanted to be able to use the GPUs in a regular 4U
+  server chassis or standard PC tower so needed to create a cooler. The design is
+  based around off the shelf parts and can be printed without supports. Electronics
+  are centered around a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
+  running [MicroPython](https://micropython.org/). This entire project was designed
+  and manufactured live on stream in the spirit of a hackathon.
 youtube_videos:
 - label: Project history, design walkthrough and stress test. A bit more verbose than
     other videos, wanted to try a direct-to-tape format.

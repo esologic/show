@@ -6,14 +6,14 @@ explanation: Completed during my engineering residency at [Hitchcock Management]
   Served as the basis for further research into automotive IoT. The GUI displays much
   more accurate and comprehensive information than a normal car dashboard, and things
   like logging and event triggering can be easily built right in. Implemented backup
-  a camera, cruise control, numpad to lock and fire ignition. An Electron UI ran on
-  Raspberry Pi. Used anodized aluminum for the actual dashboard part, high performance
-  printed parts for everything else. The car kit didn't have a CAN bus, so I had to
-  implement speedometer and tachometer from first principals on bare metal. Inside
-  the car, the electrical environment was very noisy, so hardware communication protocols
-  had to be very robust. Manufactured two complete dashboards, one made of out anodized
-  aluminium and one out of walnut. I successfully advocated for design to be open
-  sourced upon this project's completion.
+  a camera, cruise control, numpad to lock and fire ignition. An [Electron](https://www.electronjs.org/)
+  UI ran on Raspberry Pi. Used anodized aluminum for the actual dashboard part, high
+  performance printed parts for everything else. The car didn't have a [CAN bus](https://en.wikipedia.org/wiki/CAN_bus),
+  so I had to implement speedometer and tachometer from first principals on bare metal.
+  Inside the car, the electrical environment was very noisy, so hardware communication
+  protocols had to be very robust. Manufactured two complete dashboards, one made
+  of out anodized aluminium and one out of walnut. I successfully advocated for design
+  to be open sourced upon this project's completion.
 featured_media:
   label: Rendering of Mechanical CAD model.
   path: ./mk4_dashboard_images/mk4_1.jpg

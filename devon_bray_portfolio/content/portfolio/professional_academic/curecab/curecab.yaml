@@ -3,14 +3,14 @@ description: Cabinet full of UV LEDs to accelerate curing of 3D prints from SLA 
   printers.
 domain: mixed (hardware, software)
 explanation: This project was a task of mine during my internship at [MADE@MassChallenge](https://masschallenge.org/).
-  The goal was to speed up the turnaround time for prints coming through the Formlabs
-  Form1+ SLA 3D Printer. There are 72 high power UV LEDs to speed up the curing process
-  by blasting prints with UV light driven by an Arduino running code that keeps track
-  of and displays the cure time. An interesting challenge with this project was making
-  something that looked good, was easy to use and simple to the point where it wouldn’t
-  need any maintenance. I didn't know it at the time but this project would end up
-  living in this shop until it's closure years later and be upgraded several times
-  by several different engineers.
+  The goal was to speed up the turnaround time for prints coming through the [Formlabs
+  Form1+](https://www.wired.com/2013/09/formlabs-form-1/) SLA 3D Printer. There are
+  72 high power UV LEDs to speed up the curing process by blasting prints with UV
+  light driven by an Arduino running code that keeps track of and displays the cure
+  time. An interesting challenge with this project was making something that looked
+  good, was easy to use and simple to the point where it wouldn’t need any maintenance.
+  I didn't know it at the time but this project would end up living in this shop until
+  it's closure years later and be upgraded several times by several different engineers.
 featured_media:
   label: Cabinet opened with the lights turned on. Note the part platform and hardware
     UI.

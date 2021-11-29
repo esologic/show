@@ -333,6 +333,15 @@ def _read_entry_from_disk(
 
     slug = yaml_path.with_suffix("").name
 
+    youtube_videos = (
+        tuple(
+            RenderedYouTubeVideo(label=_render_markdown(video["label"]), video_id=video["video_id"])
+            for video in serialized_entry.youtube_videos
+        )
+        if serialized_entry.youtube_videos is not None
+        else None
+    )
+
     return RenderedEntryWithoutNeighbors(
         slug=slug,
         title=serialized_entry.title,
@@ -340,12 +349,7 @@ def _read_entry_from_disk(
         explanation=_render_markdown(serialized_entry.explanation),
         featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
-        youtube_videos=tuple(
-            RenderedYouTubeVideo(label=_render_markdown(video["label"]), video_id=video["video_id"])
-            for video in serialized_entry.youtube_videos
-        )
-        if serialized_entry.youtube_videos
-        else None,
+        youtube_videos=youtube_videos,
         size=serialized_entry.size.value,
         domain=string.capwords(serialized_entry.domain.value),
         primary_url=_render_link(serialized_entry.primary_url),

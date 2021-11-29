@@ -1,14 +1,15 @@
 completion_date: '2018-07-22'
 description: Test instrument for addressable LEDs.
 domain: mixed (hardware, software)
-explanation: The humble addressable LED has worked its way into nearly every hardware
-  project that has passed through my hands over the years, and is one of the foundational
-  technologies that enables Telapush. I needed a simple, flexible and robust way to
-  debug these devices during development and created blinkbox to do just that. Something
-  with the form of a piece of "benchtop" equipment like an oscilloscope or multimeter
-  but could also be carried in a toolbox if need be. A hardware UI enables user to
-  select the type and LED count, and a mode button changes the color pattern displayed
-  on the LEDs. The large input elements provide satisfying manual feedback.
+explanation: The humble [addressable LED](https://en.wikipedia.org/wiki/LED_strip_light)
+  has worked it's way into nearly every hardware project that has passed through my
+  hands over the years, and is one of the foundational technologies that enables [Telapush](https://telapush.com/).
+  I needed a simple, flexible and robust way to debug these devices during development
+  and created blinkbox to do just that. Something with the form of a piece of "benchtop"
+  equipment like an [oscilloscope](https://en.wikipedia.org/wiki/Oscilloscope) or
+  multimeter but could also be carried in a toolbox if need be. A hardware UI enables
+  user to select the type and LED count, and a mode button changes the color pattern
+  displayed on the LEDs. The large input elements provide satisfying manual feedback.
 youtube_videos:
 - label: Walkthrough and demonstration.
   video_id: rg_kiPnU8oM

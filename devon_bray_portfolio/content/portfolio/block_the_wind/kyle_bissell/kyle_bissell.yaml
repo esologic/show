@@ -1,7 +1,7 @@
 completion_date: 2019-01-12
 description: Entry in our collaboration series.
 domain: social
-explanation: Collaboration with Massachusetts artist, [Kyle Bissell](https://www.instagram.com/kdbissell/).
+explanation: Collaboration with Massachusetts artist, and longtime friend [Kyle Bissell](https://www.instagram.com/kdbissell/).
   Two colorway screenprinted hoodie. Artist-first collab paid out majority of profits
   to designer.
 featured_media:
@@ -27,9 +27,14 @@ involvement: Booked collaboration, coordinated production, photographed and edit
 mediums:
 - photography
 - apparel
+secondary_urls:
+- label: See the Block the Wind Store Instagram account for more photos.
+  link: https://www.instagram.com/blockthewindstore/
+- label: Kyle's website.
+  link: https://www.kylebissell.com/
 primary_url:
-  label: Store page.
-  link: https://block-the-wind-store.myshopify.com/collections/collaborator-collection-one
+  label: Product page on the BTW store, also contains full credits.
+  link: https://block-the-wind-store.myshopify.com/collections/collaborator-collection-one/products/block-the-wind-x-kyle-bissell-premonition-tan?variant=20348578889841
 size: small
 team_size: small group
 title: BTW x Kyle Bissell

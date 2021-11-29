@@ -170,6 +170,11 @@ figcaption > h2 {
     font-weight: bold;
 }
 
+.entry-size {
+        font-size: smaller;
+    font-weight: lighter;
+}
+
 a:link {
     font-weight: bold;
     color: white;
