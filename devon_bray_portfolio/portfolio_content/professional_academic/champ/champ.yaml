@@ -1,0 +1,45 @@
+completion_date: '2017-04-27'
+description: Tree climbing robot.
+domain: mixed (hardware, software)
+explanation: Observing wildlife, monitoring forest health, conducting research, and
+  detecting invasive species and infections are just a few of the crucial tasks that
+  currently require humans to climb trees. Putting people into trees is an expensive
+  and potentially dangerous task. The CHAMP (Compliant Hook Arboreal Mobility Platform)
+  is a tree climbing robot that carries and controls job-specific payloads to improve
+  the safety and efficiency of many arboreal tasks. Major Qualifying Project (MPQ,
+  an undergraduate senior thesis project) at [WPI](https://en.wikipedia.org/wiki/Worcester_Polytechnic_Institute).
+featured_media:
+  label: Gripper actuating, motion demonstration.
+  path: ./champ_images/champ_1.gif
+local_media:
+- label: Detail view of gripper attached to a tree.
+  path: ./champ_images/champ_2.JPG
+- label: Compliant grip position of gripper.
+  path: ./champ_images/champ_3.JPG
+- label: Gripper demonstration.
+  path: ./champ_images/champ_4.JPG
+- label: Loaded abdomen.
+  path: ./champ_images/champ_6.png
+- label: Poster.
+  path: ./champ_images/champ_5.jpg
+youtube_videos:
+- label: Prototype climbing a tree.
+  video_id: hnc2LSy0_20
+involvement: Responsible for electrical control system, and remote control application.
+mediums:
+- python
+- protoboard electronics
+- pcb electronics
+- electrical cad
+- arduino
+secondary_urls:
+- label: Blog post. Mostly a summary of the paper and my involvement.
+  link: https://www.esologic.com/champ-compliant-hook-arboreal-mobility-platform-senior-thesis-project/
+primary_url:
+  label: Read the final paper.
+  link: https://digital.wpi.edu/concern/student_works/s4655j16f?locale=en
+size: large
+team_size: small group
+title: 'CHAMP: Compliant Hook Arboreal Mobility Platform'
+version_number: 0
+visible: true

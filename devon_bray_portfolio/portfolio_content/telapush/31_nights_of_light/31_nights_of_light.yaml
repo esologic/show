@@ -1,0 +1,68 @@
+completion_date: '2018-12-01'
+description: Month-long installation at the Prudential Center mall in Boston, MA.
+domain: mixed (hardware, software)
+explanation: >-
+  Commercial installation for [Boston Properties](https://www.bxp.com/) to amplify
+  their [#31NightsOfLight](https://twitter.com/search?q=%2331NightsofLight) campaign.
+  Each night
+  in December, the lights on the roof of the Prudential Center would change to a different
+  color, raising awareness for a corresponding group or non-profit organization. Ceremonially,
+  representatives from the group being showcased would flip a massive light switch
+  in the center of the mall as a photo-op.
+  Our installation was an illuminated sign attached to the top of
+  this light switch
+  that would animate when the organizations were mentioned, or corresponding hashtags
+  used on social
+  media. The piece had to be operating 24/7 unattended and could not use local network
+  to connect to
+  the internet.
+youtube_videos:
+- label: Promotional video for this installation.
+  video_id: np7pZtG-Ofo
+featured_media:
+  label: Installed in the center of the mall, animating.
+  path: ./31_nights_of_light_images/31_7.gif
+local_media:
+- label: Instructions post.
+  path: ./31_nights_of_light_images/31_2.gif
+- label: Front view.
+  path: ./31_nights_of_light_images/31_3.png
+- label: Installation at night.
+  path: ./31_nights_of_light_images/31_4.png
+- label: Nighttime animation.
+  path: ./31_nights_of_light_images/31_5.png
+- label: 3D printed prompt.
+  path: ./31_nights_of_light_images/31_6.png
+- label: Animating.
+  path: ./31_nights_of_light_images/31_1.gif
+- label: Portrait view of animation.
+  path: ./31_nights_of_light_images/31_8.gif
+- label: Group representative posing with installation.
+  path: ./31_nights_of_light_images/31_10.jpg
+- label: CAD rendering of installation.
+  path: ./31_nights_of_light_images/31_9.PNG
+- label: Internal shot of custom computer and enclosure that was created to drive
+    this project.
+  path: ./31_nights_of_light_images/31_backbone.JPG
+involvement: Electrical/Mechanical designer, wrote software for social media parser
+  and animation engine.
+mediums:
+- python
+- 3d printer
+- mechanical cad
+- pcb electronics
+- protoboard electronics
+- electrical cad
+- twitter
+- led art
+primary_url:
+  label: Read testimonials for this project on the installations page.
+  link: https://telapush.com/installs
+secondary_urls:
+- label: Read more about 31 Nights of Light.
+  link: https://www.prudentialcenter.com/experiences/photo-galleries/31-nights-of-light/
+size: large
+team_size: small group
+title: 31 Nights Of Light
+version_number: 0
+visible: true

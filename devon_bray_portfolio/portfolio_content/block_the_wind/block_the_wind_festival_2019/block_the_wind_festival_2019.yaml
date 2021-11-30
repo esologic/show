@@ -1,0 +1,54 @@
+completion_date: 2019-08-03
+description: 13 artist independent music festival.
+domain: social
+explanation: 'Fifth annual music festival. Back at [One Longfellow Square](https://onelongfellowsquare.com/)
+  in Portland, Maine. Featured performances by musicians and artist vendor booths.
+  Musicians: [GOD.DAMN.CHAN](https://www.instagram.com/god.damn.chan/), [B. Aull](https://www.instagram.com/aullthat/),
+  [Won Pound](https://www.instagram.com/wonpounds/), [Shane Reis](https://www.instagram.com/reisxanymeans/),
+  [EMRLD](https://www.instagram.com/weareemrld/), [Bensbeendead.](https://www.instagram.com/bensbeendead/),
+  [Jxck](https://open.spotify.com/artist/3U64Inop5BlwwhsO98QHG3), [Just Plain Jones](https://www.instagram.com/justplainjones/),
+  [Just Milk](https://www.instagram.com/justmilkmusic/), [The Ravine](https://www.instagram.com/ravinemusic/),
+  [Angelikah Fahray](https://www.instagram.com/angelikahfahray/). Featured artists:
+  [Jacob A. M. Powers](https://www.instagram.com/jacobampowers/), [Emily Cole](https://www.instagram.com/e.coledesigns/).
+  Full event credits [here](https://www.instagram.com/p/B0_d9i5gwc-/). Pandemic has
+  since put a damper on these festivals but we plan to come back when the time is
+  right.'
+featured_media:
+  label: Group photo. Photo by [Garrett Clare](https://www.instagram.com/garrettclare/).
+  path: ./block_the_wind_festival_2019_images/btw_2019_1.png
+local_media:
+- label: Photo of Angelikah Fahray performing by [Tom Green](https://www.instagram.com/tune.x/).
+  path: ./block_the_wind_festival_2019_images/btw_2019_8.jpg
+- label: Photo of Just Plain Jones performing by [Nick Genesio](https://www.instagram.com/nickgenesio/).
+  path: ./block_the_wind_festival_2019_images/btw_2019_7.jpg
+- label: Photo of Shane Reis performing by [Tom Green](https://www.instagram.com/tune.x/).
+  path: ./block_the_wind_festival_2019_images/btw_2019_9.jpg
+- label: Photo of Just Milk performing by [Nick Genesio](https://www.instagram.com/nickgenesio/).
+  path: ./block_the_wind_festival_2019_images/btw_2019_11.jpg
+- label: Photo of God.Damn.Chan performing.
+  path: ./block_the_wind_festival_2019_images/btw_2019_10.jpg
+- label: Marketing Poster.
+  path: ./block_the_wind_festival_2019_images/btw_2019_5.jpg
+- label: Marketing Poster.
+  path: ./block_the_wind_festival_2019_images/btw_2019_6.jpg
+youtube_videos:
+- label: Primary Trailer.
+  video_id: i1IXb80L-Zc
+involvement: Head organizer responsible for leading the booking, planning and organizing
+  of the event. Creator of media gallery items unless otherwise specified.
+mediums:
+- photography
+- events
+secondary_urls:
+- label: Primary promotional video.
+  link: https://www.instagram.com/p/By3A0QKArpK/
+- label: Instagram Account for BTW Festival.
+  link: https://www.instagram.com/blockthewindfestival/
+primary_url:
+  label: See summary post on www.blockthewindfestival.com for more photos.
+  link: https://www.blockthewindfestival.com/2019-1
+size: medium
+team_size: large group
+title: Block The Wind Festival 2019
+version_number: 0
+visible: true

@@ -1,0 +1,9 @@
+primary_color: RGBA(173, 39, 52, 1)
+logo:
+  label: Block The Wind Logo.
+  path: ./block_the_wind_logo.png
+description: Projects completed on the job that I advocated to open-source, or academic
+  works completed during the course of my education at [WPI](https://en.wikipedia.org/wiki/Worcester_Polytechnic_Institute).
+title: Professional + Academic Projects
+version_number: 0
+rank: 3

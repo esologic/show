@@ -1,0 +1,27 @@
+completion_date: '2018-03-18'
+description: Sketch to be able to measure multiple periodic squarewaves using an Arduino.
+domain: mixed (hardware, software)
+explanation: Arduino implementation of a [frequency counter](https://en.wikipedia.org/wiki/Frequency_counter).
+  This simple project was completed very quickly and has served me well over the years.
+  A simple Arduino sketch that uses interrupts to measure the frequencies of signals
+  coming in on digital pins. This code has been recycled a [number of times](https://www.esologic.com/hitchco-mk4/)
+  and is a great example of the strengths of timer programming typically found on
+  embedded devices.
+featured_media:
+  label: Breadboard implementation of circuit.
+  path: ./frequency_counter_images/frequency_counter_1.jpg
+local_media:
+- label: Demo of operation.
+  path: ./frequency_counter_images/frequency_counter_2.jpg
+involvement: Wrote/used this software.
+mediums:
+- arduino
+- breadboard electronics
+primary_url:
+  label: Blog post (contains code, test results etc.).
+  link: https://www.esologic.com/multiple-frequency-counter-arduino/
+size: small
+team_size: solo
+title: Multi-Channel Frequency Counter
+version_number: 0
+visible: true

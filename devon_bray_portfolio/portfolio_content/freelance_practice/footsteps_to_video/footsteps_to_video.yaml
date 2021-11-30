@@ -1,0 +1,40 @@
+completion_date: '2020-09-26'
+description: Converts footsteps into frame-by-frame video output.
+domain: mixed (hardware, software)
+explanation: Client needed a solution that could detect footsteps on a treadmill,
+  then transmit detections to a host PC. Each time a footstep is detected, a video
+  being broadcast via [OBS](https://en.wikipedia.org/wiki/OBS_Studio) is incremented
+  by a frame. Designed an Arduino based footfall detection algorithm centered around
+  an accelerometer. Wrote a python application using openCV to handle creating output
+  frames. PC-side application also had to be able to change videos based on input
+  from twitch chat. Hardware UI was designed for flexibility. Knobs control different
+  parameters of the detection algorithm, button indicates a footstep has been detected
+  and can be used to manually increment frame of video. This project is one of a series
+  of jobs I've completed for interdisciplinary sculpture artist, [Sara Dittrich](https://www.saradittrich.com/About).
+featured_media:
+  label: Operating demonstration, frames of video behind performer increment each
+    time a footstep is detected.
+  path: ./footsteps_to_video_images/foot_1.gif
+local_media:
+- label: Control box installed on treadmill.
+  path: ./footsteps_to_video_images/foot_2.JPG
+- label: Front facing shot of hardware UI.
+  path: ./footsteps_to_video_images/foot_3.png
+involvement: Contracted to design and manufacture this project.
+mediums:
+- arduino
+- mechanical cad
+- protoboard electronics
+- electrical cad
+- python
+primary_url:
+  label: Client's documentation on this performance.
+  link: https://www.saradittrich.com/Our-Wandering-Nerve
+size: medium
+team_size: solo
+title: Footsteps to Video
+version_number: 0
+press_urls:
+- label: 'Sara Dittrich: The Tender Interval (DiverseWorks).'
+  link: https://diverseworks.org/in-the-works/exhibtion-performance/sara-dittrich-the-tender-interval
+visible: true

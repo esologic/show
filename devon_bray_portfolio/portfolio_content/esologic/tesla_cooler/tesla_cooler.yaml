@@ -1,0 +1,60 @@
+completion_date: '2021-11-03'
+description: High performance GPU cooler for the NVIDIA Tesla K80.
+domain: mixed (hardware, software)
+explanation: Rendered desperate for VRAM by a [StyleGAN-related](https://www.esologic.com/gance/)
+  project, I had to wade thermistor-first into the concernedly hot and strange world
+  of GPUs without video outputs to design a high performance cooler for the NVIDIA
+  Tesla K80. The GPU is designed to be installed in server chassis that have a fan
+  pressure delta, where cooled air is moved from the front of the case, through the
+  cards and then out the back. I wanted to be able to use the GPUs in a regular 4U
+  server chassis or standard PC tower so needed to create a cooler. The design is
+  based around off the shelf parts and can be printed without supports. Electronics
+  are centered around a [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
+  running [MicroPython](https://micropython.org/). This entire project was designed
+  and manufactured live on stream in the spirit of a hackathon.
+youtube_videos:
+- label: Project history, design walkthrough and stress test. A bit more verbose than
+    other videos, wanted to try a direct-to-tape format.
+  video_id: ax6S3I81yAg
+featured_media:
+  label: Single cooler attached to an NVIDIA Tesla K80.
+  path: ./tesla_cooler_images/tesla_cooler_2.JPG
+local_media:
+- label: Top-down shot of two K80s installed in server, feedback thermistors are visible.
+  path: ./tesla_cooler_images/tesla_cooler_5.JPG
+- label: Single cooler configuration installed in a K80.
+  path: ./tesla_cooler_images/tesla_cooler_1.JPG
+- label: Dual cooler configuration installed in two K80s installed in server.
+  path: ./tesla_cooler_images/tesla_cooler_3.JPG
+- label: Wider shot of two K80s installed in server.
+  path: ./tesla_cooler_images/tesla_cooler_4.JPG
+- label: Detail view of thermistors.
+  path: ./tesla_cooler_images/tesla_cooler_6.JPG
+- label: Shot of intake ports of both coolers.
+  path: ./tesla_cooler_images/tesla_cooler_7.JPG
+- label: Detail shot of electronics.
+  path: ./tesla_cooler_images/tesla_cooler_8.JPG
+involvement: Designed and manufactured the coolers.
+mediums:
+- python
+- 3d printer
+- mechanical cad
+- protoboard electronics
+- electrical cad
+primary_url:
+  label: Blog post, which contains links to schematics, code, models, BOM etc. Also
+    details early prototypes and lessons learned through iterations.
+  link: https://www.esologic.com/tesla-cooler/
+size: medium
+secondary_urls:
+- label: Github Organization (contains individual repos for e/mCAD, and micropython).
+  link: https://github.com/Tesla-Cooler
+- label: Design stream archive.
+  link: https://diode.zone/w/p/umw5h892jBqF9Rh58k63bR
+team_size: solo
+title: Tesla Cooler
+version_number: 0
+press_urls:
+- label: 3d-printed Fan Mount Keeps Server GPU Cool In Desktop Case (Hackaday).
+  link: https://hackaday.com/2021/11/06/3d-printed-fan-mount-keeps-server-gpu-cool-in-desktop-case/
+visible: true

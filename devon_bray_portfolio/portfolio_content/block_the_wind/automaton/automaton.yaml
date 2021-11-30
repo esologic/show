@@ -1,0 +1,44 @@
+completion_date: 2019-08-03
+description: Apparel for the 2019 music festival.
+domain: social
+explanation: Two colorways, gold and steel blue. Embroidered design on front, two
+  tone screenprint on the back. Designed by collective member, [Luca Pascal](https://www.artstation.com/lucapascal).
+  This has been our most popular release to date.
+featured_media:
+  label: Both Colorways.
+  path: ./automaton_images/automaton_1.png
+local_media:
+- label: Detail of gold front.
+  path: ./automaton_images/automaton_2.JPG
+- label: Detail of steel blue front.
+  path: ./automaton_images/automaton_3.png
+- label: Front of gold/steel blue.
+  path: ./automaton_images/automaton_4.png
+- label: Back of gold.
+  path: ./automaton_images/automaton_5.png
+- label: Back of steel blue.
+  path: ./automaton_images/automaton_6.JPG
+- label: Product shot of gold front.
+  path: ./automaton_images/automaton_7.png
+- label: Product shot of gold back.
+  path: ./automaton_images/automaton_8.png
+- label: Product shot of steel blue front.
+  path: ./automaton_images/automaton_9.png
+- label: Product shot of steel blue back.
+  path: ./automaton_images/automaton_10.png
+secondary_urls:
+- label: See the Block the Wind Store Instagram account for more photos.
+  link: https://www.instagram.com/blockthewindstore/
+involvement: Coordinated production, photographed and edited lookbook, responsible
+  for fulfilling orders.
+mediums:
+- photography
+- apparel
+primary_url:
+  label: Product page on the BTW store, also contains full credits.
+  link: https://block-the-wind-store.myshopify.com/collections/automation-hoodie/products/automation-hoodie-blue
+size: small
+team_size: small group
+title: Automaton Hoodie
+version_number: 0
+visible: true

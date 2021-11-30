@@ -1,0 +1,54 @@
+completion_date: '2021-11-15'
+description: Tool to map music and video into the latent space of StyleGAN2 networks.
+domain: software
+explanation: In collaboration with [Won Pound](https://wonpound.bandcamp.com/) for
+  his forthcoming album release via [minaret records](https://minaretrecords.bandcamp.com/artists)
+  I was recently commissioned to lead an expedition into [latent space](https://en.wikipedia.org/wiki/Latent_space),
+  encountering intelligences of my own haphazard creation. Created the camera used
+  to capture training images, then trained [StyleGAN2](https://github.com/NVlabs/stylegan2)
+  networks. Experimentation lead to new methods to input music and video into the
+  networks. Note that this tool is an active work in progress.
+featured_media:
+  label: Projection file example.
+  path: ./gance_images/gance_8.gif
+involvement: Wrote software to capture images, trained models, wrote tool.
+mediums:
+- python
+- photography
+- artificial intelligence
+primary_url:
+  label: Introductory blog post. Contains more information about technique, as well
+    as examples with sound.
+  link: https://www.esologic.com/gance
+secondary_urls:
+- label: GitHub repository for GANce.
+  link: https://github.com/esologic/GANce
+- label: GitHub repository for Pitraiture, the tool used to capture the training images.
+  link: https://github.com/esologic/pitraiture
+- label: Won Pound's Bandcamp.
+  link: https://wonpound.bandcamp.com/
+youtube_videos:
+- label: Debug view for music + video into StyleGAN network.
+  video_id: GAuO9Kzxn4s
+local_media:
+- label: Debug view for music + smoothed noise into StyleGAN network. [Version with
+    sound](https://www.esologic.com/gance/) is much better.
+  path: ./gance_images/gance_11.gif
+- label: Debug view for music + video into StyleGAN network with active switching
+    enabled. [Version with sound](https://www.esologic.com/gance/) is much better.
+  path: ./gance_images/gance_7.gif
+- label: Resulting still image pulled from sample output video.
+  path: ./gance_images/gance_9.png
+- label: Resulting still image pulled from sample output video.
+  path: ./gance_images/gance_10.png
+- label: Sample training image.
+  path: ./gance_images/gance_3.jpeg
+- label: Sample training image.
+  path: ./gance_images/gance_4.jpeg
+- label: Camera setup used to capture the ~100k images used for training.
+  path: ./gance_images/gance_2.JPG
+size: large
+team_size: small group
+title: GANce
+version_number: 0
+visible: true

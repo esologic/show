@@ -1,0 +1,91 @@
+completion_date: '2014-06-16'
+description: Plant growth automation system based on Raspberry Pi.
+domain: mixed (hardware, software)
+explanation: During the summer break before heading off to college, I wrote a collection
+  of scripts to run on the newly released [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi)
+  to automate the watering schedule of some tomato plants. This project ballooned
+  in scope, a twitter integration was added to post temperature and soil moisture
+  visualizations automatically. Encouraged by the positive feedback given to the development
+  log, I applied for grant funding through the [Kurt Geissler Foundation](https://kurtgiessler.com/index.html).
+  Grant in hand, research continued alongside my undergraduate responsibilities at
+  WPI. The grant also demonstrated my bona fides to a Professor of mine who graciously
+  allowed me to set up shop in the corner of his basement lab in the Physics department.
+  It was there where PiPlanter2 was born, a mother/daughter configuration that used
+  the Pi for high level work and an Arduino for interfacing with the sensors and controlling
+  lights/pumps etc.
+youtube_videos:
+- label: Overview of setup installed at WPI.
+  video_id: I0wqVl8SeuU
+- label: PiPlanter assisted plant growth time lapse.
+  video_id: IyGJweVJrH8
+- label: Final overview of first version of this project.
+  video_id: LIsfs72cTq0
+- label: Video overview of first iteration of this project.
+  video_id: k3OU84bd3oU
+featured_media:
+  label: Version 1's harvest.
+  path: ./piplanter_images/piplanter_1.jpeg
+local_media:
+- label: Version 1 overview.
+  path: ./piplanter_images/piplanter_2.jpeg
+- label: Version 1 electronics detail.
+  path: ./piplanter_images/piplanter_3.jpeg
+- label: Version 2 lighting.
+  path: ./piplanter_images/piplanter_4.jpeg
+- label: Basil seedling and flower bulbs growing in version 2.
+  path: ./piplanter_images/piplanter_5.jpeg
+- label: Version 2 electronics detail.
+  path: ./piplanter_images/piplanter_6.jpeg
+- label: Oregano growing in version 2.
+  path: ./piplanter_images/piplanter_7.jpeg
+- label: Picamera being used in version 2.
+  path: ./piplanter_images/piplanter_8.jpeg
+- label: Sample sensor visualization.
+  path: ./piplanter_images/piplanter_12.png
+- label: Me (far left) at the award ceremony for the grant.
+  path: ./piplanter_images/piplanter_9.jpg
+- label: Photo I recieved from a reader who had built a PiPlanter.
+  path: ./piplanter_images/piplanter_10.jpg
+- label: Second shot of reader's build.
+  path: ./piplanter_images/piplanter_11.jpg
+involvement: Developed and manufactured the installations of this project.
+mediums:
+- python
+- arduino
+- protoboard electronics
+- electrical cad
+- twitter
+- raspberry pi
+primary_url:
+  label: Version 2's Project page, top-level entry point for all of the documentation
+    for the entire project, including version 1.
+  link: https://www.esologic.com/piplanter-2/
+size: large
+secondary_urls:
+- label: Kurt Giessler Foundation Website (Scroll to 2014 to see the entry).
+  link: http://kurtgiessler.com/mission--awards.html
+- label: PiPlanter 2 Build Guide.
+  link: https://www.esologic.com/piplanter-2-lite-version-release/
+- label: PiPlanter 1 documentation top-level entry point.
+  link: https://www.esologic.com/piplanter-project-page/
+- label: JG PiPiplanter, a replication of this project.
+  link: http://joelgehringer.com/piplanter/
+- label: Initial blog post for the entire project (circa 2012!).
+  link: https://www.esologic.com/basic-wetness-sensor
+- label: Twitter bot that posted updates.
+  link: https://twitter.com/piplanter_bot
+- label: Alternate twitter account.
+  link: https://twitter.com/eso_rpi
+team_size: solo
+title: PiPlanter
+version_number: 0
+press_urls:
+- label: 'PiPlanter: a plant growth monitor (Raspberry Pi Foundation).'
+  link: https://www.raspberrypi.com/news/piplanter-a-plant-growth-monitor/
+- label: Raspberry Pi Automates Your Tomato Farm (Hackaday).
+  link: https://hackaday.com/2013/07/01/raspberry-pi-automates-your-tomato-farm/
+- label: PiPlanter 2 (Adafruit).
+  link: https://blog.adafruit.com/2014/10/03/piplanter-2-piday-raspberrypi-raspberry_pi-2/
+- label: Students win Giessler Foundation grants for independent projects (WPI News).
+  link: https://www.wpi.edu/news/giessler-foundation
+visible: true

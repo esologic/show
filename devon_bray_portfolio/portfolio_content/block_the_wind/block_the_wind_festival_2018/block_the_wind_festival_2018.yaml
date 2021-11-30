@@ -1,0 +1,41 @@
+completion_date: 2018-08-12
+description: 10 act independent music festival.
+domain: social
+explanation: 'Fourth annual music festival. Back at [One Longfellow Square](https://onelongfellowsquare.com/)
+  in Portland, Maine. Musicians: [EMRLD](https://www.instagram.com/weareemrld/), [Won
+  Pound](https://www.instagram.com/wonpounds/), [FREEVØ](https://www.instagram.com/freevomusic/),
+  [B. Aull](https://www.instagram.com/aullthat/), [Lena Rich](https://www.instagram.com/lena_rich/),
+  [The Ravine](https://www.instagram.com/ravinemusic/), [Jxck](https://open.spotify.com/artist/3U64Inop5BlwwhsO98QHG3),
+  [Odie DeSmith](https://www.instagram.com/odiedesmith/), [Andre Blue](https://www.instagram.com/dregottheblues/),
+  [Sumner Bright](https://www.instagram.com/sumnerbright/).'
+featured_media:
+  label: Group photo.
+  path: ./block_the_wind_festival_2018_images/btw_2018_1.jpeg
+local_media:
+- label: B. Aull Performing.
+  path: ./block_the_wind_festival_2018_images/btw_2018_2.jpg
+- label: Lena Rich Performing.
+  path: ./block_the_wind_festival_2018_images/btw_2018_3.jpg
+- label: EMRLD Performing.
+  path: ./block_the_wind_festival_2018_images/btw_2018_4.png
+- label: The Ravine back stage.
+  path: ./block_the_wind_festival_2018_images/btw_2018_5.jpg
+involvement: Head organizer responsible for leading the booking, planning and organizing
+  of the event. Creator of media gallery items unless otherwise specified.
+youtube_videos:
+- label: Primary Trailer.
+  video_id: cey9qUriVbA
+secondary_urls:
+- label: Instagram Account for BTW Festival.
+  link: https://www.instagram.com/blockthewindfestival/
+mediums:
+- photography
+- events
+primary_url:
+  label: See summary post on www.blockthewindfestival.com for more photos.
+  link: https://www.blockthewindfestival.com/2018
+size: medium
+team_size: large group
+title: Block The Wind Festival 2018
+version_number: 0
+visible: true

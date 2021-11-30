@@ -1,0 +1,29 @@
+completion_date: 2018-08-12
+description: Apparel for the 2018 music festival.
+domain: social
+explanation: Two colorways, cream and charcoal. Embroidered design on front, two tone
+  screenprint on the back. Patch on left arm. First design that worked with embriodery.
+  Designed by collective member, [Luca Pascal](https://www.artstation.com/lucapascal).
+featured_media:
+  label: Both Colorways.
+  path: ./dimensions_images/dimensions_1.JPG
+local_media:
+- label: Detail view of patches.
+  path: ./dimensions_images/dimensions_4.jpeg
+- label: Cream colorway back.
+  path: ./dimensions_images/dimensions_3.JPG
+involvement: Coordinated production, photographed and edited lookbook.
+secondary_urls:
+- label: See the Block the Wind Store Instagram account for more photos.
+  link: https://www.instagram.com/blockthewindstore/
+mediums:
+- photography
+- apparel
+primary_url:
+  label: Product page on the BTW store, also contains full credits.
+  link: https://block-the-wind-store.myshopify.com/collections/frontpage
+size: small
+team_size: small group
+title: Dimensions Hoodie
+version_number: 0
+visible: true

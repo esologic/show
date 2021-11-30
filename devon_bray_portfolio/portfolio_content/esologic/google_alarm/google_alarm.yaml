@@ -1,0 +1,34 @@
+completion_date: '2013-06-03'
+description: Uses Google calendar to trigger music playback on a set of speakers via
+  a Raspberry Pi.
+domain: software
+explanation: An ancient project, one of the very first published on the blog. Used
+  the freshly released [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi)
+  to prevent my high school self from sleeping in. This post was featured on lifehacker.com,
+  a major technology publication. The thrilling rush of comments, feedback that resulted
+  from this post is probably what lead to me continuing to publish my work in this
+  way for so long. Little did I know at the time, but both the Raspberry Pi and Python
+  would remain a major part of my life for years to come. It's probably inappropriate
+  to include such an old project in a portfolio like this but this work will always
+  have a place in my heart, and is the earliest example of my affinity for mixing
+  disparate inputs and outputs.
+featured_media:
+  label: Code snippet.
+  path: ./google_alarm_images/google_alarm_1.jpeg
+involvement: Developer of this project.
+mediums:
+- python
+- raspberry pi
+press_urls:
+- label: Combine a Raspberry Pi with Google Calendar for a Smart Alarm Clock (Lifehacker).
+  link: https://lifehacker.com/combine-a-raspberry-pi-with-google-calendar-for-a-smart-512265472
+- label: Alarm Clock Uses Raspberry Pi To Poll Google Calendar (Hackaday).
+  link: https://hackaday.com/2013/06/06/alarm-clock-uses-raspberry-pi-to-poll-google-calendar/
+primary_url:
+  label: Blog post (Contains source code. Tread with caution).
+  link: https://www.esologic.com/raspberry-pi-as-a-google-calender-alarm-clock/
+size: small
+team_size: solo
+title: Raspberry Pi Google Calendar Alarm Clock
+version_number: 0
+visible: true

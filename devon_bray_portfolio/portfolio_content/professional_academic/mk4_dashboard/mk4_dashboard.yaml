@@ -1,0 +1,54 @@
+completion_date: '2018-08-08'
+description: A fully customizable, open-source, digital dashboard for a replica 1965
+  Ford Shelby Cobra, the Factory 5 MK4 Roadster.
+domain: mixed (hardware, software)
+explanation: Completed during my engineering residency at [Hitchcock Management](https://www.linkedin.com/company/hitchcock-management/about/).
+  Served as the basis for further research into automotive IoT. The GUI displays much
+  more accurate and comprehensive information than a normal car dashboard, and things
+  like logging and event triggering can be easily built right in. Implemented backup
+  a camera, cruise control, numpad to lock and fire ignition. An [Electron](https://www.electronjs.org/)
+  UI ran on Raspberry Pi. Used anodized aluminum for the actual dashboard part, high
+  performance printed parts for everything else. The car didn't have a [CAN bus](https://en.wikipedia.org/wiki/CAN_bus),
+  so I had to implement speedometer and tachometer from first principals on bare metal.
+  Inside the car, the electrical environment was very noisy, so hardware communication
+  protocols had to be very robust. Manufactured two complete dashboards, one made
+  of out anodized aluminium and one out of walnut. I successfully advocated for design
+  to be open sourced upon this project's completion.
+featured_media:
+  label: Rendering of Mechanical CAD model.
+  path: ./mk4_dashboard_images/mk4_1.jpg
+local_media:
+- label: Electronics during assembly process.
+  path: ./mk4_dashboard_images/mk4_2.jpg
+- label: View of touchscreen display and hardware UI.
+  path: ./mk4_dashboard_images/mk4_3.JPG
+- label: UI view of the aluminum and wooden dashboards.
+  path: ./mk4_dashboard_images/mk4_4.JPG
+- label: Detail view of light switch.
+  path: ./mk4_dashboard_images/mk4_5.JPG
+- label: Assembled electronics of both dashboards.
+  path: ./mk4_dashboard_images/mk4_6.JPG
+- label: Assembled PCB, no SMD resistors allowed, had to use Arduino Mega as replaceable
+    realtime controller.
+  path: ./mk4_dashboard_images/mk4_7.JPG
+involvement: Designed electronics, designed mixed hardware/software UI, authored firmware
+  and other driving software. Assembled electronics + mechanical parts, published
+  documentation.
+mediums:
+- laser cutter
+- 3d printer
+- arduino
+- pcb electronics
+- mechanical cad
+- frontend web development
+primary_url:
+  label: Blog post (design and feature review, code/CAD etc.).
+  link: https://www.esologic.com/mk4-dd/
+secondary_urls:
+- label: Github Organization.
+  link: https://github.com/mk4-dd
+size: large
+team_size: small group
+title: MK4 Dashboard
+version_number: 0
+visible: true

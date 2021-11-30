@@ -1,0 +1,42 @@
+completion_date: '2020-10-29'
+description: Over the years I've published a number of standalone 3D printable designs.
+  This entry aggregates the most useful and most interesting.
+domain: hardware
+explanation: 3D Printing is a favorite technology and it is leveraged heavily in my
+  work, professional and otherwise. For mechanical CAD, my go-to software suite is
+  [Solidworks](https://en.wikipedia.org/wiki/SolidWorks) but occasionally I've utilized
+  [Fusion 360](https://en.wikipedia.org/wiki/Autodesk) or [ZBrush](https://en.wikipedia.org/wiki/ZBrush).
+  In my studio I use a [Prusa i3 Mk2s](https://en.wikipedia.org/wiki/Prusa_i3), but
+  have worked intimately with [Formlabs](https://en.wikipedia.org/wiki/Formlabs),
+  [Stratasys](https://en.wikipedia.org/wiki/Stratasys) and [LulzBot](https://en.wikipedia.org/wiki/Aleph_Objects)
+  machines as well. Typically my designs are utilitarian in nature.
+featured_media:
+  label: Desktop organizer, a gift. [Blog Post](https://www.esologic.com/3d-printed-pen-notebook-organizer/).
+  path: ./3d_prints_images/3d_prints_1.jpg
+local_media:
+- label: Desktop microphone stand. [Blog Post](https://www.esologic.com/mic-stand/).
+  path: ./3d_prints_images/3d_prints_2.jpg
+- label: Wire shelf Raspberry Pi mount. [Blog Post](https://www.esologic.com/goodprints-episode-1/).
+  path: ./3d_prints_images/3d_prints_6.jpg
+- label: 1x1 Parts drawer for bringing the lab on the go. [Blog Post](https://www.esologic.com/singer-parts-drawer-holder/).
+  path: ./3d_prints_images/3d_prints_4.jpeg
+- label: Wire shelf keyboard holder. [Blog Post](https://www.esologic.com/tiny-apartment-improvement-project-wire-shelf-keyboard-holder/).
+  path: ./3d_prints_images/3d_prints_5.jpeg
+- label: Wall-mounted dry box for printing nylon filaments. [Blog Post](https://www.esologic.com/wall-mounted-dry
+    box-for-3d-printing-with-nylon/).
+  path: ./3d_prints_images/3d_prints_3.jpg
+involvement: Designed and manufactured these parts.
+mediums:
+- mechanical cad
+- 3d printer
+primary_url:
+  label: 3D printing category on the blog.
+  link: https://www.esologic.com/category/3d-printing/
+secondary_urls:
+- label: Thingiverse profile.
+  link: https://www.thingiverse.com/esologic/designs
+size: small
+team_size: solo
+title: 3D Print Gallery
+version_number: 0
+visible: true

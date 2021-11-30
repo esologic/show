@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Portfolio</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='portfolio.css') }}">
+      <link rel="icon" href="{{ url_for('static', filename=portfolio.icon.path) }}" type="image/x-icon">
+   </head>
+   <body>
+      {% set image_url = url_for('static', filename=portfolio.header_background.path) -%}
+      <div class="internal-pad" style="background-image: url('{{image_url}}')">
+         <div class="portfolio-header">
+            <div class="portfolio-header-text">
+               <h1>{{ portfolio.title }}</h1>
+               {{ portfolio.description | safe }}
+               {{ portfolio.explanation | safe }}
+               <ul>
+                  <li><a href="mailto:{{portfolio.email}}">Email.</a></li>
+                  {% for contact_url in portfolio.contact_urls  -%}
+                  <li><a href="{{ contact_url.link }}" target="_blank" rel="noopener noreferrer">{{ contact_url.label }}</a></li>
+                  {% endfor -%}
+                  {% if portfolio.resume_path -%}
+                  <li><a href="{{ url_for('static', filename=portfolio.resume_path) }}" target="_blank" rel="noopener noreferrer">Resume.</a></li>
+                  {% endif -%}
+               </ul>
+               {{ portfolio.conclusion | safe }}
+            </div>
+            <img
+               src="{{ url_for('static', filename=portfolio.portrait.path) }}"
+               alt="{{ portfolio.portrait.label }}"
+            >
+         </div>
+      </div>
+      {% for section in portfolio.sections -%}
+      <div style="background-color: {{ section.primary_color }}" class="section-container">
+         <div class="section-header">
+            <h1 class="section-container-title">{{ section.title }}</h1>
+            {{ section.description | safe }}
+         </div>
+         <div class="container">
+            {% for entry in section.entries -%}
+            {% set url = url_for('render_slug', slug=entry.slug) -%}
+            <figure onclick="location.href='{{ url }}';" style="cursor: pointer;" class="dimmer item {{entry.size}}">
+               <img
+                  src="{{ url_for('static', filename=entry.featured_media.path) }}"
+                  class="gallery-img"
+                  alt="{{ entry.featured_media.label }}"
+               >
+               <figcaption>
+                  <span class="entry-title">{{ entry.title  }} (c. {{ entry.completion_year }}) <span>&#8226;</span> </span>
+                  <span class="entry-description">{{ entry.description }}</span>
+                  {% for medium in entry.mediums -%}
+                  <span class="entry-medium">{{ medium }}</span>
+                  {% if not loop.last -%}
+                  <span>/</span>
+                  {% endif -%}
+                  {% endfor -%}
+               </figcaption>
+            </figure>
+            {% endfor -%}
+         </div>
+      </div>
+      {% endfor -%}
+   </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>{{ entry.title }}</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='entry.css') }}">
+      <link rel="icon" href="{{ url_for('static', filename=entry.favicon_path) }}" type="image/x-icon">
+   </head>
+   <body>
+      <div class="nav">
+         {% if entry.previous_entry -%}
+         {% set previous_url = url_for('render_slug', slug=entry.previous_entry.slug) -%}
+         <div class="nav-button dimmer" onclick="location.href='{{ previous_url }}';">
+            <img
+               class="entry-title-item"
+               src="{{ url_for('static', filename=entry.previous_entry.featured_media.path) }}"
+               alt="{{ entry.previous_entry.featured_media.label }}"
+            >
+            <div class="nav-button-text">{{ entry.previous_entry.title }}</div>
+         </div>
+         {% endif -%}
+         <div class="nav-button dimmer" onclick="location.href='/';">
+            <img
+               class="entry-title-item"
+               src="{{ url_for('static', filename=entry.top_image.path) }}"
+               alt="{{ entry.featured_media.label }}"
+            >
+            <div class="nav-button-text">Portfolio</div>
+         </div>
+         {% if entry.next_entry -%}
+         {% set next_url = url_for('render_slug', slug=entry.next_entry.slug) -%}
+         <div class="nav-button dimmer" onclick="location.href='{{ next_url }}';">
+            <img
+               class="entry-title-item"
+               src="{{ url_for('static', filename=entry.next_entry.featured_media.path) }}"
+               alt="{{ entry.next_entry.featured_media.label }}"
+            >
+            <div class="nav-button-text">{{ entry.next_entry.title }}</div>
+         </div>
+         {% endif -%}
+      </div>
+      <div class="entry-container" style="background-color: {{ entry.primary_color }}">
+         <h1 class="area-title">{{ entry.title }} <span>({{ entry.completion_date_verbose }})</span></h1>
+         <div class="entry-title-container">
+            <figure>
+               <img
+                  class="entry-title-item"
+                  src="{{ url_for('static', filename=entry.featured_media.path) }}"
+                  alt="{{ entry.featured_media.label }}"
+               >
+               <figcaption>{{ entry.featured_media.label | safe }}</figcaption>
+            </figure>
+            <div class="entry-title-item">
+               <h3 class="description-text">{{ entry.description }}</h3>
+               {{ entry.explanation | safe }}
+               <a class="button-link" href='{{ entry.primary_url.link }}' target="_blank" rel="noopener noreferrer">
+                  <div class="primary-url dimmer">{{ entry.primary_url.label }}</div>
+               </a>
+               {% if entry.press_urls -%}
+               <p class="heavy">As Seen In:</p>
+               <ul>
+                  {% for press_url in entry.press_urls  -%}
+                  <li><a href="{{ press_url.link }}" target="_blank" rel="noopener noreferrer">{{ press_url.label }}</a></li>
+                  {% endfor -%}
+               </ul>
+               {%endif -%}
+               {% if entry.secondary_urls -%}
+               <p class="heavy">Further Reading:</p>
+               <ul>
+                  {% for secondary_url in entry.secondary_urls  -%}
+                  <li><a href="{{ secondary_url.link }}" target="_blank" rel="noopener noreferrer">{{ secondary_url.label }}</a></li>
+                  {% endfor -%}
+               </ul>
+               {%endif -%}
+               <p class="heavy">Metadata:</p>
+               <div class="entry-metadata">
+                  <span class="medium">Involvement:</span>
+                  <span>{{ entry.involvement }}</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Size:</span>
+                  <span>{{ entry.size }}</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Domain:</span>
+                  <span>{{ entry.domain }}</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Team Size:</span>
+                  <span>{{ entry.team_size }}</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Mediums:</span>
+                  {% for medium in entry.mediums %}<span>{{ medium }}</span>{% if not loop.last %}<span class="medium">,</span>{% endif %} {% endfor %}
+               </div>
+            </div>
+         </div>
+         {% if entry.youtube_videos or entry.local_media -%}
+         <div class="gallery">
+            <h2 class="area-title">Gallery</h2>
+            {% if entry.youtube_videos -%}
+            {% for youtube_video in entry.youtube_videos -%}
+            <figure class="gallery-figure">
+               <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/{{youtube_video.video_id}}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+               </iframe>
+               <figcaption>{{ youtube_video.label | safe }}</figcaption>
+            </figure>
+            {% endfor -%}
+            {% endif -%}
+            {% if entry.local_media -%}
+            {% for local_media in entry.local_media  -%}
+            <figure class="gallery-figure">
+               <img
+                  src="{{ url_for('static', filename=local_media.path) }}"
+                  alt="{{ local_media.label }}"
+               >
+               <figcaption>{{ local_media.label | safe }}</figcaption>
+            </figure>
+            {% endfor -%}
+            {% endif -%}
+            {% endif -%}
+         </div>
+      </div>
+   </body>
+</html>

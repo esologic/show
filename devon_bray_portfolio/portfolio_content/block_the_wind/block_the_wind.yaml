@@ -1,0 +1,15 @@
+primary_color: RGBA(0, 0, 0, 1)
+logo:
+  label: Block The Wind Logo.
+  path: ./block_the_wind_logo.png
+description: Block The Wind is a Maine-based art collective. Our goal is to inspire,
+  fuel and exhibit creative works in New England. Between our annual festival and
+  artist-first online store, we strive to introduce talented creatives, writers and
+  musicians to the public. I am a founding contributor, leading every major project
+  in the history of the organization. Check out the websites for the [music festival](https://www.blockthewindfestival.com/)
+  and [online store](https://block-the-wind-store.myshopify.com/). Both the [store](https://www.instagram.com/blockthewindstore/)
+  and [festival](https://www.instagram.com/blockthewindfestival/) are on Instagram
+  as well.
+title: Block The Wind
+version_number: 0
+rank: 4

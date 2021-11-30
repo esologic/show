@@ -1,0 +1,40 @@
+completion_date: '2017-10-15'
+description: Persistent installation livestreamed via Periscope.
+domain: mixed (hardware, software)
+explanation: >-
+  This persistent installation was live for around two months. This was used as a
+  live demo to potential clients. It was also a way for us to do long term testing
+  of software
+  and hardware components in a realistic scenario. Common twitter hashtags like [#boston](https://twitter.com/search?q=%23boston&src=typed_query&f=top),
+  [#hardware](https://twitter.com/search?q=%23hardware&src=typed_query&f=top), [#startup](https://twitter.com/search?q=%23startup&src=typed_query&f=top)
+  were integrated to have a constant source of input for animations. This piece lead
+  to our first commercial installation with BNT.
+youtube_videos:
+- label: Demonstration, shows a sample interaction.
+  video_id: vkzwySQfeJs
+featured_media:
+  label: Isometric shot of 3d printed lettering.
+  path: ./livepush_images/livepush_1.JPG
+local_media:
+- label: Front facing view of complete installation.
+  path: ./livepush_images/livepush_2.JPG
+- label: Another view of complete installation.
+  path: ./livepush_images/livepush_3.JPG
+involvement: Electrical/Mechanical designer, wrote software for social media parser
+  and animation engine.
+mediums:
+- python
+- 3d printer
+- mechanical cad
+- protoboard electronics
+- electrical cad
+- twitter
+- led art
+primary_url:
+  label: See more photos at the bottom of the installations page.
+  link: https://telapush.com/installs
+size: medium
+team_size: small group
+title: Livepush
+version_number: 0
+visible: true

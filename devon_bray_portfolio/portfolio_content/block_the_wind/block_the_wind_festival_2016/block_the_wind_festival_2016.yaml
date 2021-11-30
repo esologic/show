@@ -1,0 +1,31 @@
+completion_date: 2016-08-13
+description: 7 act independent music festival.
+domain: social
+explanation: 'Second annual music festival. Neighbors garage in Yarmouth, Maine. Musicians:
+  [Bensbeendead.](https://www.instagram.com/bensbeendead/), [EMRLD](https://www.instagram.com/weareemrld/),
+  [Won Pound](https://www.instagram.com/wonpounds/), [The Ravine](https://www.instagram.com/ravinemusic/),
+  [All Quiet Ire](https://www.instagram.com/all_quiet_ire/), Buffalo, Plant Hublot.'
+featured_media:
+  label: Group photo.
+  path: ./block_the_wind_festival_2016_images/btw_2016_1.jpeg
+local_media:
+- label: All Quiet Ire Performing.
+  path: ./block_the_wind_festival_2016_images/btw_2016_2.jpeg
+- label: Bensbeendead Performing.
+  path: ./block_the_wind_festival_2016_images/btw_2016_3.jpeg
+involvement: Co-organizer responsible for leading the booking, planning and organizing
+  of the event. Creator of media gallery items unless otherwise specified.
+secondary_urls:
+- label: Instagram Account for BTW Festival.
+  link: https://www.instagram.com/blockthewindfestival/
+mediums:
+- photography
+- events
+primary_url:
+  label: See summary post on www.blockthewindfestival.com for more photos.
+  link: https://www.blockthewindfestival.com/2016
+size: small
+team_size: large group
+title: Block The Wind Festival 2016
+version_number: 0
+visible: true

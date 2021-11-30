@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>GANce</title>
+      <link rel="stylesheet" href="../static/entry.css">
+      <link rel="icon" href="../static/gance_icon.png" type="image/x-icon">
+   </head>
+   <body>
+      <div class="nav">
+         <div class="nav-button dimmer" onclick="location.href='../multi_audio/index.html';">
+            <img
+               class="entry-title-item"
+               src="../static/multi_audio_1.JPG"
+               alt="&lt;p&gt;Overview shot with all components installed.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">Multiple Audio</div>
+         </div>
+         <div class="nav-button dimmer" onclick="location.href='/';">
+            <img
+               class="entry-title-item"
+               src="../static/banner_1.jpg"
+               alt="&lt;p&gt;Projection file example.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">Portfolio</div>
+         </div>
+         <div class="nav-button dimmer" onclick="location.href='../tesla_cooler/index.html';">
+            <img
+               class="entry-title-item"
+               src="../static/tesla_cooler_2.JPG"
+               alt="&lt;p&gt;Single cooler attached to an NVIDIA Tesla K80.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">Tesla Cooler</div>
+         </div>
+         </div>
+      <div class="entry-container" style="background-color: #e69500">
+         <h1 class="area-title">GANce <span>(November of 2021)</span></h1>
+         <div class="entry-title-container">
+            <figure>
+               <img
+                  class="entry-title-item"
+                  src="../static/gance_8.gif"
+                  alt="&lt;p&gt;Projection file example.&lt;/p&gt;"
+               >
+               <figcaption><p>Projection file example.</p></figcaption>
+            </figure>
+            <div class="entry-title-item">
+               <h3 class="description-text">Tool to map music and video into the latent space of StyleGAN2 networks.</h3>
+               <p>In collaboration with <a href="https://wonpound.bandcamp.com/" target="_blank">Won Pound</a> for his forthcoming album release via <a href="https://minaretrecords.bandcamp.com/artists" target="_blank">minaret records</a> I was recently commissioned to lead an expedition into <a href="https://en.wikipedia.org/wiki/Latent_space" target="_blank">latent space</a>, encountering intelligences of my own haphazard creation. Created the camera used to capture training images, then trained <a href="https://github.com/NVlabs/stylegan2" target="_blank">StyleGAN2</a> networks. Experimentation lead to new methods to input music and video into the networks. Note that this tool is an active work in progress.</p>
+               <a class="button-link" href='https://www.esologic.com/gance' target="_blank" rel="noopener noreferrer">
+                  <div class="primary-url dimmer">Introductory blog post. Contains more information about technique, as well as examples with sound.</div>
+               </a>
+               <p class="heavy">Further Reading:</p>
+               <ul>
+                  <li><a href="https://github.com/esologic/GANce" target="_blank" rel="noopener noreferrer">GitHub repository for GANce.</a></li>
+                  <li><a href="https://github.com/esologic/pitraiture" target="_blank" rel="noopener noreferrer">GitHub repository for Pitraiture, the tool used to capture the training images.</a></li>
+                  <li><a href="https://wonpound.bandcamp.com/" target="_blank" rel="noopener noreferrer">Won Pound&#39;s Bandcamp.</a></li>
+                  </ul>
+               <p class="heavy">Metadata:</p>
+               <div class="entry-metadata">
+                  <span class="medium">Involvement:</span>
+                  <span>Wrote software to capture images, trained models, wrote tool.</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Size:</span>
+                  <span>large</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Domain:</span>
+                  <span>Software</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Team Size:</span>
+                  <span>Small Group</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Mediums:</span>
+                  <span>Artificial Intelligence</span><span class="medium">,</span> <span>Photography</span><span class="medium">,</span> <span>Python</span> 
+               </div>
+            </div>
+         </div>
+         <div class="gallery">
+            <h2 class="area-title">Gallery</h2>
+            <figure class="gallery-figure">
+               <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/GAuO9Kzxn4s"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+               </iframe>
+               <figcaption><p>Debug view for music + video into StyleGAN network.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_11.gif"
+                  alt="&lt;p&gt;Debug view for music + smoothed noise into StyleGAN network. &lt;a href=&#34;https://www.esologic.com/gance/&#34; target=&#34;_blank&#34;&gt;Version with sound&lt;/a&gt; is much better.&lt;/p&gt;"
+               >
+               <figcaption><p>Debug view for music + smoothed noise into StyleGAN network. <a href="https://www.esologic.com/gance/" target="_blank">Version with sound</a> is much better.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_7.gif"
+                  alt="&lt;p&gt;Debug view for music + video into StyleGAN network with active switching enabled. &lt;a href=&#34;https://www.esologic.com/gance/&#34; target=&#34;_blank&#34;&gt;Version with sound&lt;/a&gt; is much better.&lt;/p&gt;"
+               >
+               <figcaption><p>Debug view for music + video into StyleGAN network with active switching enabled. <a href="https://www.esologic.com/gance/" target="_blank">Version with sound</a> is much better.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_9.png"
+                  alt="&lt;p&gt;Resulting still image pulled from sample output video.&lt;/p&gt;"
+               >
+               <figcaption><p>Resulting still image pulled from sample output video.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_10.png"
+                  alt="&lt;p&gt;Resulting still image pulled from sample output video.&lt;/p&gt;"
+               >
+               <figcaption><p>Resulting still image pulled from sample output video.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_3.jpeg"
+                  alt="&lt;p&gt;Sample training image.&lt;/p&gt;"
+               >
+               <figcaption><p>Sample training image.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_4.jpeg"
+                  alt="&lt;p&gt;Sample training image.&lt;/p&gt;"
+               >
+               <figcaption><p>Sample training image.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/gance_2.JPG"
+                  alt="&lt;p&gt;Camera setup used to capture the ~100k images used for training.&lt;/p&gt;"
+               >
+               <figcaption><p>Camera setup used to capture the ~100k images used for training.</p></figcaption>
+            </figure>
+            </div>
+      </div>
+   </body>
+</html>

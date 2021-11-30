@@ -1,0 +1,55 @@
+completion_date: '2019-02-06'
+description: n-Channel Audio Driver for Sound Sculpture.
+domain: mixed (hardware, software)
+explanation: Client needed a way to have looping audio play sequentially/simultaneously
+  on 8 different speakers housed in a sculpture. Had the additional requirement that
+  audio needed to be changed over time and couldn't be "hardcoded", would need to
+  be replaced by a non-technical gallery attendant. Total turnaround time for this
+  project was under three weeks, and is one of a series of jobs I've completed for
+  interdisciplinary sculpture artist, [Sara Dittrich](https://www.saradittrich.com/About).
+youtube_videos:
+- label: Demonstration and design walkthrough.
+  video_id: k1c2qlfvjBQ
+featured_media:
+  label: Overview shot with all components installed.
+  path: ./multi_audio_images/multi_audio_1.JPG
+local_media:
+- label: Overview shot with all components installed.
+  path: ./multi_audio_images/multi_audio_2.JPG
+- label: Amplifier wiring.
+  path: ./multi_audio_images/multi_audio_3.JPG
+- label: Project installed in sculpture (Credit to [Sara Dittrich](https://www.saradittrich.com/)
+    for photo).
+  path: ./multi_audio_images/multi_audio_4.jpg
+- label: Detail view of sculpture (Credit to [Sara Dittrich](https://www.saradittrich.com/)
+    for photo).
+  path: ./multi_audio_images/multi_audio_5.jpg
+- label: Photo I recieved from Johannes Kaarakainen, a Master's student of Contemporary
+    Design at Aalto University in Finland who had re-built this project for use in
+    their own work.
+  path: ./multi_audio_images/multi_audio_6.jpg
+involvement: Contracted to design and manufacture this project.
+mediums:
+- raspberry pi
+- mechanical cad
+primary_url:
+  label: Blog post (contains links code, BOM etc).
+  link: https://www.esologic.com/multi-audio/
+size: medium
+secondary_urls:
+- label: Documentation on client's website.
+  link: https://www.saradittrich.com/These-Blobs
+- label: Github (source code).
+  link: https://github.com/esologic/pear
+team_size: solo
+title: Multiple Audio
+version_number: 0
+press_urls:
+- label: Play multiple sounds simultaneously with a Raspberry Pi (Raspberry Pi Blog).
+  link: https://www.raspberrypi.com/news/multiple-sounds-simultaneously-raspberry-pi/
+- label: Python Script Sends Each Speaker Its Own Sound File (Hackaday).
+  link: https://hackaday.com/2019/02/14/python-script-sends-each-speaker-its-own-sound-file/
+- label: RPi-Powered Art Installation Plays Multiple Tracks on Ear-Shaped Speakers
+    (Hackster.io).
+  link: https://www.hackster.io/news/rpi-powered-art-installation-plays-multiple-tracks-on-ear-shaped-speakers-1ef3263c9441
+visible: true

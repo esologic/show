@@ -2,24 +2,32 @@
 
 Contains the content and server code that makes up my portfolio.
 
+The goal of the repo is to decouple portfolio content and portfolio representation.
+
+It should be very low overhead to add a new piece of work to the portfolio, or remove an old piece.
+
+I should be able to update the style and presentation of the portfolio without having to rethink entering the content 
+
+
 ## Usage
 
-####  Environment variables
+To build static files, run:
 
-Add if needed
-
-#### Correct usage
-
-With the virtual env activated, run: 
-
-```
-python devon_bray_portfolio.py --fill-me-in
+```bash
+python main.py
 ```
 
-#### Incorrect usage
+To serve the static files, in the `build` directory, run:
 
-Add if needed
+```bash
+python3 -m http.server
+```
 
+To use the flask server, with the `venv` activated, run:
+
+```bash
+ python -m devon_bray_portfolio.web_view.app
+```
 
 ## Getting Started
 

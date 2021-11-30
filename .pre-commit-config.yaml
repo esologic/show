@@ -25,6 +25,11 @@ repos:
       language: python
       pass_filenames: false
       entry: ./tools/run_mypy.sh
+    - id: yamlfmt
+      name: yamlfmlt
+      language: python
+      pass_filenames: false
+      entry: ./tools/apply_yamlfmt.sh
     - id: pytest
       name: pytest
       language: python

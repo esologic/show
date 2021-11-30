@@ -1,0 +1,11 @@
+primary_color: RGBA(128, 0, 128, 1)
+logo:
+  label: Telapush logo.
+  path: ./telapush_logo.png
+description: Telapush is a company that creates interactive light art installations
+  driven by social media. As cofounder, I was responsible for the development of all
+  the hardware and the majority of the software. More information can be found on
+  the [company website](https://telapush.com/).
+title: Telapush
+version_number: 0
+rank: 0

@@ -1,0 +1,33 @@
+completion_date: 2017-08-10
+description: 9 act independent music festival.
+domain: social
+explanation: 'Third annual music festival. [One Longfellow Square](https://onelongfellowsquare.com/)
+  in Portland, Maine. First year at a real music venue. Musicians: [EMRLD](https://www.instagram.com/weareemrld/),
+  [Won Pound](https://www.instagram.com/wonpounds/), [Bensbeendead.](https://www.instagram.com/bensbeendead/).
+  [Lena Rich](https://www.instagram.com/lena_rich/), [The Ravine](https://www.instagram.com/ravinemusic/),
+  [Odie DeSmith](https://www.instagram.com/odiedesmith/), [The Sauce Collective](https://www.instagram.com/saucecollectiveny/),
+  [Sumner Bright](https://www.instagram.com/sumnerbright/), [Emma Ivy](https://www.instagram.com/emmaivy1/).'
+featured_media:
+  label: Group photo.
+  path: ./block_the_wind_festival_2017_images/btw_2017_1.jpeg
+local_media:
+- label: The Sauce Collective Performing.
+  path: ./block_the_wind_festival_2017_images/btw_2017_2.jpg
+- label: The Ravine Performing.
+  path: ./block_the_wind_festival_2017_images/btw_2017_3.jpg
+involvement: Head organizer responsible for leading the booking, planning and organizing
+  of the event. Creator of media gallery items unless otherwise specified.
+mediums:
+- photography
+- events
+secondary_urls:
+- label: Instagram Account for BTW Festival.
+  link: https://www.instagram.com/blockthewindfestival/
+primary_url:
+  label: See summary post on www.blockthewindfestival.com for more photos.
+  link: https://www.blockthewindfestival.com/2017
+size: medium
+team_size: large group
+title: Block The Wind Festival 2017
+version_number: 0
+visible: true

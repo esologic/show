@@ -1,0 +1,31 @@
+completion_date: 2015-08-16
+description: 5 act independent music festival.
+domain: social
+explanation: 'Inaugural music festival. Friends playing for each other. Neighbors
+  backyard in Yarmouth, Maine. Musicians: [EMRLD](https://www.instagram.com/weareemrld/),
+  [Won Pound](https://www.instagram.com/wonpounds/), [The Ravine](https://www.instagram.com/ravinemusic/),
+  [Jxck](https://open.spotify.com/artist/3U64Inop5BlwwhsO98QHG3), [Odie DeSmith](https://www.instagram.com/odiedesmith/).'
+featured_media:
+  label: Group photo.
+  path: ./block_the_wind_festival_2015_images/btw_2015_1.JPG
+local_media:
+- label: EMRLD Performing.
+  path: ./block_the_wind_festival_2015_images/btw_2015_2.JPG
+- label: Won Pound Performing.
+  path: ./block_the_wind_festival_2015_images/btw_2015_3.JPG
+involvement: Co-organizer responsible for leading the booking, planning and organizing
+  of the event. Creator of media gallery items unless otherwise specified.
+secondary_urls:
+- label: Instagram Account for BTW Festival.
+  link: https://www.instagram.com/blockthewindfestival/
+mediums:
+- photography
+- events
+primary_url:
+  label: See summary post on www.blockthewindfestival.com for more photos.
+  link: https://www.blockthewindfestival.com/new-page-2
+size: small
+team_size: small group
+title: Block The Wind Festival 2015
+version_number: 0
+visible: true

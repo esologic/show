@@ -1,0 +1,34 @@
+completion_date: 2019-01-12
+description: Entry in our collaboration series.
+domain: social
+explanation: Collaboration with Maine artist, and longtime friend [Nick Genesio](https://www.instagram.com/nickgenesio/).
+  Screenprinted tee shirt and hoodie. Artist-first collab paid out majority of profits
+  to designer.
+featured_media:
+  label: Tee.
+  path: ./nick_genesio_images/nick_1.jpg
+local_media:
+- label: Hoodie.
+  path: ./nick_genesio_images/nick_2.jpg
+- label: Product photo of tee.
+  path: ./nick_genesio_images/nick_3.jpg
+- label: Product photo of hoodie.
+  path: ./nick_genesio_images/nick_4.jpg
+involvement: Booked collaboration, coordinated production, photographed and edited
+  lookbook, responsible for fulfilling orders.
+mediums:
+- photography
+- apparel
+secondary_urls:
+- label: See the Block the Wind Store Instagram account for more photos.
+  link: https://www.instagram.com/blockthewindstore/
+- label: Nick's website.
+  link: https://www.nickgenesio.net/
+primary_url:
+  label: Store page.
+  link: https://block-the-wind-store.myshopify.com/collections/collaborator-collection-one/products/block-the-wind-x-nick-genesio-uglyhoodie02
+size: small
+team_size: small group
+title: BTW x Nick Genesio
+version_number: 0
+visible: true

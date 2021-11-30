@@ -1,0 +1,43 @@
+completion_date: '2015-01-18'
+description: Twitter-enabled dorm window.
+domain: mixed (hardware, software)
+explanation: A strand of LEDs hung in my street-facing college dorm room could color
+  based on input from a public twitter account. Accepted text or images as input.
+  After the color change was completed, an image of the result was replied back to
+  user. This concept eventually grew to become [Telapush](https://telapush.com/).
+  A preeminent experience of mine in the thrilling medium of public installation art.
+youtube_videos:
+- label: Initial publication + demonstration.
+  video_id: rNKmVJ7Pi0c
+- label: Second set of features.
+  video_id: JDliZ-xXPwI
+featured_media:
+  label: Sample twitter interaction.
+  path: ./heywpi_images/heywpi_1.PNG
+local_media:
+- label: Sample response to user.
+  path: ./heywpi_images/heywpi_2.png
+involvement: Designed and displayed.
+mediums:
+- raspberry pi
+- python
+- twitter
+- led art
+primary_url:
+  label: Project page. Links to development log, code and design files.
+  link: https://www.esologic.com/heywpi-project/
+size: medium
+secondary_urls:
+- label: '@heywpi twitter account.'
+  link: https://twitter.com/heywpi
+- label: Official Raspberry Pi Twitter account playing with window.
+  link: https://twitter.com/Raspberry_Pi/status/557273282341117952
+- label: Search that produces all of the interactions with this project.
+  link: https://twitter.com/search?q=heywpi&src=typed_query
+team_size: solo
+title: '@heywpi'
+version_number: 0
+press_urls:
+- label: Twitter-controlled Raspberry Pi lights up window on WPI campus (Adafruit).
+  link: https://blog.adafruit.com/2015/01/23/twitter-controlled-raspberry-pi-lights-up-window-on-wpi-campus-piday-raspberrypi-raspberry_pi-heywpi/
+visible: true

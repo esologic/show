@@ -1,0 +1,45 @@
+completion_date: '2015-08-12'
+description: Cabinet full of UV LEDs to accelerate curing of 3D prints from SLA resin
+  printers.
+domain: mixed (hardware, software)
+explanation: This project was a task of mine during my internship at [MADE@MassChallenge](https://masschallenge.org/).
+  The goal was to speed up the turnaround time for prints coming through the [Formlabs
+  Form1+](https://www.wired.com/2013/09/formlabs-form-1/) SLA 3D Printer. There are
+  72 high power UV LEDs to speed up the curing process by blasting prints with UV
+  light driven by an Arduino running code that keeps track of and displays the cure
+  time. An interesting challenge with this project was making something that looked
+  good, was easy to use and simple to the point where it wouldn’t need any maintenance.
+  I didn't know it at the time but this project would end up living in this shop until
+  it's closure years later and be upgraded several times by several different engineers.
+featured_media:
+  label: Cabinet opened with the lights turned on. Note the part platform and hardware
+    UI.
+  path: ./curecab_images/curecab_1.JPG
+local_media:
+- label: Detail view of the electronics housing. Many tour groups would walk the lab
+    floor, we wanted visitors to see "how it worked" so lid was transparent.
+  path: ./curecab_images/curecab_2.JPG
+- label: Electronics box in closed position.
+  path: ./curecab_images/curecab_3.JPG
+- label: Roadkill electronics.
+  path: ./curecab_images/curecab_4.JPG
+youtube_videos:
+- label: Project overview video, contains a walkthrough and short demonstration.
+  video_id: bDANxamg2Xs
+involvement: Designed and fabricated the cabinet and electronics as well as wrote
+  the software driving it.
+mediums:
+- laser cutter
+- 3d printer
+- arduino
+- fritzing
+- breadboard electronics
+- mechanical cad
+primary_url:
+  label: Blog post (contains links to schematics, code, models, BOM etc).
+  link: https://www.esologic.com/uv-resin-curing-cabinet/
+size: medium
+team_size: solo
+title: UV Resin Curing Cabinet
+version_number: 0
+visible: true

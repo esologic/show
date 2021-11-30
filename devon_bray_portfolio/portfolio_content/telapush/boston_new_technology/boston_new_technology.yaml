@@ -1,0 +1,70 @@
+completion_date: '2018-03-07'
+description: Portable installation that followed the Boston New Technology meetup
+  group for six months.
+domain: mixed (hardware, software)
+explanation: >-
+  Our first commercial installation, this project was unique in that it had to be
+  portable to be
+  able to travel from meetup location to meetup location. The software was updated
+  per event
+  to map to common hashtags used by presenting companies, as well as animate in patterns
+  representative of attending companies or sponsors. Each event also had a specific
+  hashtag ([#BNT89](https://twitter.com/search?q=BNT89&src=typed_query), [#BNT90](https://twitter.com/search?q=%23BNT90&src=typed_query&f=top)
+  etc.) that was also included in the animation table.
+  We had to integrate a portable modem to be able to maintain a connection to 4G internet
+  as meetup locations wifi wasn't always reliable.
+  The the illuminated element on the sign was a recreation of the BNT logo. We also
+  created a smaller prompting sign to indicate
+  to attendees how to interact with the piece.
+youtube_videos:
+- label: Boston New Technology marketing video (installation appears at 1:10).
+  video_id: O5oT7z4IbLY
+- label: Installation idling at an event.
+  video_id: CPCDeOkGqcY
+featured_media:
+  label: Animation activating on installation.
+  path: ./boston_new_technology_images/bnt_1.gif
+local_media:
+- label: Displayed at event (with a view of the pru which is pictured on the installation!).
+  path: ./boston_new_technology_images/bnt_2.JPG
+- label: Detail view of illuminated printed lettering.
+  path: ./boston_new_technology_images/bnt_3.JPG
+- label: Interacting with installation.
+  path: ./boston_new_technology_images/bnt_4.JPG
+- label: Installed at event.
+  path: ./boston_new_technology_images/bnt_5.JPG
+- label: Prompt with event-specific hashtag.
+  path: ./boston_new_technology_images/bnt_6.JPG
+- label: Detail view of prompt.
+  path: ./boston_new_technology_images/bnt_7.JPG
+- label: Electronics, power supplies, NVIDIA Jetson, and 4G modem can be seen.
+  path: ./boston_new_technology_images/bnt_8.JPG
+- label: Rolling carrying case.
+  path: ./boston_new_technology_images/bnt_9.JPG
+- label: Rear view, laser-engraved logo visible.
+  path: ./boston_new_technology_images/bnt_10.JPG
+- label: Telapush LLC posing with the installation.
+  path: ./boston_new_technology_images/bnt_11.JPG
+involvement: Electrical/Mechanical designer, wrote software for social media parser
+  and animation engine.
+mediums:
+- python
+- 3d printer
+- mechanical cad
+- protoboard electronics
+- electrical cad
+- twitter
+- led art
+primary_url:
+  label: See more photos on the installations page.
+  link: https://telapush.com/installs
+secondary_urls:
+- label: User interactions.
+  link: https://twitter.com/hashtag/BNT90?src=hashtag_click
+- label: Boston New Technology website.
+  link: https://bostonnewtechnology.com/
+size: large
+team_size: small group
+title: Boston New Technology
+version_number: 0
+visible: true

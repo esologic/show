@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+
+body {
+  margin: 3rem;
+  font-family: "Inconsolata";
+  background-color: #fffff0;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+}
+
+.nav-button {
+  position: relative;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.nav-button img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  box-sizing: border-box;
+  height: 5vh;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
+}
+
+/* Centered text */
+.nav-button-text {
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-style: italic;
+  text-shadow: 2px 2px 1rem #000000, 2px 2px 0.75rem #000000,
+    2px 2px 0.5rem #000000, 2px 2px 0.25rem #000000, 1px 1px 1px #000000;
+}
+
+.entry-container {
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.area-title {
+  text-align: center;
+}
+
+.area-title span {
+  font-style: italic;
+}
+
+.description-text {
+  margin-block-start: 0;
+}
+
+.entry-title-container {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+  align-items: center;
+  grid-gap: 2rem;
+}
+
+img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  box-sizing: border-box;
+}
+
+.entry-title-container img {
+  max-height: 70vh;
+}
+
+.gallery img {
+  max-height: 90vh;
+}
+
+.entry-title-item {
+  flex: 45%;
+}
+
+.primary-url {
+  text-align: center;
+  font-weight: bold;
+  color: blue;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  background-color: deepskyblue;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.67);
+}
+
+.button-link {
+  text-decoration: none;
+}
+
+.heavy {
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.medium {
+  font-weight: bolder;
+}
+
+.entry-metadata {
+  margin-left: 5%;
+}
+
+.gallery {
+  display: grid;
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+}
+
+figure {
+  margin: 0 auto;
+  text-align: center;
+  display: table;
+}
+
+.gallery-figure {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+figcaption {
+  justify-self: stretch;
+  margin-top: 0.5rem;
+  border-style: dotted;
+  border-width: 2px;
+  text-align: center;
+  display: table-caption;
+  caption-side: bottom;
+}
+
+figcaption p {
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
+}
+
+.dimmer {
+  filter: brightness(100%);
+}
+
+.dimmer:hover {
+  filter: brightness(90%);
+}
+
+a:link {
+  font-weight: bold;
+  color: white;
+  filter: brightness(100%);
+}
+
+a:hover {
+  filter: brightness(90%);
+}
+
+a:visited {
+  color: white;
+}
