@@ -3,7 +3,7 @@
 1.0.1 - (2021-11-30)
 ------------------
 
-* Fixed bad link in resume
+* Fixed bad link in resume.
 
 
 1.0.0 - (2021-11-30)
