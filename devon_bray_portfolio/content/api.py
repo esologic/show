@@ -3,6 +3,7 @@ Interface through which other components of this application access the content 
 TODO: There's a bit of redundancy, and a little more inheritance could be helpful.
 """
 import itertools
+import shutil
 import string
 import typing as t
 from datetime import date
@@ -170,6 +171,9 @@ class Portfolio(NamedTuple):
     header_top_image: RenderedLocalMedia
     header_bottom_image: RenderedLocalMedia
     icon: RenderedLocalMedia
+    resume_path: t.Optional[str]
+    portrait: RenderedLocalMedia
+    header_background: RenderedLocalMedia
 
 
 def _render_markdown(text: str) -> str:
@@ -237,54 +241,66 @@ def _render_local_media(
     yaml_path: Path,
     max_size: t.Tuple[int, int],
     output_name: t.Optional[str],
+    force_recreate: bool,
     local_media: schema.LocalMedia,
 ) -> RenderedLocalMedia:
     """
     Copies, processes images from their origins in the entry folders to their destinations
     in the `media_directory` folder. Returns a new NT, with a reference to their path
     relative to `media_directory`.
-    :param local_media: Reference to the file in the entry directory.
-    :return: Fields converted to strings, paths relative to `media_directory`.
+    :param media_directory: Destination path parent.
+    :param yaml_path: Config file image was read from.
+    :param max_size: Max image size in pixels.
+    :param output_name: Filename of output
+    :param local_media: To copy.
+    :param force_recreate: Force a recompute.
+    :return: For addition to portfolio.
     """
 
     name = local_media["path"].name if output_name is None else output_name
     output_path = media_directory.joinpath(name)
 
-    image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
+    if not output_path.exists() or force_recreate:
 
-    if getattr(image, "is_animated", False):
+        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
 
-        frames = ImageSequence.Iterator(image)
+        if getattr(image, "is_animated", False):
 
-        # Wrap on-the-fly thumbnail generator
-        def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-            for frame in f:
-                thumbnail = frame.copy()
-                thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                yield thumbnail
+            frames = ImageSequence.Iterator(image)
 
-        frames = thumbnails(frames)
+            # Wrap on-the-fly thumbnail generator
+            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
+                for frame in f:
+                    thumbnail = frame.copy()
+                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
+                    yield thumbnail
 
-        # Save output
-        om = next(frames)  # Handle first frame separately
-        om.info = image.info  # Copy sequence info
-        om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
-    else:
-        respect_rotation = ImageOps.exif_transpose(image)
-        if respect_rotation.mode == "RGBA":
-            background = Image.new("RGBA", respect_rotation.size, (0, 0, 0))
-            respect_rotation = Image.alpha_composite(background, respect_rotation)
-            respect_rotation = respect_rotation.convert("RGB")
+            frames = thumbnails(frames)
 
-        respect_rotation.thumbnail(max_size)
+            # Save output
+            om = next(frames)  # Handle first frame separately
+            om.info = image.info  # Copy sequence info
+            om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
+        else:
+            respect_rotation = ImageOps.exif_transpose(image)
+            if respect_rotation.mode == "RGBA":
+                background = Image.new("RGBA", respect_rotation.size, (0, 0, 0))
+                respect_rotation = Image.alpha_composite(background, respect_rotation)
+                respect_rotation = respect_rotation.convert("RGB")
 
-        respect_rotation.save(str(output_path))
+            respect_rotation.thumbnail(max_size)
+
+            respect_rotation.save(str(output_path))
 
     return RenderedLocalMedia(label=_render_markdown(local_media["label"]), path=str(name))
 
 
 def _read_entry_from_disk(
-    yaml_path: Path, media_directory: Path, primary_color: str, top_image: RenderedLocalMedia
+    yaml_path: Path,
+    media_directory: Path,
+    primary_color: str,
+    top_image: RenderedLocalMedia,
+    write_images: bool,
 ) -> RenderedEntryWithoutNeighbors:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
@@ -299,7 +315,9 @@ def _read_entry_from_disk(
 
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
-    media_processor = partial(_render_local_media, media_directory, yaml_path, (3000, 3000), None)
+    media_processor = partial(
+        _render_local_media, media_directory, yaml_path, (3000, 3000), None, write_images
+    )
 
     if serialized_entry.local_media is not None:
 
@@ -315,6 +333,15 @@ def _read_entry_from_disk(
 
     slug = yaml_path.with_suffix("").name
 
+    youtube_videos = (
+        tuple(
+            RenderedYouTubeVideo(label=_render_markdown(video["label"]), video_id=video["video_id"])
+            for video in serialized_entry.youtube_videos
+        )
+        if serialized_entry.youtube_videos is not None
+        else None
+    )
+
     return RenderedEntryWithoutNeighbors(
         slug=slug,
         title=serialized_entry.title,
@@ -322,12 +349,7 @@ def _read_entry_from_disk(
         explanation=_render_markdown(serialized_entry.explanation),
         featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
-        youtube_videos=tuple(
-            RenderedYouTubeVideo(label=_render_markdown(video["label"]), video_id=video["video_id"])
-            for video in serialized_entry.youtube_videos
-        )
-        if serialized_entry.youtube_videos
-        else None,
+        youtube_videos=youtube_videos,
         size=serialized_entry.size.value,
         domain=string.capwords(serialized_entry.domain.value),
         primary_url=_render_link(serialized_entry.primary_url),
@@ -343,8 +365,9 @@ def _read_entry_from_disk(
         favicon_path=_render_local_media(
             media_directory,
             yaml_path,
-            (15, 15),
+            (50, 50),
             f"{slug}_icon.png",
+            write_images,
             serialized_entry.featured_media,
         ).path,
         top_image=top_image,
@@ -387,7 +410,10 @@ def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
 
 
 def _read_section_from_disk(
-    section_directory: Path, static_content_directory: Path, top_image: RenderedLocalMedia
+    section_directory: Path,
+    static_content_directory: Path,
+    top_image: RenderedLocalMedia,
+    write_images: bool,
 ) -> SectionIncompleteEntries:
     """
     Given a `section_directory` (so a directory with a top-level yaml, and a bunch of directories
@@ -409,7 +435,11 @@ def _read_section_from_disk(
         sorted(
             [
                 _read_entry_from_disk(
-                    _find_yaml(path), static_content_directory, primary_color, top_image
+                    _find_yaml(path),
+                    static_content_directory,
+                    primary_color,
+                    top_image,
+                    write_images,
                 )
                 for path in _directories_in_directory(section_directory)
             ],
@@ -428,6 +458,7 @@ def _read_section_from_disk(
             section_description_path,
             (500, 500),
             None,
+            write_images,
             section_description.logo,
         ),
         rank=section_description.rank,
@@ -476,7 +507,9 @@ def _fill_entry_neighbors(
     )
 
 
-def discover_portfolio(sections_directory: Path, static_content_directory: Path) -> Portfolio:
+def discover_portfolio(
+    sections_directory: Path, static_content_directory: Path, write_images: bool
+) -> Portfolio:
     """
     Loads the portfolio as it's represented on disk (as a collection of directories and images and
     yaml files) into memory so it can be displayed by other components of this application (flask)
@@ -502,8 +535,10 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
                     portfolio_description_path,
                     (4000, 4000),
                     None,
+                    write_images,
                     portfolio_description.return_image,
                 ),
+                write_images=write_images,
             )
             for section_directory in _directories_in_directory(sections_directory)
         ],
@@ -550,6 +585,18 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
         for section in sections
     ]
 
+    if portfolio_description.resume_path is not None:
+        new_resume_path = static_content_directory.joinpath("resume").with_suffix(
+            portfolio_description.resume_path.suffix
+        )
+        shutil.copy(
+            src=portfolio_description_path.parent.joinpath(portfolio_description.resume_path),
+            dst=new_resume_path,
+        )
+        resume_path = new_resume_path.name
+    else:
+        resume_path = None
+
     return Portfolio(
         title=portfolio_description.title,
         description=_render_markdown(portfolio_description.description),
@@ -563,6 +610,7 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
+            write_images,
             portfolio_description.header_top_image,
         ),
         header_bottom_image=_render_local_media(
@@ -570,13 +618,32 @@ def discover_portfolio(sections_directory: Path, static_content_directory: Path)
             portfolio_description_path,
             (4000, 4000),
             None,
+            write_images,
             portfolio_description.header_bottom_image,
         ),
         icon=_render_local_media(
             static_content_directory,
             portfolio_description_path,
-            (15, 15),
+            (50, 50),
             None,
+            write_images,
             portfolio_description.icon,
+        ),
+        resume_path=resume_path,
+        portrait=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (3000, 3000),
+            None,
+            write_images,
+            portfolio_description.portrait,
+        ),
+        header_background=_render_local_media(
+            static_content_directory,
+            portfolio_description_path,
+            (3000, 3000),
+            None,
+            write_images,
+            portfolio_description.header_background,
         ),
     )

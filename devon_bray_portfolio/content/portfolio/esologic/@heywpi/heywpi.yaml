@@ -1,5 +1,5 @@
 completion_date: '2015-01-18'
-description: Twitter-enabled window.
+description: Twitter-enabled dorm window.
 domain: mixed (hardware, software)
 explanation: A strand of LEDs hung in my street-facing college dorm room could color
   based on input from a public twitter account. Accepted text or images as input.
@@ -24,12 +24,16 @@ mediums:
 - twitter
 - led art
 primary_url:
-  label: Project page, links to development log, code and design files.
+  label: Project page. Links to development log, code and design files.
   link: https://www.esologic.com/heywpi-project/
 size: medium
 secondary_urls:
 - label: '@heywpi twitter account.'
   link: https://twitter.com/heywpi
+- label: Official Raspberry Pi Twitter account playing with window.
+  link: https://twitter.com/Raspberry_Pi/status/557273282341117952
+- label: Search that produces all of the interactions with this project.
+  link: https://twitter.com/search?q=heywpi&src=typed_query
 team_size: solo
 title: '@heywpi'
 version_number: 0

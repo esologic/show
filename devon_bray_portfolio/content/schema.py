@@ -201,7 +201,20 @@ class YouTubeVideo(TypedDict):
     video_id: str
 
 
-class SerializedEntry(BaseModel):
+class InputReader(BaseModel):
+    """
+    Common functionality needed for files read from disk.
+    """
+
+    class Config:
+        """
+        Configures properties of children.
+        """
+
+        extra = "forbid"
+
+
+class SerializedEntry(InputReader):
     """
     All of the raw data that makes up an entry in the portfolio.
     Note: The idea with this structure is that it can easily be written by hand using a markdown
@@ -266,7 +279,7 @@ class SerializedEntry(BaseModel):
     visible: bool
 
 
-class SerializedSectionDescription(BaseModel):
+class SerializedSectionDescription(InputReader):
     """
     Top level description of a whole section (meaning a group of entries like esologic, telapush
     etc) of entries. Note that the entries themselves are discovered by virtue of the directory
@@ -294,7 +307,7 @@ class SerializedSectionDescription(BaseModel):
     rank: int
 
 
-class SerializedPortfolioDescription(BaseModel):
+class SerializedPortfolioDescription(InputReader):
     """
     Description of entire portfolio.
     """
@@ -323,6 +336,12 @@ class SerializedPortfolioDescription(BaseModel):
     return_image: LocalMedia
 
     icon: LocalMedia
+
+    resume_path: Optional[Path]
+
+    portrait: LocalMedia
+
+    header_background: Optional[LocalMedia]
 
 
 def read_yaml(path: Path) -> t.Dict[str, t.Any]:  # type: ignore[misc]

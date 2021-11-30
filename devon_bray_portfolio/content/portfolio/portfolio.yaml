@@ -2,12 +2,15 @@ version_number: 0
 title: Devon Bray
 description: Boston-based Engineer with an educational background in **Electrical
   & Computer Engineering**, **Computer Science** and **English Literature**.
-explanation: I seek out work which leverages interdisciplinary engineering processes.
-  This is accomplished through my professional work as a Software Engineer, my freelance
-  practice, and my body of open-source work published online.
+explanation: I seek out work which leverages interdisciplinary engineering processes,
+  leading to the development of tools, technologies and frameworks that live at the
+  intersection between hardware and software. This is accomplished through my professional
+  work as a Software Engineer, my freelance practice, and my body of open-source work
+  published online.
 conclusion: The following is my portfolio, a selection of the best projects across
   the different areas I'm active. If you have questions please reach out via email.
 email: dev@esologic.com
+resume_path: ./resume-v13-one-page-1.pdf
 contact_urls:
 - label: GitHub.
   link: https://github.com/esologic/
@@ -15,8 +18,6 @@ contact_urls:
   link: https://twitter.com/eso_logic/
 - label: Linkedin.
   link: https://www.linkedin.com/in/braydevon/
-- label: Resume.
-  link: https://www.todoFIXME.com
 header_top_image:
   label: Sunset over Cape Cod bay.
   path: ./banner_18.jpg
@@ -28,4 +29,10 @@ return_image:
   path: ./banner_1.jpg
 icon:
   label: Self-portrait.
-  path: ./icon.jpg
+  path: ./portrait.jpg
+portrait:
+  label: Photo take at Marconi Station.
+  path: ./portrait.jpg
+header_background:
+  label: Sunset over Cape Cod bay.
+  path: ./header_background.png

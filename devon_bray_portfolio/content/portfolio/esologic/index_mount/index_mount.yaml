@@ -1,11 +1,11 @@
 completion_date: '2018-05-18'
 description: Over-engineered rack mount for the Valve Index.
 domain: hardware
-explanation: Needed a way to house this VR headset in an already overcrowded space,
-  ended up designing a geometrically interesting series of print friendly models based
-  on the [open-source models](https://github.com/ValveSoftware/IndexHardware) of the
-  headset published by Valve. This project ended up gaining some popularity, having
-  several remixes published on thingiverse. The modeling was a rewarding challenge.
+explanation: Needed a way to house this [VR headset](https://en.wikipedia.org/wiki/Valve_Index)
+  in an already overcrowded space, ended up designing a geometrically interesting
+  series of print-friendly models based on the [open-source models](https://github.com/ValveSoftware/IndexHardware)
+  of the headset published by Valve. This project ended up gaining some popularity,
+  having several remixes published on thingiverse. The modeling was a rewarding challenge.
 youtube_videos:
 - label: Project overview video, contains installation instructions and design rationale.
   video_id: vPsgj4sFM2w
@@ -25,8 +25,10 @@ primary_url:
   label: Blog post (models, BOM etc.).
   link: https://www.esologic.com/a-3d-printed-solution-for-storing-a-valve-index-on-a-wire-shelf/
 secondary_urls:
-- label: Thingiverse.
+- label: Thingiverse post.
   link: https://www.thingiverse.com/thing:4370584
+- label: Remix as a wall mount.
+  link: https://www.thingiverse.com/thing:4856001
 size: small
 team_size: solo
 title: Index Mount
