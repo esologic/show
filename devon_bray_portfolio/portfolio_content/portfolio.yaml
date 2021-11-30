@@ -28,8 +28,8 @@ return_image:
   label: Sunset over Cape Cod bay.
   path: ./banner_1.jpg
 icon:
-  label: Self-portrait.
-  path: ./portrait.jpg
+  label: Self-portrait cropped to a square.
+  path: ./portrait_square.png
 portrait:
   label: Photo take at Marconi Station.
   path: ./portrait.jpg

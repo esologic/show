@@ -85,7 +85,7 @@ img {
 }
 
 .gallery img {
-  max-height: 95vh;
+  max-height: 90vh;
 }
 
 .entry-title-item {
@@ -122,7 +122,6 @@ img {
 
 .gallery {
   display: grid;
-  grid-auto-flow: row;
   gap: 4px;
   align-items: center;
   justify-items: center;
@@ -140,6 +139,7 @@ figure {
 }
 
 figcaption {
+  justify-self: stretch;
   margin-top: 0.5rem;
   border-style: dotted;
   border-width: 2px;

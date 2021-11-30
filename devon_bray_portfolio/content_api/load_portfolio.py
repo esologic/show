@@ -4,7 +4,6 @@ TODO: There's a bit of redundancy, and a little more inheritance could be helpfu
 """
 import itertools
 import shutil
-import string
 import typing as t
 from datetime import date
 from functools import partial
@@ -189,6 +188,15 @@ def _render_date(d: date, verbose: bool) -> str:
     return d.strftime("%B of %Y") if verbose else d.strftime("%Y")
 
 
+def _capitalize_string(text: str) -> str:
+    """
+    Canonical function to capitalize a string.
+    :param text: To capitalize.
+    :return: Capitalized.
+    """
+    return str.title(text)
+
+
 def _render_mediums(mediums: t.List[schema.Medium]) -> t.Tuple[str, ...]:
     """
     Makes sure capitalization, and format etc are uniform.
@@ -205,7 +213,7 @@ def _render_mediums(mediums: t.List[schema.Medium]) -> t.Tuple[str, ...]:
         return medium
 
     return tuple(
-        sorted([convert(medium) for medium in [string.capwords(medium) for medium in mediums]])
+        sorted([convert(medium) for medium in [_capitalize_string(medium) for medium in mediums]])
     )
 
 
@@ -275,14 +283,14 @@ def _read_entry_from_disk(
         local_media=local_media,
         youtube_videos=youtube_videos,
         size=serialized_entry.size.value,
-        domain=string.capwords(serialized_entry.domain.value),
+        domain=_capitalize_string(serialized_entry.domain.value),
         primary_url=_render_link(serialized_entry.primary_url),
         secondary_urls=_render_link_list(serialized_entry.secondary_urls),
         press_urls=_render_link_list(serialized_entry.press_urls),
         completion_date=serialized_entry.completion_date,
         completion_date_verbose=_render_date(serialized_entry.completion_date, verbose=True),
         completion_year=_render_date(serialized_entry.completion_date, verbose=False),
-        team_size=string.capwords(serialized_entry.team_size.value),
+        team_size=_capitalize_string(serialized_entry.team_size.value),
         involvement=serialized_entry.involvement,
         mediums=_render_mediums(serialized_entry.mediums),
         primary_color=primary_color,
@@ -545,7 +553,7 @@ def discover_portfolio(
             media_directory=static_content_directory,
             yaml_path=portfolio_description_path,
             new_file_name="portfolio_icon.png",
-            image_config=images_sizes.small,
+            image_config=images_sizes.icon,
             local_media=portfolio_description.icon,
         ),
         resume_path=resume_path,
