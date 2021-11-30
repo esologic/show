@@ -12,23 +12,17 @@ from multiprocessing import Pool
 from pathlib import Path
 from typing import NamedTuple
 
-from markdown import markdown
-from PIL import Image, ImageOps, ImageSequence
-
-from devon_bray_portfolio.content import schema
+from devon_bray_portfolio.content_api import schema
+from devon_bray_portfolio.content_api.images import (
+    ImagesConfig,
+    ImageSizes,
+    RenderedLocalMedia,
+    render_local_media,
+    unpack_image_sizes,
+)
+from devon_bray_portfolio.content_api.markdown_render import render_markdown
 
 YAML_EXTENSION = "yaml"
-
-
-class RenderedLocalMedia(NamedTuple):
-    """
-    Derived from the `LocalMedia` TD in `schema.py`.
-    All string fields, this structure will be directly input into the jinja html template
-    by flask.
-    """
-
-    label: str
-    path: str
 
 
 class RenderedLink(NamedTuple):
@@ -176,16 +170,6 @@ class Portfolio(NamedTuple):
     header_background: RenderedLocalMedia
 
 
-def _render_markdown(text: str) -> str:
-    """
-
-    :param text:
-    :return:
-    """
-
-    return markdown(text, extensions=["markdown3_newtab"])
-
-
 def _render_link(url: schema.Link) -> RenderedLink:
     """
     Go from the serialized form to the rendered form.
@@ -236,71 +220,12 @@ def _render_link_list(
     return tuple(_render_link(url) for url in link_list) if link_list else None
 
 
-def _render_local_media(
-    media_directory: Path,
-    yaml_path: Path,
-    max_size: t.Tuple[int, int],
-    output_name: t.Optional[str],
-    force_recreate: bool,
-    local_media: schema.LocalMedia,
-) -> RenderedLocalMedia:
-    """
-    Copies, processes images from their origins in the entry folders to their destinations
-    in the `media_directory` folder. Returns a new NT, with a reference to their path
-    relative to `media_directory`.
-    :param media_directory: Destination path parent.
-    :param yaml_path: Config file image was read from.
-    :param max_size: Max image size in pixels.
-    :param output_name: Filename of output
-    :param local_media: To copy.
-    :param force_recreate: Force a recompute.
-    :return: For addition to portfolio.
-    """
-
-    name = local_media["path"].name if output_name is None else output_name
-    output_path = media_directory.joinpath(name)
-
-    if not output_path.exists() or force_recreate:
-
-        image = Image.open(str(yaml_path.parent.joinpath(local_media["path"])))
-
-        if getattr(image, "is_animated", False):
-
-            frames = ImageSequence.Iterator(image)
-
-            # Wrap on-the-fly thumbnail generator
-            def thumbnails(f: ImageSequence.Iterator) -> t.Iterator[Image.Image]:
-                for frame in f:
-                    thumbnail = frame.copy()
-                    thumbnail.thumbnail(max_size, Image.ANTIALIAS)
-                    yield thumbnail
-
-            frames = thumbnails(frames)
-
-            # Save output
-            om = next(frames)  # Handle first frame separately
-            om.info = image.info  # Copy sequence info
-            om.save(str(output_path), save_all=True, append_images=list(frames), loop=0)
-        else:
-            respect_rotation = ImageOps.exif_transpose(image)
-            if respect_rotation.mode == "RGBA":
-                background = Image.new("RGBA", respect_rotation.size, (0, 0, 0))
-                respect_rotation = Image.alpha_composite(background, respect_rotation)
-                respect_rotation = respect_rotation.convert("RGB")
-
-            respect_rotation.thumbnail(max_size)
-
-            respect_rotation.save(str(output_path))
-
-    return RenderedLocalMedia(label=_render_markdown(local_media["label"]), path=str(name))
-
-
 def _read_entry_from_disk(
     yaml_path: Path,
     media_directory: Path,
     primary_color: str,
-    top_image: RenderedLocalMedia,
-    write_images: bool,
+    return_button_image: RenderedLocalMedia,
+    image_sizes: ImageSizes,
 ) -> RenderedEntryWithoutNeighbors:
     """
     Read in a portfolio entry from it's yaml path on disk, normalize formatting and render the
@@ -316,11 +241,10 @@ def _read_entry_from_disk(
     serialized_entry = schema.read_portfolio_element(yaml_path, schema.SerializedEntry)
 
     media_processor = partial(
-        _render_local_media, media_directory, yaml_path, (3000, 3000), None, write_images
+        render_local_media, media_directory, yaml_path, None, image_sizes.large
     )
 
     if serialized_entry.local_media is not None:
-
         with Pool(processes=5) as p:
             local_media = tuple(
                 p.map(
@@ -335,7 +259,7 @@ def _read_entry_from_disk(
 
     youtube_videos = (
         tuple(
-            RenderedYouTubeVideo(label=_render_markdown(video["label"]), video_id=video["video_id"])
+            RenderedYouTubeVideo(label=render_markdown(video["label"]), video_id=video["video_id"])
             for video in serialized_entry.youtube_videos
         )
         if serialized_entry.youtube_videos is not None
@@ -346,7 +270,7 @@ def _read_entry_from_disk(
         slug=slug,
         title=serialized_entry.title,
         description=serialized_entry.description,
-        explanation=_render_markdown(serialized_entry.explanation),
+        explanation=render_markdown(serialized_entry.explanation),
         featured_media=media_processor(serialized_entry.featured_media),
         local_media=local_media,
         youtube_videos=youtube_videos,
@@ -362,15 +286,14 @@ def _read_entry_from_disk(
         involvement=serialized_entry.involvement,
         mediums=_render_mediums(serialized_entry.mediums),
         primary_color=primary_color,
-        favicon_path=_render_local_media(
-            media_directory,
-            yaml_path,
-            (50, 50),
-            f"{slug}_icon.png",
-            write_images,
-            serialized_entry.featured_media,
+        favicon_path=render_local_media(
+            media_directory=media_directory,
+            yaml_path=yaml_path,
+            new_file_name=f"{slug}_icon.png",
+            image_config=image_sizes.icon,
+            local_media=serialized_entry.featured_media,
         ).path,
-        top_image=top_image,
+        top_image=return_button_image,
         visible=serialized_entry.visible,
     )
 
@@ -412,8 +335,8 @@ def _directories_in_directory(directory: Path) -> t.Iterator[Path]:
 def _read_section_from_disk(
     section_directory: Path,
     static_content_directory: Path,
-    top_image: RenderedLocalMedia,
-    write_images: bool,
+    return_button_image: RenderedLocalMedia,
+    image_sizes: ImageSizes,
 ) -> SectionIncompleteEntries:
     """
     Given a `section_directory` (so a directory with a top-level yaml, and a bunch of directories
@@ -435,11 +358,11 @@ def _read_section_from_disk(
         sorted(
             [
                 _read_entry_from_disk(
-                    _find_yaml(path),
-                    static_content_directory,
-                    primary_color,
-                    top_image,
-                    write_images,
+                    yaml_path=_find_yaml(path),
+                    media_directory=static_content_directory,
+                    primary_color=primary_color,
+                    return_button_image=return_button_image,
+                    image_sizes=image_sizes,
                 )
                 for path in _directories_in_directory(section_directory)
             ],
@@ -449,17 +372,16 @@ def _read_section_from_disk(
     )
 
     return SectionIncompleteEntries(
-        description=_render_markdown(section_description.description),
+        description=render_markdown(section_description.description),
         title=section_description.title,
         entries=entries,
         primary_color=primary_color,
-        logo=_render_local_media(
-            static_content_directory,
-            section_description_path,
-            (500, 500),
-            None,
-            write_images,
-            section_description.logo,
+        logo=render_local_media(
+            media_directory=static_content_directory,
+            yaml_path=section_description_path,
+            new_file_name=None,
+            image_config=image_sizes.small,
+            local_media=section_description.logo,
         ),
         rank=section_description.rank,
     )
@@ -508,7 +430,7 @@ def _fill_entry_neighbors(
 
 
 def discover_portfolio(
-    sections_directory: Path, static_content_directory: Path, write_images: bool
+    sections_directory: Path, static_content_directory: Path, image_config: ImagesConfig
 ) -> Portfolio:
     """
     Loads the portfolio as it's represented on disk (as a collection of directories and images and
@@ -517,6 +439,7 @@ def discover_portfolio(
     portfolio.
     :param static_content_directory: Media discovered is copied to this directory so it can
     be served by flask.
+    :param image_config: Settings for modifying images for inclusion in the portfolio.
     :return: In-memory version of the portfolio.
     """
 
@@ -525,20 +448,23 @@ def discover_portfolio(
         portfolio_description_path, schema.SerializedPortfolioDescription
     )
 
+    images_sizes = unpack_image_sizes(image_config)
+
+    return_button_image = render_local_media(
+        media_directory=static_content_directory,
+        yaml_path=portfolio_description_path,
+        new_file_name=None,
+        image_config=images_sizes.small,
+        local_media=portfolio_description.return_image,
+    )
+
     sections = sorted(
         [
             _read_section_from_disk(
-                section_directory,
-                static_content_directory,
-                _render_local_media(
-                    static_content_directory,
-                    portfolio_description_path,
-                    (4000, 4000),
-                    None,
-                    write_images,
-                    portfolio_description.return_image,
-                ),
-                write_images=write_images,
+                section_directory=section_directory,
+                static_content_directory=static_content_directory,
+                return_button_image=return_button_image,
+                image_sizes=images_sizes,
             )
             for section_directory in _directories_in_directory(sections_directory)
         ],
@@ -597,53 +523,32 @@ def discover_portfolio(
     else:
         resume_path = None
 
+    asset_image_processor = partial(
+        render_local_media,
+        static_content_directory,
+        portfolio_description_path,
+        None,
+        images_sizes.large,
+    )
+
     return Portfolio(
         title=portfolio_description.title,
-        description=_render_markdown(portfolio_description.description),
+        description=render_markdown(portfolio_description.description),
         sections=sections_with_entry_neighbors,
-        conclusion=_render_markdown(portfolio_description.conclusion),
+        conclusion=render_markdown(portfolio_description.conclusion),
         contact_urls=_render_link_list(portfolio_description.contact_urls),
         email=portfolio_description.email,
-        explanation=_render_markdown(portfolio_description.explanation),
-        header_top_image=_render_local_media(
-            static_content_directory,
-            portfolio_description_path,
-            (4000, 4000),
-            None,
-            write_images,
-            portfolio_description.header_top_image,
-        ),
-        header_bottom_image=_render_local_media(
-            static_content_directory,
-            portfolio_description_path,
-            (4000, 4000),
-            None,
-            write_images,
-            portfolio_description.header_bottom_image,
-        ),
-        icon=_render_local_media(
-            static_content_directory,
-            portfolio_description_path,
-            (50, 50),
-            None,
-            write_images,
-            portfolio_description.icon,
+        explanation=render_markdown(portfolio_description.explanation),
+        header_top_image=asset_image_processor(portfolio_description.header_top_image),
+        header_bottom_image=asset_image_processor(portfolio_description.header_bottom_image),
+        icon=render_local_media(
+            media_directory=static_content_directory,
+            yaml_path=portfolio_description_path,
+            new_file_name="portfolio_icon.png",
+            image_config=images_sizes.small,
+            local_media=portfolio_description.icon,
         ),
         resume_path=resume_path,
-        portrait=_render_local_media(
-            static_content_directory,
-            portfolio_description_path,
-            (3000, 3000),
-            None,
-            write_images,
-            portfolio_description.portrait,
-        ),
-        header_background=_render_local_media(
-            static_content_directory,
-            portfolio_description_path,
-            (3000, 3000),
-            None,
-            write_images,
-            portfolio_description.header_background,
-        ),
+        portrait=asset_image_processor(portfolio_description.portrait),
+        header_background=asset_image_processor(portfolio_description.header_background),
     )

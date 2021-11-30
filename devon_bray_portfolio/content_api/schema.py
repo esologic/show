@@ -1,5 +1,5 @@
 """
-Describes the data that make up the portfolio.
+Describes the data that makes up the portfolio.
 """
 
 import string
@@ -206,11 +206,26 @@ class InputReader(BaseModel):
     Common functionality needed for files read from disk.
     """
 
+    # See type docs.
+    version_number: VersionNumber
+
+    # Title of the element, will be displayed prominently.
+    # For entries, should be a human-readable name for the entry
+    # For sections, should be the shortest name that can describe the section.
+    # For portfolio, should be the name of the person who's portfolio this is.
+    title: str
+
+    # For entries, should be one or two sentences at the most.
+    # For sections, should be one or two sentences to describe nature of the section as a whole.
+    # For portfolio, shortest possible description of who the person is.
+    description: ValidatedString
+
     class Config:
         """
         Configures properties of children.
         """
 
+        # If fields are set on loaded object that are not expected, an error will be raised.
         extra = "forbid"
 
 
@@ -220,15 +235,6 @@ class SerializedEntry(InputReader):
     Note: The idea with this structure is that it can easily be written by hand using a markdown
     file that contains metadata yaml. The expectation is that these entries are written by hand.
     """
-
-    # See type docs.
-    version_number: VersionNumber
-
-    # Name of the portfolio entry, should be as short as possible to describe the piece.
-    title: str
-
-    # A short description of the project, should be one or two sentences at the most.
-    description: ValidatedString
 
     # Between three and five sentences, combined with the `description`, should give reader a very
     # complete idea as to what the project was about.
@@ -276,6 +282,8 @@ class SerializedEntry(InputReader):
     mediums: List[Medium]
 
     # If True, the item will be listed in the portfolio, if False it will be omitted.
+    # TODO - Would like to be able to unlist entries, not have them visible in the main portfolio
+    # but still linkable from the outside, if you knew the URL.
     visible: bool
 
 
@@ -284,17 +292,7 @@ class SerializedSectionDescription(InputReader):
     Top level description of a whole section (meaning a group of entries like esologic, telapush
     etc) of entries. Note that the entries themselves are discovered by virtue of the directory
     structure and are not explicit listed in these files.
-    # TODO, may want a logo here
     """
-
-    # Name of the portfolio section, should be as short as possible to describe the section.
-    title: str
-
-    # A short description of the section, should be one or two sentences at the most.
-    description: ValidatedString
-
-    # See type docs.
-    version_number: VersionNumber
 
     # CSS color, used to set the background of the section.
     primary_color: Color
@@ -312,35 +310,37 @@ class SerializedPortfolioDescription(InputReader):
     Description of entire portfolio.
     """
 
-    # Main header of the portfolio. Should be something like: "Collected works of Devon Bray"
-    title: str
-
-    # Can add a note about why projects were selected, probably want to go over nature of day job
-    description: ValidatedString
-
-    # See type docs.
-    version_number: VersionNumber
-
+    # Mission as an engineer, will be displayed after description.
     explanation: ValidatedString
 
+    # Will be displayed after contact info.
     conclusion: ValidatedString
 
+    # A mailto link will be created using this email.
     email: EmailStr
 
+    # List of things like github, twitter, linkedin etc.
     contact_urls: t.List[Link]
 
+    # Currently unused.
     header_top_image: LocalMedia
 
+    # Currently unused.
     header_bottom_image: LocalMedia
 
+    # The background of the button on the top of the entry page.
     return_image: LocalMedia
 
+    # Favicon for the portfolio page.
     icon: LocalMedia
 
+    # Path to the resume that will be listed in the contact urls section.
     resume_path: Optional[Path]
 
+    # Displayed in header, portrait of person who's photo this is.
     portrait: LocalMedia
 
+    # Background of top header.
     header_background: Optional[LocalMedia]
 
 
