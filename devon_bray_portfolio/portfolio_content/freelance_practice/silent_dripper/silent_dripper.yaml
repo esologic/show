@@ -1,0 +1,58 @@
+completion_date: '2021-05-12'
+description: Reads heartbeat sensor to create perfect water droplets in total silence.
+domain: mixed (hardware, software)
+explanation: Client needed a device to reliably produce droplets of water for a piece
+  of performance art. Because the piece was to be performed in a gallery setting,
+  little to no acoustic noise was permissible during operation, ruling out conventional
+  DC motor pumps and solenoids. Solution was a stepper motor fitted to a [peristaltic
+  pump](https://en.wikipedia.org/wiki/Peristaltic_pump) using motor drivers designed
+  for making 3D printers operate quietly. Fabricated PCB to package electronics, wrote
+  firmware to read heartbeat sensor and drive motors, and did mechanical design and
+  manufacturing to produce the monolithic finished actuators. This project is one
+  of a series of jobs I've completed for interdisciplinary sculpture artist, [Sara
+  Dittrich](https://www.saradittrich.com/About).
+featured_media:
+  label: Operating demonstration, pulse sensor output is displayed next to operating
+    drippers.
+  path: ./silent_dripper_images/silent_dripper_1.gif
+local_media:
+- label: Assembled production drippers.
+  path: ./silent_dripper_images/silent_dripper_3.JPG
+- label: Detail view of a single dripper.
+  path: ./silent_dripper_images/silent_dripper_4.JPG
+- label: Detail view of internal assembly.
+  path: ./silent_dripper_images/silent_dripper_5.JPG
+- label: Shell housing internal assembly.
+  path: ./silent_dripper_images/silent_dripper_2.gif
+- label: Assembled main PCB.
+  path: ./silent_dripper_images/silent_dripper_6.JPG
+- label: Assembled connector PCB.
+  path: ./silent_dripper_images/silent_dripper_7.JPG
+involvement: Contracted to design and manufacture this project.
+youtube_videos:
+- label: Feature overview of project.
+  video_id: mmAslwyjcbU
+mediums:
+- arduino
+- mechanical cad
+- pcb electronics
+- electrical cad
+primary_url:
+  label: Blog post, with detailed research notes on pump selection, as well as code/CAD
+    etc.
+  link: https://www.esologic.com/silent-dripper/
+size: large
+team_size: solo
+title: The Silent Dripper
+version_number: 0
+secondary_urls:
+- label: Github Organization (contains individual repos for e/mCAD, and Arduino firmware).
+  link: https://github.com/Silent-Dripper
+- label: Client's documentation on the performance.
+  link: https://www.saradittrich.com/The-Tender-Interval
+press_urls:
+- label: The Silent Dripper Dispenses Water Without Making Any Sound (Hackaday).
+  link: https://hackaday.com/2021/11/19/the-silent-dripper-dispenses-water-without-making-any-sound/
+- label: 'Sara Dittrich: The Tender Interval (DiverseWorks).'
+  link: https://diverseworks.org/in-the-works/exhibtion-performance/sara-dittrich-the-tender-interval
+visible: true

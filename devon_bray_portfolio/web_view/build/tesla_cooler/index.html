@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Tesla Cooler</title>
+      <link rel="stylesheet" href="../static/entry.css">
+      <link rel="icon" href="../static/tesla_cooler_icon.png" type="image/x-icon">
+   </head>
+   <body>
+      <div class="nav">
+         <div class="nav-button dimmer" onclick="location.href='../gance/index.html';">
+            <img
+               class="entry-title-item"
+               src="../static/gance_8.gif"
+               alt="&lt;p&gt;Projection file example.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">GANce</div>
+         </div>
+         <div class="nav-button dimmer" onclick="location.href='/';">
+            <img
+               class="entry-title-item"
+               src="../static/banner_1.jpg"
+               alt="&lt;p&gt;Single cooler attached to an NVIDIA Tesla K80.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">Portfolio</div>
+         </div>
+         <div class="nav-button dimmer" onclick="location.href='../3d_prints/index.html';">
+            <img
+               class="entry-title-item"
+               src="../static/3d_prints_1.jpg"
+               alt="&lt;p&gt;Desktop organizer, a gift. &lt;a href=&#34;https://www.esologic.com/3d-printed-pen-notebook-organizer/&#34; target=&#34;_blank&#34;&gt;Blog Post&lt;/a&gt;.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">3D Print Gallery</div>
+         </div>
+         </div>
+      <div class="entry-container" style="background-color: #e69500">
+         <h1 class="area-title">Tesla Cooler <span>(November of 2021)</span></h1>
+         <div class="entry-title-container">
+            <figure>
+               <img
+                  class="entry-title-item"
+                  src="../static/tesla_cooler_2.JPG"
+                  alt="&lt;p&gt;Single cooler attached to an NVIDIA Tesla K80.&lt;/p&gt;"
+               >
+               <figcaption><p>Single cooler attached to an NVIDIA Tesla K80.</p></figcaption>
+            </figure>
+            <div class="entry-title-item">
+               <h3 class="description-text">High performance GPU cooler for the NVIDIA Tesla K80.</h3>
+               <p>Rendered desperate for VRAM by a <a href="https://www.esologic.com/gance/" target="_blank">StyleGAN-related</a> project, I had to wade thermistor-first into the concernedly hot and strange world of GPUs without video outputs to design a high performance cooler for the NVIDIA Tesla K80. The GPU is designed to be installed in server chassis that have a fan pressure delta, where cooled air is moved from the front of the case, through the cards and then out the back. I wanted to be able to use the GPUs in a regular 4U server chassis or standard PC tower so needed to create a cooler. The design is based around off the shelf parts and can be printed without supports. Electronics are centered around a <a href="https://www.raspberrypi.com/products/raspberry-pi-pico/" target="_blank">Raspberry Pi Pico</a> running <a href="https://micropython.org/" target="_blank">MicroPython</a>. This entire project was designed and manufactured live on stream in the spirit of a hackathon.</p>
+               <a class="button-link" href='https://www.esologic.com/tesla-cooler/' target="_blank" rel="noopener noreferrer">
+                  <div class="primary-url dimmer">Blog post, which contains links to schematics, code, models, BOM etc. Also details early prototypes and lessons learned through iterations.</div>
+               </a>
+               <p class="heavy">As Seen In:</p>
+               <ul>
+                  <li><a href="https://hackaday.com/2021/11/06/3d-printed-fan-mount-keeps-server-gpu-cool-in-desktop-case/" target="_blank" rel="noopener noreferrer">3d-printed Fan Mount Keeps Server GPU Cool In Desktop Case (Hackaday).</a></li>
+                  </ul>
+               <p class="heavy">Further Reading:</p>
+               <ul>
+                  <li><a href="https://github.com/Tesla-Cooler" target="_blank" rel="noopener noreferrer">Github Organization (contains individual repos for e/mCAD, and micropython).</a></li>
+                  <li><a href="https://diode.zone/w/p/umw5h892jBqF9Rh58k63bR" target="_blank" rel="noopener noreferrer">Design stream archive.</a></li>
+                  </ul>
+               <p class="heavy">Metadata:</p>
+               <div class="entry-metadata">
+                  <span class="medium">Involvement:</span>
+                  <span>Designed and manufactured the coolers.</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Size:</span>
+                  <span>medium</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Domain:</span>
+                  <span>Mixed (Hardware, Software)</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Team Size:</span>
+                  <span>Solo</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Mediums:</span>
+                  <span>3D Printer</span><span class="medium">,</span> <span>Electrical CAD</span><span class="medium">,</span> <span>Mechanical CAD</span><span class="medium">,</span> <span>Protoboard Electronics</span><span class="medium">,</span> <span>Python</span> 
+               </div>
+            </div>
+         </div>
+         <div class="gallery">
+            <h2 class="area-title">Gallery</h2>
+            <figure class="gallery-figure">
+               <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/ax6S3I81yAg"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+               </iframe>
+               <figcaption><p>Project history, design walkthrough and stress test. A bit more verbose than other videos, wanted to try a direct-to-tape format.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_5.JPG"
+                  alt="&lt;p&gt;Top-down shot of two K80s installed in server, feedback thermistors are visible.&lt;/p&gt;"
+               >
+               <figcaption><p>Top-down shot of two K80s installed in server, feedback thermistors are visible.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_1.JPG"
+                  alt="&lt;p&gt;Single cooler configuration installed in a K80.&lt;/p&gt;"
+               >
+               <figcaption><p>Single cooler configuration installed in a K80.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_3.JPG"
+                  alt="&lt;p&gt;Dual cooler configuration installed in two K80s installed in server.&lt;/p&gt;"
+               >
+               <figcaption><p>Dual cooler configuration installed in two K80s installed in server.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_4.JPG"
+                  alt="&lt;p&gt;Wider shot of two K80s installed in server.&lt;/p&gt;"
+               >
+               <figcaption><p>Wider shot of two K80s installed in server.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_6.JPG"
+                  alt="&lt;p&gt;Detail view of thermistors.&lt;/p&gt;"
+               >
+               <figcaption><p>Detail view of thermistors.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_7.JPG"
+                  alt="&lt;p&gt;Shot of intake ports of both coolers.&lt;/p&gt;"
+               >
+               <figcaption><p>Shot of intake ports of both coolers.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/tesla_cooler_8.JPG"
+                  alt="&lt;p&gt;Detail shot of electronics.&lt;/p&gt;"
+               >
+               <figcaption><p>Detail shot of electronics.</p></figcaption>
+            </figure>
+            </div>
+      </div>
+   </body>
+</html>

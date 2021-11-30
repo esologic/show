@@ -9,7 +9,6 @@ def main() -> None:
     """
     This function creates a number of static HTML files that can be served on their own as the
     portfolio.
-    TODO: iron out render location etc
     :return: None
     """
 

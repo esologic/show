@@ -9,26 +9,33 @@ from pathlib import Path
 
 from flask import Flask, render_template
 
-from devon_bray_portfolio.content.api import discover_portfolio
+from devon_bray_portfolio.content_api import ImagesConfig, discover_portfolio
+from devon_bray_portfolio.paths_common import CONTENT_ROOT
 
 _CURRENT_DIRECTORY = Path(os.path.dirname(os.path.abspath(__file__)))
 
 
-def create_app(write_images: bool = False) -> Flask:
+def create_app(portfolio_content_root: Path = CONTENT_ROOT, write_images: bool = False) -> Flask:
     """
-
-    :return:
+    Creates the flask object to serve the portfolio, or to be rendered statically.
+    :param portfolio_content_root: Root path of content to be rendered into a portfolio.
+    :param write_images: When images are loaded from content directories, they are modified.
+    Set this to True if you want them to be re-modified if they don't already exist.
+    :return: Flask object for serving or rendering.
     """
 
     app = Flask(__name__)
 
     current_portfolio = discover_portfolio(
-        sections_directory=Path(
-            "/home/devon/Documents/projects/devon_bray_portfolio"
-            "/devon_bray_portfolio/content/portfolio"
-        ),
+        sections_directory=portfolio_content_root,
         static_content_directory=_CURRENT_DIRECTORY.joinpath("static"),
-        write_images=write_images,
+        image_config=ImagesConfig(
+            large_image_max_dimensions=(2000, 2000),
+            small_image_max_dimensions=(500, 500),
+            icon_max_dimensions=(50, 50),
+            quality=95,
+            force_rewrite=write_images,
+        ),
     )
 
     lookup = {
@@ -41,8 +48,8 @@ def create_app(write_images: bool = False) -> Flask:
     @app.route("/")
     def render_portfolio() -> str:  # pylint: disable=unused-variable
         """
-
-        :return:
+        Top level view of portfolio. Shows all the entries grouped by section.
+        :return: HTML.
         """
         return render_template(
             "portfolio.html",
@@ -52,8 +59,8 @@ def create_app(write_images: bool = False) -> Flask:
     @app.route("/<string:slug>/")
     def render_slug(slug: str) -> str:  # pylint: disable=unused-variable
         """
-
-        :return:
+        Renders an individual portfolio entry.
+        :return: HTML
         """
         return render_template(
             "entry.html",
@@ -66,9 +73,10 @@ def create_app(write_images: bool = False) -> Flask:
         e: t.Union[t.Type[KeyError], int]
     ) -> t.Tuple[str, int]:
         """
+        404 Error Page.
         TODO: Maybe I want to do a cheeky email thing here?
-        :param e:
-        :return:
+        :param e: Error that was raised
+        :return: HTML
         """
         return f"No page! Exception: {e}", 404
 
@@ -76,5 +84,4 @@ def create_app(write_images: bool = False) -> Flask:
 
 
 if __name__ == "__main__":
-
     create_app().run(host="0.0.0.0")

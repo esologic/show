@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Footsteps to Video</title>
+      <link rel="stylesheet" href="../static/entry.css">
+      <link rel="icon" href="../static/footsteps_to_video_icon.png" type="image/x-icon">
+   </head>
+   <body>
+      <div class="nav">
+         <div class="nav-button dimmer" onclick="location.href='../silent_dripper/index.html';">
+            <img
+               class="entry-title-item"
+               src="../static/silent_dripper_1.gif"
+               alt="&lt;p&gt;Operating demonstration, pulse sensor output is displayed next to operating drippers.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">The Silent Dripper</div>
+         </div>
+         <div class="nav-button dimmer" onclick="location.href='/';">
+            <img
+               class="entry-title-item"
+               src="../static/banner_1.jpg"
+               alt="&lt;p&gt;Operating demonstration, frames of video behind performer increment each time a footstep is detected.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">Portfolio</div>
+         </div>
+         <div class="nav-button dimmer" onclick="location.href='../multi_audio/index.html';">
+            <img
+               class="entry-title-item"
+               src="../static/multi_audio_1.JPG"
+               alt="&lt;p&gt;Overview shot with all components installed.&lt;/p&gt;"
+            >
+            <div class="nav-button-text">Multiple Audio</div>
+         </div>
+         </div>
+      <div class="entry-container" style="background-color: green">
+         <h1 class="area-title">Footsteps to Video <span>(September of 2020)</span></h1>
+         <div class="entry-title-container">
+            <figure>
+               <img
+                  class="entry-title-item"
+                  src="../static/foot_1.gif"
+                  alt="&lt;p&gt;Operating demonstration, frames of video behind performer increment each time a footstep is detected.&lt;/p&gt;"
+               >
+               <figcaption><p>Operating demonstration, frames of video behind performer increment each time a footstep is detected.</p></figcaption>
+            </figure>
+            <div class="entry-title-item">
+               <h3 class="description-text">Converts footsteps into frame-by-frame video output.</h3>
+               <p>Client needed a solution that could detect footsteps on a treadmill, then transmit detections to a host PC. Each time a footstep is detected, a video being broadcast via <a href="https://en.wikipedia.org/wiki/OBS_Studio" target="_blank">OBS</a> is incremented by a frame. Designed an Arduino based footfall detection algorithm centered around an accelerometer. Wrote a python application using openCV to handle creating output frames. PC-side application also had to be able to change videos based on input from twitch chat. Hardware UI was designed for flexibility. Knobs control different parameters of the detection algorithm, button indicates a footstep has been detected and can be used to manually increment frame of video. This project is one of a series of jobs I've completed for interdisciplinary sculpture artist, <a href="https://www.saradittrich.com/About" target="_blank">Sara Dittrich</a>.</p>
+               <a class="button-link" href='https://www.saradittrich.com/Our-Wandering-Nerve' target="_blank" rel="noopener noreferrer">
+                  <div class="primary-url dimmer">Client&#39;s documentation on this performance.</div>
+               </a>
+               <p class="heavy">As Seen In:</p>
+               <ul>
+                  <li><a href="https://diverseworks.org/in-the-works/exhibtion-performance/sara-dittrich-the-tender-interval" target="_blank" rel="noopener noreferrer">Sara Dittrich: The Tender Interval (DiverseWorks).</a></li>
+                  </ul>
+               <p class="heavy">Metadata:</p>
+               <div class="entry-metadata">
+                  <span class="medium">Involvement:</span>
+                  <span>Contracted to design and manufacture this project.</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Size:</span>
+                  <span>medium</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Domain:</span>
+                  <span>Mixed (Hardware, Software)</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Team Size:</span>
+                  <span>Solo</span>
+                  <span class="medium">/</span>
+                  <span class="medium">Mediums:</span>
+                  <span>Arduino</span><span class="medium">,</span> <span>Electrical CAD</span><span class="medium">,</span> <span>Mechanical CAD</span><span class="medium">,</span> <span>Protoboard Electronics</span><span class="medium">,</span> <span>Python</span> 
+               </div>
+            </div>
+         </div>
+         <div class="gallery">
+            <h2 class="area-title">Gallery</h2>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/foot_2.JPG"
+                  alt="&lt;p&gt;Control box installed on treadmill.&lt;/p&gt;"
+               >
+               <figcaption><p>Control box installed on treadmill.</p></figcaption>
+            </figure>
+            <figure class="gallery-figure">
+               <img
+                  src="../static/foot_3.png"
+                  alt="&lt;p&gt;Front facing shot of hardware UI.&lt;/p&gt;"
+               >
+               <figcaption><p>Front facing shot of hardware UI.</p></figcaption>
+            </figure>
+            </div>
+      </div>
+   </body>
+</html>

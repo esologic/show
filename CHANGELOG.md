@@ -1,6 +1,6 @@
 # Changelog
 
-1.0.0 - (2021-11-22)
+1.0.0 - (2021-11-30)
 ------------------
 
 * Adds first batch of portfolio entries.

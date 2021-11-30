@@ -1,0 +1,13 @@
+primary_color: RGBA(230, 149, 0, 1)
+logo:
+  label: Esologic logo.
+  path: ./esologic_logo.jpg
+description: Personal engineering [blog](https://www.esologic.com). Catalogs the development
+  of open-source projects, serving as the publication outlet for their releases alongside
+  occasional tutorials and teardowns. My goal is to share useful engineering techniques
+  and methods, promoting the open exchange of ideas. There's an accompanying YouTube
+  channel [here](https://www.youtube.com/user/esological). The following is a representative
+  selection of works published over the 10+ year history of the site.
+title: esologic.com
+version_number: 0
+rank: 2
