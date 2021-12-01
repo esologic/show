@@ -16,7 +16,7 @@ def prod_dependencies() -> List[str]:
 
 setup(
     name="devon_bray_portfolio",
-    version="1.0.0",
+    version="1.0.1",
     description="Contains the content and server code that makes up my portfolio.",
     author="Devon Bray",
     author_email="dev@esologic.com",

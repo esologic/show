@@ -1,6 +1,6 @@
 # Changelog
 
-1.0.1 - (2021-11-30)
+1.0.1 - (2021-12-01)
 ------------------
 
 * Fixed bad link in resume, and other resume edits.
